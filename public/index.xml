@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kars7e&#39;s Blog</title>
+    <link>http://blog.kars7e.io/index.xml</link>
+    <description>Recent content on kars7e&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 04 Mar 2016 14:05:45 +0000</lastBuildDate>
+    <atom:link href="http://blog.kars7e.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My introduction to Elixir programming language</title>
+      <link>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
+      <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
+      <description>
+
+&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;{% post_url 2016-02-12-daj-sie-poznac-challange-accepted %}&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;Programming Elixir 1.2&lt;/a&gt; - A book by the one and only &lt;a href=&#34;https://twitter.com/pragdave&#34;&gt;Dave Thomas&lt;/a&gt;. I&amp;rsquo;ve read it and I wholeheartedly recommend it.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://howistart.org/posts/elixir/1&#34;&gt;Portal Game in Elixir&lt;/a&gt; - by &lt;a href=&#34;https://twitter.com/josevalim&#34;&gt;Jose Valim&lt;/a&gt;, the author of Elixir. I remember reading this article was the first thing that got me into the language.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;erlang-the-battle-tested-foundation-of-elixir&#34;&gt;Erlang - the battle-tested foundation of Elixir&lt;/h2&gt;
+
+&lt;p&gt;I will start my introduction by talking about a different language, called &lt;a href=&#34;https://en.wikipedia.org/wiki/Erlang_(programming_language)&#34;&gt;Erlang&lt;/a&gt;. Erlang is a 30 years old language built specifically to be used in distributed and highly available applications. It has proved its value over the years in telecommunications industry where it had been employed to deal with telephone connections at massive scale, but it also has been used by companies like &lt;a href=&#34;https://vimeo.com/44312354&#34;&gt;Whatsapp&lt;/a&gt; or &lt;a href=&#34;https://www.quora.com/Why-was-Erlang-chosen-for-use-in-Facebook-chat&#34;&gt;Facebook&lt;/a&gt; for their most connections-heavy applications. Such strong foundations are very important for me - as a pragmatic programmer, I&amp;rsquo;m looking for solutions that will last, and Erlang ecosystem is definitely a good ingredient to build one.&lt;/p&gt;
+
+&lt;p&gt;So how does Elixir utilize Erlang? First of all, it&amp;rsquo;s written in it. You can look at the &lt;a href=&#34;https://github.com/elixir-lang/elixir&#34;&gt;Elixir&amp;rsquo;s Github repository&lt;/a&gt;, You will obviously notice that Elixir is a huge Erlang&amp;rsquo;s code base. But there&amp;rsquo;s more than that. When you write code in Elixir, you can utilize &lt;a href=&#34;http://erlang.org/doc/apps/stdlib/&#34;&gt;standard Erlang library&lt;/a&gt;. You will find a lot of useful 3rd party libraries written for &lt;a href=&#34;https://hex.pm/&#34;&gt;Elixir or Erlang&lt;/a&gt; itself. In my opinion this helps a lot in Elixir&amp;rsquo;s adoption, because lack of decent library ecosystem is often a main problem of young programming languages. And last but not least, Elixir utilizes the power of BEAM, an Erlang&amp;rsquo;s virtual machine. It&amp;rsquo;s very interesting concept itself, and I won&amp;rsquo;t go much into detail of it here, let me just mention that Erlang VM in some way behaves very similarly to the Operating System - in fact, there is a special version of it running &lt;a href=&#34;http://erlangonxen.org/&#34;&gt;directly on Xen&lt;/a&gt; - without any additional operating system in between.&lt;/p&gt;
+
+&lt;h2 id=&#34;elixir-let-s-go-meta&#34;&gt;Elixir - let&amp;rsquo;s go meta&lt;/h2&gt;
+
+&lt;p&gt;Enough about Erlang, let&amp;rsquo;s talk about our actor in a leading role, Elixir, and what have made me fall in love with that language. There are many reasons to that, but I will start with a small piece of code that comes from the book &lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;&amp;ldquo;Programming Elixir&amp;rdquo;&lt;/a&gt; by Dave Thomas:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:ok&lt;/span&gt;, body}), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: body
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:error&lt;/span&gt;, error}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    {&lt;span style=&#34;color: #007020&#34;&gt;_&lt;/span&gt;, message} &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;keyfind(error, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;puts &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Error fetching from Github: &lt;/span&gt;&lt;span style=&#34;background-color: #eeeeee&#34;&gt;#{&lt;/span&gt;message&lt;span style=&#34;background-color: #eeeeee&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;halt(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;)
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; process({user, project, count}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;fetch(user,project)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; decode_response
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; convert_to_list_of_maps
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; sort_into_ascending_order
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;take(count)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; print_table_for_columns([&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;])
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; is_binary(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: str
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: to_string(str)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This excerpt is not complete (there are few functions missing, as well as module definition, which means the example will not compile), but it perfectly depicts 2 out of my 3 favorite features of Elixir: pattern matching and pipe operator. let&amp;rsquo;s talk about them in detail.&lt;/p&gt;
+
+&lt;h3 id=&#34;pattern-matching-the-beautiful-if&#34;&gt;Pattern matching - the beautiful &amp;ldquo;if&amp;rdquo;&lt;/h3&gt;
+
+&lt;p&gt;I will start with the fact that Elixir is a &lt;a href=&#34;https://en.wikipedia.org/wiki/Functional_programming&#34;&gt;functional&lt;/a&gt; programming language - the central concepts of it are functions and data immutability. This is important especially if you come from the object-oriented background like Java or C++. In Java your main friends are a class and an object instance of that class, and you have a lot of these. In Elixir, you have a lot of functions, and you want them to be clean and easily understandable. Your main enemy in such situations is a conditional statement, whether it is &amp;ldquo;if&amp;rdquo; or &amp;ldquo;switch&amp;rdquo;, it makes code harder to reason about - especially if you have nested several conditionals together (that&amp;rsquo;s something you always try to avoid).&lt;/p&gt;
+
+&lt;p&gt;In Elixir, you have a great help in form of pattern matching:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:ok&lt;/span&gt;, body}), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: body
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:error&lt;/span&gt;, error}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    {&lt;span style=&#34;color: #007020&#34;&gt;_&lt;/span&gt;, message} &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;keyfind(error, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;puts &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Error fetching from Github: &lt;/span&gt;&lt;span style=&#34;background-color: #eeeeee&#34;&gt;#{&lt;/span&gt;message&lt;span style=&#34;background-color: #eeeeee&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;halt(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;)
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+As you can see in the example above, function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt; is defined twice, with different function bodies.
+They both accept single parameter, which is a &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#tuples&#34;&gt;tuple&lt;/a&gt;, however it goes even further - they accept only two-element tuple, and specify that first element must be either an &lt;strong&gt;&lt;em&gt;:ok&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;:error&lt;/em&gt;&lt;/strong&gt; &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#atoms&#34;&gt;atom&lt;/a&gt;. If we try to break any of those constraints and for example execute that function with first element set to &lt;strong&gt;&lt;em&gt;:warning&lt;/em&gt;&lt;/strong&gt;, we will get:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;iex(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color: #333333&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:warning&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;})
+&lt;span style=&#34;color: #333333&#34;&gt;**&lt;/span&gt; (&lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;FunctionClauseError&lt;/span&gt;) no function clause matching &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response&lt;span style=&#34;color: #333333&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;1&lt;/span&gt;
+    iex:&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:warning&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;})
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This gives a tremendous value to limit the &amp;ldquo;ifs&amp;rdquo; in our code, but also makes code much easier to reason about - the error handling case like the code above is a great example where we see exactly which part is responsible for dealing with errors, and which processes the happy code path.&lt;/p&gt;
+
+&lt;p&gt;There is also a mechanism called &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/case-cond-and-if.html#expressions-in-guard-clauses&#34;&gt;guard clauses&lt;/a&gt;&lt;/strong&gt; which I consider to be a logical part of pattern matching (although technically it might not be). In the code example I already used before we can observe:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; is_binary(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: str
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: to_string(str)
+&lt;/pre&gt;&lt;/div&gt;
+
+Which boils down to a check if an argument is a binary (which indicates &lt;a href=&#34;http://elixir-lang.org/getting-started/binaries-strings-and-char-lists.html&#34;&gt;it&amp;rsquo;s a string&lt;/a&gt;) and should just be returned, or is it something else and should be first converted to string. The way it&amp;rsquo;s done though is by using &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword, which gives more visibility into what&amp;rsquo;s the actual purpose of this code. &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword causes function to match only if the expression after it is true. For example if we had a function that takes 2 arguments, and multiplies them if the first argument is larger than the second one, and sums them otherwise, we could write:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; combine(a, b) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; a &lt;span style=&#34;color: #333333&#34;&gt;&amp;gt;&lt;/span&gt; b, &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: a &lt;span style=&#34;color: #333333&#34;&gt;*&lt;/span&gt; b
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; combine(a, b), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: a &lt;span style=&#34;color: #333333&#34;&gt;+&lt;/span&gt; b
+&lt;/pre&gt;&lt;/div&gt;
+
+It&amp;rsquo;s very important to remember that functions are matched in the same order they are defined, so match-all functions should be defined last.&lt;/p&gt;
+
+&lt;h3 id=&#34;pipe-operator-from-unix-with-love&#34;&gt;Pipe operator - from unix with |love&amp;gt;&lt;/h3&gt;
+
+&lt;p&gt;The second feature that attracted me to Elixir is &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/enumerables-and-streams.html#the-pipe-operator&#34;&gt;pipe operator&lt;/a&gt;&lt;/strong&gt;. Pipe operator is not something unique to Elixir - in one of &lt;a href=&#34;https://changelog.com/194/&#34;&gt;The Changelog&amp;rsquo;s episodes&lt;/a&gt;, Jose Valim (author of Elixir) mentions that he borrowed that idea from F#, functional programming language that belongs to .NET family. Before we talk more about this operator though, let&amp;rsquo;s first talk about another Elixir&amp;rsquo;s property, which is data immutability. Its basic principle is that data, once created, cannot be modified in place, which in turn means that if we want store that modified data, we will create a new data entry for it. It&amp;rsquo;s very similar to Unix &lt;em&gt;pipe&lt;/em&gt; (&amp;ldquo;|&amp;rdquo;) use case - when we use &lt;strong&gt;&lt;em&gt;cat &amp;ldquo;file.txt&amp;rdquo; | grep &amp;ldquo;some text&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;  in linux, we almost never want to save it back to &lt;em&gt;file.txt&lt;/em&gt; - instead we&amp;rsquo;ll save it to a new file, or use it instantly. In that case we can talk about &lt;strong&gt;data transformation&lt;/strong&gt; - and Elixir is all about transforming the data. So similarly to Unix, Elixir has its pipe operator, which differs from the standard &amp;ldquo;|&amp;rdquo; character by having an additional &amp;ldquo;greater than&amp;rdquo; sign after it.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see the example again:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; process({user, project, count}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;fetch(user,project)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; decode_response
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; convert_to_list_of_maps
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; sort_into_ascending_order
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;take(count)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; print_table_for_columns([&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;])
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+So how does this work?&lt;br&gt;
+&lt;strong&gt;&lt;em&gt;&amp;#124;&amp;gt;&lt;/em&gt;&lt;/strong&gt; operator causes the output of &lt;strong&gt;&lt;em&gt;Issues.GithubIssues.fetch(user,project)&lt;/em&gt;&lt;/strong&gt; function call to be bound with the first argument of function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt;, which output of is in turn bound to the first argument of function &lt;strong&gt;_convert_to_list_of&lt;em&gt;maps&lt;/em&gt;&lt;/strong&gt;, and so on. Notice that some of the functions in that chain still take arguments - those arguments will be passed to the function starting from the second argument, as first is reserved for pipe operator.&lt;/p&gt;
+
+&lt;p&gt;Such code composition gives a great insight into what data transformation is happening here, and in what order. Also, if we need to modify/remove/add one of the transformation&amp;rsquo;s steps, it&amp;rsquo;s very clear how it should be done.&lt;/p&gt;
+
+&lt;h3 id=&#34;meta-programming-in-elixir-the-scary-powerful-wizard-in-a-high-tower&#34;&gt;Meta programming in Elixir - the scary powerful wizard in a high tower&lt;/h3&gt;
+
+&lt;p&gt;I mentioned that pattern matching and pipe operator are my 2 of 3 favorite Elixir features, and the third one couldn&amp;rsquo;t be anything else then macros and meta programming. It&amp;rsquo;s a big addition compared to the Erlang, and I remember reading an article where Jose mentions Meta programming and &lt;a href=&#34;http://elixir-lang.org/getting-started/protocols.html&#34;&gt;Protocols&lt;/a&gt; as the most important language features. I used the word &amp;ldquo;scary&amp;rdquo; because meta programming is indeed super powerful, but at the same time it might be dangerous - once you learn how many things can be done with help of macros, you might be tempted to use them even where it doesn&amp;rsquo;t really make much sense. Macros are expressions in code that are executed at compile time, and replaced with computed code. I won&amp;rsquo;t go into detail about macros and meta programming, because this topic requires really good explanation, so I will recommend two sources to learn more about it:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://vimeo.com/131643017&#34;&gt;Great presentation&lt;/a&gt; by Chris Mccord, where he talks about meta programming in Elixir at NDC conference in Norway,&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/cmelixir/metaprogramming-elixir&#34;&gt;Metaprogramming Elixir&lt;/a&gt; - an awesome book, also by Chris Mccord, which goes into detail of macros wizardry.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But to give some perspective into how powerful macros in Elixir are, consider following piece of code (shamelessly taken from Chris&amp;rsquo; presentation):
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;defmodule&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Notifier&lt;/span&gt; &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; ping(pid) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Process&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;alive?(pid) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+      &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Logger&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;debug &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Sending ping!&amp;quot;&lt;/span&gt;
+      send pid, &lt;span style=&#34;color: #AA6600&#34;&gt;:ping&lt;/span&gt;
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&gt;send&lt;/em&gt; function is a &lt;strong&gt;macro&lt;/strong&gt; - including &lt;strong&gt;&lt;em&gt;defmodule&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;def&lt;/em&gt;&lt;/strong&gt; keywords! Even &lt;strong&gt;&lt;em&gt;Logger.debug&lt;/em&gt;&lt;/strong&gt; is a macro, and there is a good reason to that. Because macros are evaluated at compile time, debug messages can be completely removed from the actual compiled code if logging level has been set to omit them, which results in saving CPU cycles required to handle them. Isn&amp;rsquo;t that just awesome?&lt;/p&gt;
+
+&lt;h2 id=&#34;summary-just-the-tip-of-the-iceberg&#34;&gt;Summary - just the tip of the iceberg&lt;/h2&gt;
+
+&lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
+
+&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[DSP] Let&#39;s do some planning</title>
+      <link>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</link>
+      <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
+      <description>
+
+&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;{% post_url 2016-02-12-daj-sie-poznac-challange-accepted %}&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework.&lt;/p&gt;
+
+&lt;p&gt;And what&amp;rsquo;s that planning I mentioned in the title of this post? I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
+
+&lt;h3 id=&#34;week-1-the-game&#34;&gt;Week 1 - The Game&lt;/h3&gt;
+
+&lt;p&gt;I will introduce basic game concepts and rules, and how I envision the game will look like at the end of this challenge.&lt;/p&gt;
+
+&lt;h3 id=&#34;week-2-hello-elixir&#34;&gt;Week 2 - Hello Elixir&lt;/h3&gt;
+
+&lt;p&gt;Week 2 will be about elixir - what is this language, what interesting features does it have, and how can we model the game in it.&lt;/p&gt;
+
+&lt;h3 id=&#34;week-3-mvp&#34;&gt;Week 3 - MVP&lt;/h3&gt;
+
+&lt;p&gt;By the end of week 3 I&amp;rsquo;d like to have a running version of the game in pure Elixir, available to play through iex (Elixir REPL).&lt;/p&gt;
+
+&lt;h3 id=&#34;week-4-we-re-going-web-wide&#34;&gt;Week 4 - We&amp;rsquo;re going web-wide&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;ll do an introduction to Phoenix, Elixir based high performance web framework.&lt;/p&gt;
+
+&lt;h3 id=&#34;week-5-work-work-work&#34;&gt;Week 5 - Work, work, work&lt;/h3&gt;
+
+&lt;p&gt;I will spend this week on implementing the game in phoenix, and I will slowly transition to frontend.&lt;/p&gt;
+
+&lt;h3 id=&#34;week-6-7-8-show-me-your-pretty-face&#34;&gt;Week 6, 7 &amp;amp; 8 - Show me your pretty face&lt;/h3&gt;
+
+&lt;p&gt;Well, we&amp;rsquo;re talking games here, and it ain&amp;rsquo;t &lt;a href=&#34;https://en.wikipedia.org/wiki/MUD&#34;&gt;mud&lt;/a&gt;-type, so we need to create some UI.
+I honestly have no idea how it will work, what technologies will I use, or where will I take some decent graphics from. Fun ride, as usual.&lt;/p&gt;
+
+&lt;h3 id=&#34;week-9-10-let-s-scale-it-baby&#34;&gt;Week 9 &amp;amp; 10 - Let&amp;rsquo;s scale it baby!&lt;/h3&gt;
+
+&lt;p&gt;Elixir is really a &lt;a href=&#34;http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections&#34;&gt;high performance language&lt;/a&gt;, but at some point there is always a need to scale out and use more servers than just one. I&amp;rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&amp;rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.&lt;/p&gt;
+
+&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Daj Się poznać - challange accepted</title>
+      <link>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
+      <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+
+&lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;allow anonymous players to join the game easily, just by opening game’s website.&lt;/li&gt;
+&lt;li&gt;handle many (and i really mean MANY, like ~1MLN) connections at the same time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To achieve above, I want to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;design this system in maximally stateless mode - game state will be held in memory, and each game instance will be handled by a separate ‘actor’ in the system&lt;/li&gt;
+&lt;li&gt;System will be able to connect new nodes (physical/virtual servers) dynamically. This means that server can be scaled horizontally, based on the current load (number of players).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
+Wish me good luck! :-)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating vcards in rails using vpim - which works in outlook with correct encoding</title>
+      <link>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</link>
+      <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
+      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+I’m using awsome vpim gem.
+In controller, where you will generate vcard, add this require:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #007020&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;vpim&lt;span style=&#34;color: #333333&#34;&gt;/&lt;/span&gt;vcard&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The best working solution is to encode your vcard in utf-8, which is not currently available in vpim, so lets add following piece of code (after the require):&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;module&lt;/span&gt; &lt;span style=&#34;color: #0e84b5; font-weight: bold&#34;&gt;Vpim&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;DirectoryInfo&lt;/span&gt;
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Field&lt;/span&gt;
+      &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #007020&#34;&gt;self&lt;/span&gt;
+        alias_method &lt;span style=&#34;color: #AA6600&#34;&gt;:orig_create&lt;/span&gt;, &lt;span style=&#34;color: #AA6600&#34;&gt;:create&lt;/span&gt;
+
+        &lt;span style=&#34;color: #888888&#34;&gt;# we overwrite Field.create for setting the CHARSET&lt;/span&gt;
+        &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;create&lt;/span&gt;(&lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;, value&lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, params&lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt;{})
+          &lt;span style=&#34;color: #888888&#34;&gt;# specify the lines you don&amp;#39;t want to add a charset to&lt;/span&gt;
+          lines_to_ignore &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #DD2200; background-color: #fff0f0&#34;&gt;%w(BEGIN END VERSION)&lt;/span&gt;
+          params&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;merge!({&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;CHARSET&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;unless&lt;/span&gt; lines_to_ignore&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;include? &lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;
+          orig_create(&lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;, value, params)
+        &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+      &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It&amp;rdquo;s important to set charset to utf-8, not UTF-8 - Outlook won’t handle it!
+Now you have to generate vcard itself - i’m doing it with following piece of code:&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #888888&#34;&gt;#controller method&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;vcard&lt;/span&gt;
+    person &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Person&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;visible&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;find(params&lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #AA6600&#34;&gt;:id&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt;)
+    card &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Vpim&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Vcard&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Maker&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;make2 &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;maker&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;
+
+      &lt;span style=&#34;color: #888888&#34;&gt;#setting up name&lt;/span&gt;
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_name &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;
+        &lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;prefix &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+        &lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;given &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;first_name
+        &lt;span style=&#34;color: #007020&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;family &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;last_name
+      &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+      &lt;span style=&#34;color: #888888&#34;&gt;# setting up address.&lt;/span&gt;
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_addr &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;addr&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;
+        addr&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt;
+        addr&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;street &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;street
+        addr&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;postalcode &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;zip_code
+        addr&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;region &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;city
+        addr&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;country &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;Poland&amp;#39;&lt;/span&gt;
+      &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;title &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;law_level
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;org &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;your company&amp;#39;&lt;/span&gt;
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_field(&lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Vpim&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;DirectoryInfo&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;Field&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;create(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;office&amp;#39;&lt;/span&gt;, person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;name ))
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_tel(person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;phone) { &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;e&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt; e&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;cell&amp;#39;&lt;/span&gt;}
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_tel(person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;phone) { &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;e&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt; e&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt;}
+
+
+      maker&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;add_email(person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;email) { &lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt;e&lt;span style=&#34;color: #333333&#34;&gt;|&lt;/span&gt; e&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;location &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt; }
+
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;At the end, we have to send the file (still vcard method) :&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt; send_data card&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;to_s, &lt;span style=&#34;color: #AA6600&#34;&gt;:type&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;text&lt;span style=&#34;color: #333333&#34;&gt;/&lt;/span&gt;x&lt;span style=&#34;color: #333333&#34;&gt;-&lt;/span&gt;vcard&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #AA6600&#34;&gt;:filename&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #003366; font-weight: bold&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;::&lt;/span&gt;encode(person&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;name) &lt;span style=&#34;color: #333333&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;vcf&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Things to remember:
+* Make correct charset
+* set content-type (:type option) - you can sent charset also in content-type.
+* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>I18n::InvalidPluralizationData in rails 3.2 with polish locale</title>
+      <link>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</link>
+      <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
+      <description>&lt;p&gt;In case u receive this error with such explanation:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pl:
+  activerecord:
+    models:
+      article:
+        one: “Artykuł”
+        few: “Artykuły”
+        many: “Artykułów”
+        other: “Artykuły”
+&lt;/pre&gt;&lt;/div&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>Bright sides of PHP - it evolved!</title>
+      <link>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</link>
+      <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
+      <description>
+
+&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
+
+&lt;p&gt;I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
+Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.&lt;/p&gt;
+
+&lt;h2 id=&#34;still-long-way-to-go-but-not-that-long-anymore&#34;&gt;Still long way to go? (but not that long anymore)&lt;/h2&gt;
+
+&lt;p&gt;Well, things went well for PHP recently, but there are still two main problems slowing down PHP progress - which of course would change what developers think of PHP, because the success on a software market is indisputable (look at statistics about PHP-based CMS usage provided by Fabien in his article).
+First is the massive amount of legacy code hanging on servers all around the world. And when i’m talking legacy, i don’t have in mind bad designed code which can’t be developed because some poor coders had no idea about design patterns that time. I&amp;rdquo;n talking about old, pre-5.3 PHP code, without namespaces, sometimes even without classes, You can’t touch it. You can’t do anything. 
+Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>NOT IN operator on Oracle 10g Express Edition</title>
+      <link>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</link>
+      <pubDate>Sun, 16 May 2010 18:39:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</guid>
+      <description>&lt;p&gt;Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:&lt;/p&gt;
+
+&lt;p&gt;select department_name from departments where departments.department_id not in (employees.department_id from employees group by department_id );&lt;/p&gt;
+
+&lt;p&gt;And made so many problems….
+This statement was supposed to return all departments which do not have any employees. Sounds easy, hmm? So it was for me, but… it returned nothing, and i knew there are at least 8 such departments.&lt;/p&gt;
+
+&lt;p&gt;After throwing away theory about data errors, i started googling. I found some info about NOT IN operator. Shortly, if it gets set of values which NULL inside, it will fail to return anything. i checked this and… yep, there was 1 (literally: ONE) employee that had no department (department_id was NULL). Argh.
+Anyway, the fixed version of query:&lt;/p&gt;
+
+&lt;p&gt;select department_name from departments where departments.department_id not in (select NVL(employees.department_id,0) from employees group by department_id );&lt;/p&gt;
+
+&lt;p&gt;Remember: always ensure that you are not getting NULL values in NOT IN subqueries!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>From OpenSUSE 11.2 (KDE4) to Ubuntu 10.04 (Gnome)</title>
+      <link>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</link>
+      <pubDate>Thu, 13 May 2010 20:49:54 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</guid>
+      <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment. My first idea was that i had enough of KDE4, so i installed Gnome on OpenSUSE. However, Gnome on OpenSUSE… no, thats wrong. After really short time i burned Ubuntu 10.04 CD and put it on install. It wasn’t too hard to do it - all important data was on different partition, i just had to rememeber to remove all gnome config files, because i didn’t want to format my home partition (i left all my stuff as it was). Without removing these files Ubuntu after installation looks awful (it detects gnome files and does not override them).
+Summary:
+pros:
+ * my laptop’s VGA output works! (now i can connect my monitor… yeah)
+ * it’s really fast
+cons:
+- a lot of stuff to setup again….&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to make Linksys WRT54GL able to redirect port</title>
+      <link>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</link>
+      <pubDate>Mon, 10 May 2010 13:49:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</guid>
+      <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).
+Fortunately, there is great software called dd-wrt.com, which makes your $60 worth router to a $600 worth one. It adds a lot of great features, also the one i needed most - port redirection. Simply download the package (version for WEB interface was good for me) and update the router firmware - it goes through easy web interface, few clicks - and it’s done! Just remember to stay away from power connector during the proccess.
+After that, i got new handy web interface. Then i could simply redirect from different WAN ports to the same 80 port but on different hosts.
+There are more supported routers, full list is available here.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>VMware Server 2 &#43; OpenSuSE 11.2 (32bit) &#43; Firefox 3.6</title>
+      <link>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</link>
+      <pubDate>Mon, 10 May 2010 00:54:44 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</guid>
+      <description>&lt;p&gt;Krótkie intro
+Do tej pory zawsze korzystałem z VirtualBoksa do wirtualizacji systemu (zwykłe uruchomienie Windows pod linuksem, nic specjalnego). Nie posiada on jednak wsparcia dla DirectX3D, co podobno umie VMware - wczoraj wieczorem postanowiłem więc go wypróbować. Z bogatej oferty softu VMware&amp;rdquo;a Wybrałem VMware Server w wersji 2.0.2, i szczęśliwy zabrałem się za pobieranie, mając nadzieję na szybki test i długi sen. Jak się okazało, nic z tego.
+Instalacja VMware Server - Problem 1
+Po pobraniu pakietu rpm ze strony &lt;a href=&#34;http://www.vmware.com/download/server/getserver.html&#34;&gt;http://www.vmware.com/download/server/getserver.html&lt;/a&gt; (pominę upierdliwą rejestrację na stronie, której trzeba dokonać aby cokolwiek pobrać) i zainstalowaniu pakietu w systemie należy uruchomić skrypt konfiguracyjny vmware-config.pl. Po uruchomieniu skrypt spróbuje nam zbudować sterownik dla naszego jądra - w moim przypadku jest to defaultowa wersja 2.6.31.12-0.1-desktop. Należy mieć oczywiście zainstalowany pakiet ze źródłami danej wersji kernela. Przy próbie budowania sterownika kompilator niestety rzuca sporą ilością błędów, na przykład:
+CC [M] /tmp/vmware-config20/vmmon-only/linux/driver.o /tmp/vmware-config20/vmmon-only/linux/driver.c:171: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:172: warning: initialization from incompatible pointer type /tmp/vmware-config20/vmmon-only/linux/driver.c:175: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:176: warning: initialization from incompatible pointer type
+Błędy przy kompilacji modułu występują podobno dla wersji kernela od 2.6.28 w górę. Aby temu zaradzić, należy pobrać ten patch. ( Teoretycznie w nazwie ma wersję 2.0.1 i x64, ale zadziałał również w moim przypadku). Paczkę należy rozpakować do katalogu /usr/lib/vmware/modules/source, a następnie uruchomić skrypt, który znajdował się w paczce (robimy to z uprawnieniami roota). Po zakończeniu pracy skryptu dostajemy informację, aby uruchomić vmware-config.pl ponownie. NIE robimy tego, ponieważ zostalibyśmy zasypani kolejnym błędem - tym razem dotyczącym modułu vsock i wynikającym z błędów w samym skrypcie vmware-config.pl . Pobieramy kolejnego patcha, Rozpakowujemy gdziekolwiek, i aplikujemy zawartość w następujący sposób:
+patch /usr/bin/vmware-config.pl vmware-config-tools.pl.patch
+Teraz możemy już uruchomić vmware-config.pl ponownie, i dokonać reszty konfiguracji. Dobrym pomysłem jest podanie swojej nazwy użytkownika, kiedy skrypt zapyta o użytkownika będącego administratorem VMservera.
+Korzystanie z VMware Web Access pod Firefoksem 3.6 - problem 2
+Podczas konfiguracji serwera podawaliśmy numery portów, na jakich pracuje serwer. domyślnie jest to 8333 dla połączeń po https i 8222 dla połączeń http. Można więc wypróbować jak to działa, otwierając w przeglądarce adres 127.0.0.1:8222 . Poprzez Web Access możemy tworzyć nowe maszyny wirtualne i nimi zarządzać, a także używać ich poprzez Remote Console plug-in. Jednak nie w firefoksie 3.6.
+a) Przede wszystkim, wspomniany dostęp przez https nie będzie działać. Wynika to z domyślnej konfiguracji FF3.6 , w której SSL2 jest wyłączony. Aby go włączyć, należy wpisać w pasek adresu about:config, poszukać opcji security.enable_ssl2 i zmienić jej wartość na true.
+b) Oprócz tego, nie uda nam się również dostać do maszyny poprzez Remote Console Plug-in . Problem ten występuje w wersji FF3.6 i bodajże tylko dla linuksa. Objawia się on komunikatem o treści:
+Cannot access virtual machine console. The request timed out.
+UWAGA: przyczyną tego komunikatu może być również zainstalowany Adblock, flashblock, noscript lub inne tego typu pluginy. Należy upewnić się, że to nie one są przyczyną problemu, szczególnie jeśli nasza wersja Firefoksa jest inna niż 3.6 .
+Aby dostać się do maszyny, należy uruchomić plugin ręcznie. w tym celu odnajdujemy zainstalowany plugin (ścieżka ~/.mozilla/firefox/folder_z_profilem/extensions/VMwareVMRC\@vmware.com/). Wewnątrz znajduje się katalog plugins, który nas interesuje. Kopiujemy sobie go w miejsce, z którego łatwiej nam będzie z niego korzystać, a następnie uruchamiamy vmware-vmrc znajdujący się wewnątrz (może być potrzebne nadanie uprawnień wykonywania dla tego skryptu oraz paru innych znajdujących się w katalogu plugins). Po uruchomieniu dostaniemy interfejs podobny do tego, jaki oferuje nam VMware Player. Podajemy dane do logowania do serwera. Uwaga - u mnie zadziałało tylko połączenie po SSL (na porcie 8883), zwykłe połączenie po porcie 8882 powodowało wieczne łączenie się z serwerem. Po połączeniu wybieramy maszynę, którą wcześniej utworzyliśmy poprzez Web Access. Teraz możemy cieszyć się działającą maszyną wirtualną. Ufff :)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Arp spoofing</title>
+      <link>http://blog.kars7e.io/2010/05/10/arp-spoofing/</link>
+      <pubDate>Mon, 10 May 2010 00:27:16 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2010/05/10/arp-spoofing/</guid>
+      <description>&lt;p&gt;Ostatnio w sieci znów krąży trojan, który m.in. wykorzystuje mechanizm arp spoofingu. Spotkaliście się z dziwnym linkiem do skryptu js na początku strony, np. v.freefl.info/day.js? No to klops… ale można spróbować z tym skutecznie powalczyć.
+Nie usuniemy tego żadnym antywirusem, bo nie siedzi to na naszym komputerze. możemy zablokować wspomniany link adblockiem/noscriptem i innymi tego typu podobnymi, lecz jest to tylko tymczasowe rozwiązanie, bo wspomniany link w każdej chwili może się zmienić. Ale o co właściwie chodzi?
+Komputery wykorzystują protokół arp do translacji adresów IP na adresy MAC urządzeń sieciowych. komputer atakujący podszywa się w czasie takiej translacji pod inny komputer ( najczęściej gateway do internetu), przez co wszystkie zapytania idą poprzez komputer atakujący (tzw. man in the middle ). Dokładniejszy scenariusz tego ataku można przeczytać tu.
+Co zrobić z tym fantem?
+Przede wszystkim zlokalizować źródło problemu, czyli komputer zarażony wirusem, będący naszym “podszywaczem” w sieci. w małej sieci domowej to nie problem, gorsza sprawa jeśli jest to np. duża sieć akademikowa (jak w moim przypadku), a jej admini nie kwapią się z analizą i wykryciem zainfekowanych maszyn. Rozwiązaniem tego problemu jest statyczne przypisanie komputerom i ich adresom MAC przydzielonych im adresów IP. aby sprawdzić, czy w naszej sieci występuje problem, wykorzystujemy polecenie arp. wydajemy komendę:arp -a (zarówno na linuksie, jak i na windows). Jeśli w zwróconej tablicy mamy dwa wpisy o tym samym adresie mac i dwóch różnych adresach IP, to znak, że coś jest nie tak. możemy sami ustawić statyczne linkowanie adresów (jeśli znamy adres MAC właściwego komputera) poleceniem:arp -s IP_ADDR MAC_ADDR Podany adres możemy wyciągać analizując ruch narzędziami tcpdump (windump na windows) . Możemy również posłużyć się narzędziami stworzonymi w tym celu: arpON na linuksa, oraz anti-arpspoof na windows. Niemniej jednak są to tymczasowe rozwiązania, gdyż dopiero wyeliminowanie zarażonego komputera zapewni pełnię bezpieczeństwa.
+P.S. Wpis ten powstał ze względu na dokuczliwość problemu i trudność znalezienia rozwiązania w internecie.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://blog.kars7e.io/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/about/</guid>
+      <description>
+
+&lt;h3 id=&#34;short-version&#34;&gt;Short version&lt;/h3&gt;
+
+&lt;p&gt;28, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Elixir &amp;amp; Go.
+Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for &lt;a href=&#34;http://www.vmware.com/&#34;&gt;VMware&lt;/a&gt;, industry leader in virtualization and private cloud solutions. Currently living in Sunnyvale, CA, with my lovely wife
+and 5 months old daughter. Check out my &lt;a href=&#34;http://linkedin.com/in/karolstepniewski&#34;&gt;LinkedIn&lt;/a&gt; to learn more about my career and what I have been doing in my professional life.&lt;/p&gt;
+
+&lt;h2 id=&#34;a-bit-longer-version&#34;&gt;A bit longer version&lt;/h2&gt;
+
+&lt;p&gt;I was born in 1988 in Poland, in a family where my father held a Ph.D. in physics, while my two older brothers
+graduated from the university with Computer Science degree, and my mom was a math teacher.
+So it was obvious I should choose to study arts and history of medieval crop farming&amp;hellip; no, not really.&lt;/p&gt;
+
+&lt;p&gt;So yeah, I started early. I played with computer keyboards when I was 2. I did my first &amp;ldquo;format C&amp;rdquo;
+(sorry dad) when I was 6. I had my first computer (the mighty &lt;a href=&#34;https://en.wikipedia.org/wiki/Intel_80286&#34;&gt;286&lt;/a&gt;)
+when I was 9. I burnt my first computer when I was 10 (again, sorry dad). I wrote my first program when I was 12
+(most likely &lt;a href=&#34;https://en.wikipedia.org/wiki/Logo_(programming_language)&#34;&gt;Logo&lt;/a&gt;, could have been Pascal too).
+But it&amp;rsquo;s not like I was all in love with programming since then - I didn&amp;rsquo;t feel it, coding wasn&amp;rsquo;t my passion.
+I just wanted to play basketball and video games. Now when I look at the past, I think I could have felt like
+I was forced to do that - and as we all know, there is nothing more effective to make you hate doing something than
+forcing you to do so. Of course I used linux for everything, I compiled my first kernel before I even finished my primary school, but still, it wasn&amp;rsquo;t something I liked to do.&lt;/p&gt;
+
+&lt;p&gt;Only somewhere in high-school i started realizing programming is fun. I did it more and more often,
+I learned C, C++, bash, PHP. I did CLI apps, web programming, I modified kernel to make it print funny stuff.
+Those were fun times. But I still preferred basketball and video games :-)&lt;/p&gt;
+
+&lt;p&gt;And then university happened.&lt;br&gt;
+Actually, two universities happened. I was accepted to &lt;a href=&#34;http://www.elka.pw.edu.pl/eng&#34;&gt;Warsaw University of Technology&lt;/a&gt;, one of the top CS schools in Poland, but my semester wasn&amp;rsquo;t starting until February, which was unusual and different from any other school (normal university semester in Poland starts in October). So to not bore myself to death during those 5 months, I decided to join different university, and different major, which had a bit more relaxed terms of applying. and it was supposed to just be a temporary thing&amp;hellip; Boy, what a good decision that was.&lt;/p&gt;
+
+&lt;p&gt;I joined &lt;a href=&#34;http://www.sggw.pl/en/&#34;&gt;Warsaw University of Life Sciences&lt;/a&gt; to study Econometrics - an area of economy completely new to me (not that I knew anything about economy at that time). It gave me different perspective, it taught me how computer science can be applied to do really interesting things. And it made me aware of stocks, options, bonds, and all other derivatives - something that turned out to be quite useful when I later arrived to Silicon Valley :-).&lt;/p&gt;
+
+&lt;p&gt;So I stayed, and after some time I studied at two universities at the same time. Oh, and I worked at the same time too.
+After all, why not? I realized that the more tasks you have to do, the better you get at managing them. Those were crazy days, which included coding (together with my best friend) a fully functional multi-player snake game with GUI and what not over single night, having 5 exams the same day (with half of them on a campus located at the other end of the city) or hacking studying process (no, seriously, you can&amp;rsquo;t study two full-time majors and work at the same time without finding some shortcuts. But it was all legal!). Sometimes I think that I could have waited with working until after I finished my studies, to have more time for research, etc. But then I think how MUCH I learned by working - and this experience is so priceless I would never exchange it for anything else.&lt;/p&gt;
+
+&lt;p&gt;So I worked. Again, it&amp;rsquo;s always been a fun ride. Once I woke up on Friday to learn we need to move EVERYTHING from our servers because the company who actually owned them would come to collect them on Monday. So I spent next 3 days to plan and migrate all our data to a real data center. 56 hours without sleep is pretty unforgettable memory. I did different things in my career: I wrote software, I managed it, I designed it, I managed the physical infrastructure it was running on. I had my own company and I helped my customers resolve their needs, whether it was a website, data migration to cloud, or complex CRM system performance optimization. I worked full-time on a position that involved integrating huge enterprise software for telco industry.&lt;/p&gt;
+
+&lt;p&gt;And that&amp;rsquo;s when I turned 26.&lt;/p&gt;
+
+&lt;p&gt;So when I was 26, I got a message on LinkedIn saying that VMware is having this huge recruiting event in Warsaw, and I&amp;rsquo;m invited to participate. I was like &amp;ldquo;why would I even want to work for VMware?&amp;rdquo; - at that time I only knew their awesome desktop virtualization products (Fusion, Workstation) and server-side industry standard vSphere family. Not really in my area of interests. But with the usual attitude of &amp;ldquo;why not?&amp;rdquo; I went ahead and took part in it. My goal was to just check how such things look like, and what expectations companies of that scale might have. So I spent good 6 hours being grilled by all those smart engineers and managers, with my brain melting more and more every time interviewers would switch. And, after all of these, 30 MINUTES after my last interview (employers, this is how it should be done!), I&amp;rsquo;ve been told they want me, and they want me in US. To work on Cloud Foundry. In ruby. And they also do Go. At that time all those technologies were my top choices and favorite languages, so I couldn&amp;rsquo;t say no. When I left home that day, I told my girlfriend: &amp;ldquo;I&amp;rsquo;m just gonna see what is this VMware about&amp;rdquo;. When I got back, I said: &amp;ldquo;Honey, looks like we&amp;rsquo;re moving to USA&amp;rdquo;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;So as I said, the offer was about working on Cloud Foundry project using Ruby in Seattle. But if you read my short bio version, you will notice I&amp;rsquo;m in Sunnyvale, working on OpenStack, which is written in Python! What happened? Well, it turned out that VMware is in the process of building their new product called &lt;a href=&#34;https://www.vmware.com/products/openstack&#34;&gt;VIO - VMware Integrated OpenStack&lt;/a&gt;. It was new, it was fresh, it was cool. But it also needed a lot of people, and it needed them quickly. I&amp;rsquo;ve got asked if I&amp;rsquo;m okay with joining VIO team instead. I didn&amp;rsquo;t know much about OpenStack at that time, last time I coded production python had been long time ago, so I thought - why not? I don&amp;rsquo;t have to mention the weather in Bay Area is a bit better than in Seattle :-).&lt;/p&gt;
+
+&lt;p&gt;So here we are, at the end of this story, and the future will show what&amp;rsquo;s next. But one thing I&amp;rsquo;m pretty sure about is that it&amp;rsquo;s full of &amp;ldquo;why not?&amp;rdquo; attitude!&lt;/p&gt;
+
+&lt;p&gt;TBD!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

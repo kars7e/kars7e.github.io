@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> How to make Linksys WRT54GL able to redirect port &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.iocss/slim.css">
+<link rel="stylesheet" href="http://blog.kars7e.iocss/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/">How to make Linksys WRT54GL able to redirect port</a></h2>
+          <span class="post-date">May 10, 2010 </span>
+          <div class="post-content">
+            <p>Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).
+Fortunately, there is great software called dd-wrt.com, which makes your $60 worth router to a $600 worth one. It adds a lot of great features, also the one i needed most - port redirection. Simply download the package (version for WEB interface was good for me) and update the router firmware - it goes through easy web interface, few clicks - and it’s done! Just remember to stay away from power connector during the proccess.
+After that, i got new handy web interface. Then i could simply redirect from different WAN ports to the same 80 port but on different hosts.
+There are more supported routers, full list is available here.</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/"> Prev</a>  
+          <a class="btn next " href="http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+  
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.iojs/slim.js"></script>
+  <script src="http://blog.kars7e.iojs/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Creating vcards in rails using vpim - which works in outlook with correct encoding &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.iocss/slim.css">
+<link rel="stylesheet" href="http://blog.kars7e.iocss/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/">Creating vcards in rails using vpim - which works in outlook with correct encoding</a></h2>
+          <span class="post-date">Sep 12, 2013 </span>
+          <div class="post-content">
+            <p>Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+I’m using awsome vpim gem.
+In controller, where you will generate vcard, add this require:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #007020">require</span> <span style="background-color: #fff0f0">&#39;&#39;</span>vpim<span style="color: #333333">/</span>vcard<span style="background-color: #fff0f0">&#39;&#39;</span>
+</pre></div>
+
+
+<p>The best working solution is to encode your vcard in utf-8, which is not currently available in vpim, so lets add following piece of code (after the require):</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">module</span> <span style="color: #0e84b5; font-weight: bold">Vpim</span>
+  <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">DirectoryInfo</span>
+    <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Field</span>
+      <span style="color: #008800; font-weight: bold">class</span> <span style="color: #333333">&lt;&lt;</span> <span style="color: #007020">self</span>
+        alias_method <span style="color: #AA6600">:orig_create</span>, <span style="color: #AA6600">:create</span>
+
+        <span style="color: #888888"># we overwrite Field.create for setting the CHARSET</span>
+        <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">create</span>(<span style="color: #007020">name</span>, value<span style="color: #333333">=</span><span style="background-color: #fff0f0">&#39;&#39;</span>, params<span style="color: #333333">=</span>{})
+          <span style="color: #888888"># specify the lines you don&#39;t want to add a charset to</span>
+          lines_to_ignore <span style="color: #333333">=</span> <span style="color: #DD2200; background-color: #fff0f0">%w(BEGIN END VERSION)</span>
+          params<span style="color: #333333">.</span>merge!({<span style="background-color: #fff0f0">&#39;CHARSET&#39;</span> <span style="color: #333333">=&gt;</span> <span style="background-color: #fff0f0">&#39;utf-8&#39;</span>}) <span style="color: #008800; font-weight: bold">unless</span> lines_to_ignore<span style="color: #333333">.</span>include? <span style="color: #007020">name</span>
+          orig_create(<span style="color: #007020">name</span>, value, params)
+        <span style="color: #008800; font-weight: bold">end</span>
+      <span style="color: #008800; font-weight: bold">end</span>
+
+    <span style="color: #008800; font-weight: bold">end</span>
+  <span style="color: #008800; font-weight: bold">end</span>
+<span style="color: #008800; font-weight: bold">end</span>
+</pre></div>
+
+
+<p>It&rdquo;s important to set charset to utf-8, not UTF-8 - Outlook won’t handle it!
+Now you have to generate vcard itself - i’m doing it with following piece of code:</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>  <span style="color: #888888">#controller method</span>
+  <span style="color: #008800; font-weight: bold">def</span> <span style="color: #0066BB; font-weight: bold">vcard</span>
+    person <span style="color: #333333">=</span> <span style="color: #003366; font-weight: bold">Person</span><span style="color: #333333">.</span>visible<span style="color: #333333">.</span>find(params<span style="color: #333333">[</span><span style="color: #AA6600">:id</span><span style="color: #333333">]</span>)
+    card <span style="color: #333333">=</span> <span style="color: #003366; font-weight: bold">Vpim</span><span style="color: #333333">::</span><span style="color: #003366; font-weight: bold">Vcard</span><span style="color: #333333">::</span><span style="color: #003366; font-weight: bold">Maker</span><span style="color: #333333">.</span>make2 <span style="color: #008800; font-weight: bold">do</span> <span style="color: #333333">|</span>maker<span style="color: #333333">|</span>
+
+      <span style="color: #888888">#setting up name</span>
+      maker<span style="color: #333333">.</span>add_name <span style="color: #008800; font-weight: bold">do</span> <span style="color: #333333">|</span><span style="color: #007020">name</span><span style="color: #333333">|</span>
+        <span style="color: #007020">name</span><span style="color: #333333">.</span>prefix <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;&#39;</span>
+        <span style="color: #007020">name</span><span style="color: #333333">.</span>given <span style="color: #333333">=</span> person<span style="color: #333333">.</span>first_name
+        <span style="color: #007020">name</span><span style="color: #333333">.</span>family <span style="color: #333333">=</span> person<span style="color: #333333">.</span>last_name
+      <span style="color: #008800; font-weight: bold">end</span>
+
+      <span style="color: #888888"># setting up address.</span>
+      maker<span style="color: #333333">.</span>add_addr <span style="color: #008800; font-weight: bold">do</span> <span style="color: #333333">|</span>addr<span style="color: #333333">|</span>
+        addr<span style="color: #333333">.</span>location <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;work&#39;</span>
+        addr<span style="color: #333333">.</span>street <span style="color: #333333">=</span> person<span style="color: #333333">.</span>location<span style="color: #333333">.</span>street
+        addr<span style="color: #333333">.</span>postalcode <span style="color: #333333">=</span> person<span style="color: #333333">.</span>location<span style="color: #333333">.</span>zip_code
+        addr<span style="color: #333333">.</span>region <span style="color: #333333">=</span> person<span style="color: #333333">.</span>location<span style="color: #333333">.</span>city
+        addr<span style="color: #333333">.</span>country <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;Poland&#39;</span>
+      <span style="color: #008800; font-weight: bold">end</span>
+
+      maker<span style="color: #333333">.</span>title <span style="color: #333333">=</span> person<span style="color: #333333">.</span>law_level
+      maker<span style="color: #333333">.</span>org <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;your company&#39;</span>
+      maker<span style="color: #333333">.</span>add_field(<span style="color: #003366; font-weight: bold">Vpim</span><span style="color: #333333">::</span><span style="color: #003366; font-weight: bold">DirectoryInfo</span><span style="color: #333333">::</span><span style="color: #003366; font-weight: bold">Field</span><span style="color: #333333">.</span>create(<span style="background-color: #fff0f0">&#39;office&#39;</span>, person<span style="color: #333333">.</span>location<span style="color: #333333">.</span>name ))
+      maker<span style="color: #333333">.</span>add_tel(person<span style="color: #333333">.</span>phone) { <span style="color: #333333">|</span>e<span style="color: #333333">|</span> e<span style="color: #333333">.</span>location <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;cell&#39;</span>}
+      maker<span style="color: #333333">.</span>add_tel(person<span style="color: #333333">.</span>location<span style="color: #333333">.</span>phone) { <span style="color: #333333">|</span>e<span style="color: #333333">|</span> e<span style="color: #333333">.</span>location <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;work&#39;</span>}
+
+
+      maker<span style="color: #333333">.</span>add_email(person<span style="color: #333333">.</span>email) { <span style="color: #333333">|</span>e<span style="color: #333333">|</span> e<span style="color: #333333">.</span>location <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&#39;work&#39;</span> }
+
+    <span style="color: #008800; font-weight: bold">end</span>
+</pre></div>
+</p>
+
+<p>At the end, we have to send the file (still vcard method) :</p>
+
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span> send_data card<span style="color: #333333">.</span>to_s, <span style="color: #AA6600">:type</span> <span style="color: #333333">=&gt;</span> <span style="background-color: #fff0f0">&#39;&#39;</span>text<span style="color: #333333">/</span>x<span style="color: #333333">-</span>vcard<span style="background-color: #fff0f0">&#39;&#39;</span>, <span style="color: #AA6600">:filename</span> <span style="color: #333333">=&gt;</span> <span style="color: #003366; font-weight: bold">URI</span><span style="color: #333333">::</span>encode(person<span style="color: #333333">.</span>name) <span style="color: #333333">+</span> <span style="background-color: #fff0f0">&#39;&#39;</span><span style="color: #333333">.</span>vcf<span style="background-color: #fff0f0">&#39;&#39;</span>
+  <span style="color: #008800; font-weight: bold">end</span>
+</pre></div>
+</p>
+
+<p>Things to remember:
+* Make correct charset
+* set content-type (:type option) - you can sent charset also in content-type.
+* URI:encode helps when filename includes non-ASCII characters</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/"> Prev</a>  
+          <a class="btn next " href="http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+  
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.iojs/slim.js"></script>
+  <script src="http://blog.kars7e.iojs/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
