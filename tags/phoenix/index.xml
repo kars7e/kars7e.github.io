@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phoenix on kars7e&#39;s Blog</title>
+    <link>http://blog.kars7e.io/tags/phoenix/index.xml</link>
+    <description>Recent content in Phoenix on kars7e&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://blog.kars7e.io/tags/phoenix/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Daj Się poznać - challange accepted</title>
+      <link>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
+      <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+
+&lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;allow anonymous players to join the game easily, just by opening game’s website.&lt;/li&gt;
+&lt;li&gt;handle many (and i really mean MANY, like ~1MLN) connections at the same time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To achieve above, I want to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;design this system in maximally stateless mode - game state will be held in memory, and each game instance will be handled by a separate ‘actor’ in the system&lt;/li&gt;
+&lt;li&gt;System will be able to connect new nodes (physical/virtual servers) dynamically. This means that server can be scaled horizontally, based on the current load (number of players).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
+Wish me good luck! :-)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

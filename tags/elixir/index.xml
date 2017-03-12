@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elixir on kars7e&#39;s Blog</title>
+    <link>http://blog.kars7e.io/tags/elixir/index.xml</link>
+    <description>Recent content in Elixir on kars7e&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://blog.kars7e.io/tags/elixir/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>My introduction to Elixir programming language</title>
+      <link>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
+      <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
+      <description>
+
+&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;{% post_url 2016-02-12-daj-sie-poznac-challange-accepted %}&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;Programming Elixir 1.2&lt;/a&gt; - A book by the one and only &lt;a href=&#34;https://twitter.com/pragdave&#34;&gt;Dave Thomas&lt;/a&gt;. I&amp;rsquo;ve read it and I wholeheartedly recommend it.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://howistart.org/posts/elixir/1&#34;&gt;Portal Game in Elixir&lt;/a&gt; - by &lt;a href=&#34;https://twitter.com/josevalim&#34;&gt;Jose Valim&lt;/a&gt;, the author of Elixir. I remember reading this article was the first thing that got me into the language.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;erlang-the-battle-tested-foundation-of-elixir&#34;&gt;Erlang - the battle-tested foundation of Elixir&lt;/h2&gt;
+
+&lt;p&gt;I will start my introduction by talking about a different language, called &lt;a href=&#34;https://en.wikipedia.org/wiki/Erlang_(programming_language)&#34;&gt;Erlang&lt;/a&gt;. Erlang is a 30 years old language built specifically to be used in distributed and highly available applications. It has proved its value over the years in telecommunications industry where it had been employed to deal with telephone connections at massive scale, but it also has been used by companies like &lt;a href=&#34;https://vimeo.com/44312354&#34;&gt;Whatsapp&lt;/a&gt; or &lt;a href=&#34;https://www.quora.com/Why-was-Erlang-chosen-for-use-in-Facebook-chat&#34;&gt;Facebook&lt;/a&gt; for their most connections-heavy applications. Such strong foundations are very important for me - as a pragmatic programmer, I&amp;rsquo;m looking for solutions that will last, and Erlang ecosystem is definitely a good ingredient to build one.&lt;/p&gt;
+
+&lt;p&gt;So how does Elixir utilize Erlang? First of all, it&amp;rsquo;s written in it. You can look at the &lt;a href=&#34;https://github.com/elixir-lang/elixir&#34;&gt;Elixir&amp;rsquo;s Github repository&lt;/a&gt;, You will obviously notice that Elixir is a huge Erlang&amp;rsquo;s code base. But there&amp;rsquo;s more than that. When you write code in Elixir, you can utilize &lt;a href=&#34;http://erlang.org/doc/apps/stdlib/&#34;&gt;standard Erlang library&lt;/a&gt;. You will find a lot of useful 3rd party libraries written for &lt;a href=&#34;https://hex.pm/&#34;&gt;Elixir or Erlang&lt;/a&gt; itself. In my opinion this helps a lot in Elixir&amp;rsquo;s adoption, because lack of decent library ecosystem is often a main problem of young programming languages. And last but not least, Elixir utilizes the power of BEAM, an Erlang&amp;rsquo;s virtual machine. It&amp;rsquo;s very interesting concept itself, and I won&amp;rsquo;t go much into detail of it here, let me just mention that Erlang VM in some way behaves very similarly to the Operating System - in fact, there is a special version of it running &lt;a href=&#34;http://erlangonxen.org/&#34;&gt;directly on Xen&lt;/a&gt; - without any additional operating system in between.&lt;/p&gt;
+
+&lt;h2 id=&#34;elixir-let-s-go-meta&#34;&gt;Elixir - let&amp;rsquo;s go meta&lt;/h2&gt;
+
+&lt;p&gt;Enough about Erlang, let&amp;rsquo;s talk about our actor in a leading role, Elixir, and what have made me fall in love with that language. There are many reasons to that, but I will start with a small piece of code that comes from the book &lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;&amp;ldquo;Programming Elixir&amp;rdquo;&lt;/a&gt; by Dave Thomas:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:ok&lt;/span&gt;, body}), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: body
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:error&lt;/span&gt;, error}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    {&lt;span style=&#34;color: #007020&#34;&gt;_&lt;/span&gt;, message} &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;keyfind(error, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;puts &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Error fetching from Github: &lt;/span&gt;&lt;span style=&#34;background-color: #eeeeee&#34;&gt;#{&lt;/span&gt;message&lt;span style=&#34;background-color: #eeeeee&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;halt(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;)
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; process({user, project, count}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;fetch(user,project)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; decode_response
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; convert_to_list_of_maps
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; sort_into_ascending_order
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;take(count)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; print_table_for_columns([&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;])
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; is_binary(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: str
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: to_string(str)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This excerpt is not complete (there are few functions missing, as well as module definition, which means the example will not compile), but it perfectly depicts 2 out of my 3 favorite features of Elixir: pattern matching and pipe operator. let&amp;rsquo;s talk about them in detail.&lt;/p&gt;
+
+&lt;h3 id=&#34;pattern-matching-the-beautiful-if&#34;&gt;Pattern matching - the beautiful &amp;ldquo;if&amp;rdquo;&lt;/h3&gt;
+
+&lt;p&gt;I will start with the fact that Elixir is a &lt;a href=&#34;https://en.wikipedia.org/wiki/Functional_programming&#34;&gt;functional&lt;/a&gt; programming language - the central concepts of it are functions and data immutability. This is important especially if you come from the object-oriented background like Java or C++. In Java your main friends are a class and an object instance of that class, and you have a lot of these. In Elixir, you have a lot of functions, and you want them to be clean and easily understandable. Your main enemy in such situations is a conditional statement, whether it is &amp;ldquo;if&amp;rdquo; or &amp;ldquo;switch&amp;rdquo;, it makes code harder to reason about - especially if you have nested several conditionals together (that&amp;rsquo;s something you always try to avoid).&lt;/p&gt;
+
+&lt;p&gt;In Elixir, you have a great help in form of pattern matching:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:ok&lt;/span&gt;, body}), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: body
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:error&lt;/span&gt;, error}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    {&lt;span style=&#34;color: #007020&#34;&gt;_&lt;/span&gt;, message} &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;keyfind(error, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;0&lt;/span&gt;)
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;puts &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Error fetching from Github: &lt;/span&gt;&lt;span style=&#34;background-color: #eeeeee&#34;&gt;#{&lt;/span&gt;message&lt;span style=&#34;background-color: #eeeeee&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;halt(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;)
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+As you can see in the example above, function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt; is defined twice, with different function bodies.
+They both accept single parameter, which is a &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#tuples&#34;&gt;tuple&lt;/a&gt;, however it goes even further - they accept only two-element tuple, and specify that first element must be either an &lt;strong&gt;&lt;em&gt;:ok&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;:error&lt;/em&gt;&lt;/strong&gt; &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#atoms&#34;&gt;atom&lt;/a&gt;. If we try to break any of those constraints and for example execute that function with first element set to &lt;strong&gt;&lt;em&gt;:warning&lt;/em&gt;&lt;/strong&gt;, we will get:&lt;/p&gt;
+
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;iex(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;3&lt;/span&gt;)&lt;span style=&#34;color: #333333&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:warning&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;})
+&lt;span style=&#34;color: #333333&#34;&gt;**&lt;/span&gt; (&lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;FunctionClauseError&lt;/span&gt;) no function clause matching &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response&lt;span style=&#34;color: #333333&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;1&lt;/span&gt;
+    iex:&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;decode_response({&lt;span style=&#34;color: #AA6600&#34;&gt;:warning&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;})
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This gives a tremendous value to limit the &amp;ldquo;ifs&amp;rdquo; in our code, but also makes code much easier to reason about - the error handling case like the code above is a great example where we see exactly which part is responsible for dealing with errors, and which processes the happy code path.&lt;/p&gt;
+
+&lt;p&gt;There is also a mechanism called &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/case-cond-and-if.html#expressions-in-guard-clauses&#34;&gt;guard clauses&lt;/a&gt;&lt;/strong&gt; which I consider to be a logical part of pattern matching (although technically it might not be). In the code example I already used before we can observe:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; is_binary(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: str
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; printable(str), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: to_string(str)
+&lt;/pre&gt;&lt;/div&gt;
+
+Which boils down to a check if an argument is a binary (which indicates &lt;a href=&#34;http://elixir-lang.org/getting-started/binaries-strings-and-char-lists.html&#34;&gt;it&amp;rsquo;s a string&lt;/a&gt;) and should just be returned, or is it something else and should be first converted to string. The way it&amp;rsquo;s done though is by using &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword, which gives more visibility into what&amp;rsquo;s the actual purpose of this code. &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword causes function to match only if the expression after it is true. For example if we had a function that takes 2 arguments, and multiplies them if the first argument is larger than the second one, and sums them otherwise, we could write:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; combine(a, b) &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;when&lt;/span&gt; a &lt;span style=&#34;color: #333333&#34;&gt;&amp;gt;&lt;/span&gt; b, &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: a &lt;span style=&#34;color: #333333&#34;&gt;*&lt;/span&gt; b
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; combine(a, b), &lt;span style=&#34;color: #AA6600&#34;&gt;do&lt;/span&gt;: a &lt;span style=&#34;color: #333333&#34;&gt;+&lt;/span&gt; b
+&lt;/pre&gt;&lt;/div&gt;
+
+It&amp;rsquo;s very important to remember that functions are matched in the same order they are defined, so match-all functions should be defined last.&lt;/p&gt;
+
+&lt;h3 id=&#34;pipe-operator-from-unix-with-love&#34;&gt;Pipe operator - from unix with |love&amp;gt;&lt;/h3&gt;
+
+&lt;p&gt;The second feature that attracted me to Elixir is &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/enumerables-and-streams.html#the-pipe-operator&#34;&gt;pipe operator&lt;/a&gt;&lt;/strong&gt;. Pipe operator is not something unique to Elixir - in one of &lt;a href=&#34;https://changelog.com/194/&#34;&gt;The Changelog&amp;rsquo;s episodes&lt;/a&gt;, Jose Valim (author of Elixir) mentions that he borrowed that idea from F#, functional programming language that belongs to .NET family. Before we talk more about this operator though, let&amp;rsquo;s first talk about another Elixir&amp;rsquo;s property, which is data immutability. Its basic principle is that data, once created, cannot be modified in place, which in turn means that if we want store that modified data, we will create a new data entry for it. It&amp;rsquo;s very similar to Unix &lt;em&gt;pipe&lt;/em&gt; (&amp;ldquo;|&amp;rdquo;) use case - when we use &lt;strong&gt;&lt;em&gt;cat &amp;ldquo;file.txt&amp;rdquo; | grep &amp;ldquo;some text&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;  in linux, we almost never want to save it back to &lt;em&gt;file.txt&lt;/em&gt; - instead we&amp;rsquo;ll save it to a new file, or use it instantly. In that case we can talk about &lt;strong&gt;data transformation&lt;/strong&gt; - and Elixir is all about transforming the data. So similarly to Unix, Elixir has its pipe operator, which differs from the standard &amp;ldquo;|&amp;rdquo; character by having an additional &amp;ldquo;greater than&amp;rdquo; sign after it.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see the example again:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; process({user, project, count}) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;fetch(user,project)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; decode_response
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; convert_to_list_of_maps
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; sort_into_ascending_order
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;take(count)
+    &lt;span style=&#34;color: #333333&#34;&gt;|&amp;gt;&lt;/span&gt; print_table_for_columns([&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;, &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;])
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+So how does this work?&lt;br&gt;
+&lt;strong&gt;&lt;em&gt;&amp;#124;&amp;gt;&lt;/em&gt;&lt;/strong&gt; operator causes the output of &lt;strong&gt;&lt;em&gt;Issues.GithubIssues.fetch(user,project)&lt;/em&gt;&lt;/strong&gt; function call to be bound with the first argument of function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt;, which output of is in turn bound to the first argument of function &lt;strong&gt;_convert_to_list_of&lt;em&gt;maps&lt;/em&gt;&lt;/strong&gt;, and so on. Notice that some of the functions in that chain still take arguments - those arguments will be passed to the function starting from the second argument, as first is reserved for pipe operator.&lt;/p&gt;
+
+&lt;p&gt;Such code composition gives a great insight into what data transformation is happening here, and in what order. Also, if we need to modify/remove/add one of the transformation&amp;rsquo;s steps, it&amp;rsquo;s very clear how it should be done.&lt;/p&gt;
+
+&lt;h3 id=&#34;meta-programming-in-elixir-the-scary-powerful-wizard-in-a-high-tower&#34;&gt;Meta programming in Elixir - the scary powerful wizard in a high tower&lt;/h3&gt;
+
+&lt;p&gt;I mentioned that pattern matching and pipe operator are my 2 of 3 favorite Elixir features, and the third one couldn&amp;rsquo;t be anything else then macros and meta programming. It&amp;rsquo;s a big addition compared to the Erlang, and I remember reading an article where Jose mentions Meta programming and &lt;a href=&#34;http://elixir-lang.org/getting-started/protocols.html&#34;&gt;Protocols&lt;/a&gt; as the most important language features. I used the word &amp;ldquo;scary&amp;rdquo; because meta programming is indeed super powerful, but at the same time it might be dangerous - once you learn how many things can be done with help of macros, you might be tempted to use them even where it doesn&amp;rsquo;t really make much sense. Macros are expressions in code that are executed at compile time, and replaced with computed code. I won&amp;rsquo;t go into detail about macros and meta programming, because this topic requires really good explanation, so I will recommend two sources to learn more about it:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://vimeo.com/131643017&#34;&gt;Great presentation&lt;/a&gt; by Chris Mccord, where he talks about meta programming in Elixir at NDC conference in Norway,&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/cmelixir/metaprogramming-elixir&#34;&gt;Metaprogramming Elixir&lt;/a&gt; - an awesome book, also by Chris Mccord, which goes into detail of macros wizardry.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But to give some perspective into how powerful macros in Elixir are, consider following piece of code (shamelessly taken from Chris&amp;rsquo; presentation):
+&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;defmodule&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Notifier&lt;/span&gt; &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;def&lt;/span&gt; ping(pid) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Process&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;alive?(pid) &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;do&lt;/span&gt;
+      &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;Logger&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;.&lt;/span&gt;debug &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Sending ping!&amp;quot;&lt;/span&gt;
+      send pid, &lt;span style=&#34;color: #AA6600&#34;&gt;:ping&lt;/span&gt;
+    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+
+&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&gt;send&lt;/em&gt; function is a &lt;strong&gt;macro&lt;/strong&gt; - including &lt;strong&gt;&lt;em&gt;defmodule&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;def&lt;/em&gt;&lt;/strong&gt; keywords! Even &lt;strong&gt;&lt;em&gt;Logger.debug&lt;/em&gt;&lt;/strong&gt; is a macro, and there is a good reason to that. Because macros are evaluated at compile time, debug messages can be completely removed from the actual compiled code if logging level has been set to omit them, which results in saving CPU cycles required to handle them. Isn&amp;rsquo;t that just awesome?&lt;/p&gt;
+
+&lt;h2 id=&#34;summary-just-the-tip-of-the-iceberg&#34;&gt;Summary - just the tip of the iceberg&lt;/h2&gt;
+
+&lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
+
+&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Daj Się poznać - challange accepted</title>
+      <link>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
+      <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+
+&lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;allow anonymous players to join the game easily, just by opening game’s website.&lt;/li&gt;
+&lt;li&gt;handle many (and i really mean MANY, like ~1MLN) connections at the same time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To achieve above, I want to:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;design this system in maximally stateless mode - game state will be held in memory, and each game instance will be handled by a separate ‘actor’ in the system&lt;/li&gt;
+&lt;li&gt;System will be able to connect new nodes (physical/virtual servers) dynamically. This means that server can be scaled horizontally, based on the current load (number of players).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
+Wish me good luck! :-)&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

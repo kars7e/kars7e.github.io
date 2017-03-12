@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</loc>
+    <lastmod>2016-03-01T09:05:45+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</loc>
+    <lastmod>2016-02-12T09:05:45+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</loc>
+    <lastmod>2013-06-23T13:50:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</loc>
+    <lastmod>2012-07-04T00:12:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</loc>
+    <lastmod>2010-05-16T18:39:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</loc>
+    <lastmod>2010-05-13T20:49:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</loc>
+    <lastmod>2010-05-10T13:49:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</loc>
+    <lastmod>2010-05-10T00:54:44+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/2010/05/10/arp-spoofing/</loc>
+    <lastmod>2010-05-10T00:27:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/about/</loc>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/about/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/antirants/</loc>
+    <lastmod>2012-07-04T00:12:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/blog/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/dajsiepoznac/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/categories/dajsiepoznac/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/elixir/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/encoding/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/erlang/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/functionalprogramming/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/i18n/</loc>
+    <lastmod>2013-06-23T13:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/karol-stepniewski/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/outlook/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/phoenix/</loc>
+    <lastmod>2016-02-12T09:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/php/</loc>
+    <lastmod>2012-07-04T00:12:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/planning/</loc>
+    <lastmod>2016-03-01T09:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/post/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/programming/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/quicknote/</loc>
+    <lastmod>2013-06-23T13:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/rails/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/rails3/</loc>
+    <lastmod>2013-06-23T13:50:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/ruby/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/tags/vpim/</loc>
+    <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/</loc>
+    <lastmod>2016-03-04T14:05:45+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

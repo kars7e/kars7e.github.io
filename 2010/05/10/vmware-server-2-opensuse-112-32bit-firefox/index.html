@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> VMware Server 2 &#43; OpenSuSE 11.2 (32bit) &#43; Firefox 3.6 &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.iocss/slim.css">
+<link rel="stylesheet" href="http://blog.kars7e.iocss/highlight.min.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline"></p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+       
+	  <li class="spacer">&ac;</li>
+  
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/">VMware Server 2 &#43; OpenSuSE 11.2 (32bit) &#43; Firefox 3.6</a></h2>
+          <span class="post-date">May 10, 2010 </span>
+          <div class="post-content">
+            <p>Krótkie intro
+Do tej pory zawsze korzystałem z VirtualBoksa do wirtualizacji systemu (zwykłe uruchomienie Windows pod linuksem, nic specjalnego). Nie posiada on jednak wsparcia dla DirectX3D, co podobno umie VMware - wczoraj wieczorem postanowiłem więc go wypróbować. Z bogatej oferty softu VMware&rdquo;a Wybrałem VMware Server w wersji 2.0.2, i szczęśliwy zabrałem się za pobieranie, mając nadzieję na szybki test i długi sen. Jak się okazało, nic z tego.
+Instalacja VMware Server - Problem 1
+Po pobraniu pakietu rpm ze strony <a href="http://www.vmware.com/download/server/getserver.html">http://www.vmware.com/download/server/getserver.html</a> (pominę upierdliwą rejestrację na stronie, której trzeba dokonać aby cokolwiek pobrać) i zainstalowaniu pakietu w systemie należy uruchomić skrypt konfiguracyjny vmware-config.pl. Po uruchomieniu skrypt spróbuje nam zbudować sterownik dla naszego jądra - w moim przypadku jest to defaultowa wersja 2.6.31.12-0.1-desktop. Należy mieć oczywiście zainstalowany pakiet ze źródłami danej wersji kernela. Przy próbie budowania sterownika kompilator niestety rzuca sporą ilością błędów, na przykład:
+CC [M] /tmp/vmware-config20/vmmon-only/linux/driver.o /tmp/vmware-config20/vmmon-only/linux/driver.c:171: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:172: warning: initialization from incompatible pointer type /tmp/vmware-config20/vmmon-only/linux/driver.c:175: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:176: warning: initialization from incompatible pointer type
+Błędy przy kompilacji modułu występują podobno dla wersji kernela od 2.6.28 w górę. Aby temu zaradzić, należy pobrać ten patch. ( Teoretycznie w nazwie ma wersję 2.0.1 i x64, ale zadziałał również w moim przypadku). Paczkę należy rozpakować do katalogu /usr/lib/vmware/modules/source, a następnie uruchomić skrypt, który znajdował się w paczce (robimy to z uprawnieniami roota). Po zakończeniu pracy skryptu dostajemy informację, aby uruchomić vmware-config.pl ponownie. NIE robimy tego, ponieważ zostalibyśmy zasypani kolejnym błędem - tym razem dotyczącym modułu vsock i wynikającym z błędów w samym skrypcie vmware-config.pl . Pobieramy kolejnego patcha, Rozpakowujemy gdziekolwiek, i aplikujemy zawartość w następujący sposób:
+patch /usr/bin/vmware-config.pl vmware-config-tools.pl.patch
+Teraz możemy już uruchomić vmware-config.pl ponownie, i dokonać reszty konfiguracji. Dobrym pomysłem jest podanie swojej nazwy użytkownika, kiedy skrypt zapyta o użytkownika będącego administratorem VMservera.
+Korzystanie z VMware Web Access pod Firefoksem 3.6 - problem 2
+Podczas konfiguracji serwera podawaliśmy numery portów, na jakich pracuje serwer. domyślnie jest to 8333 dla połączeń po https i 8222 dla połączeń http. Można więc wypróbować jak to działa, otwierając w przeglądarce adres 127.0.0.1:8222 . Poprzez Web Access możemy tworzyć nowe maszyny wirtualne i nimi zarządzać, a także używać ich poprzez Remote Console plug-in. Jednak nie w firefoksie 3.6.
+a) Przede wszystkim, wspomniany dostęp przez https nie będzie działać. Wynika to z domyślnej konfiguracji FF3.6 , w której SSL2 jest wyłączony. Aby go włączyć, należy wpisać w pasek adresu about:config, poszukać opcji security.enable_ssl2 i zmienić jej wartość na true.
+b) Oprócz tego, nie uda nam się również dostać do maszyny poprzez Remote Console Plug-in . Problem ten występuje w wersji FF3.6 i bodajże tylko dla linuksa. Objawia się on komunikatem o treści:
+Cannot access virtual machine console. The request timed out.
+UWAGA: przyczyną tego komunikatu może być również zainstalowany Adblock, flashblock, noscript lub inne tego typu pluginy. Należy upewnić się, że to nie one są przyczyną problemu, szczególnie jeśli nasza wersja Firefoksa jest inna niż 3.6 .
+Aby dostać się do maszyny, należy uruchomić plugin ręcznie. w tym celu odnajdujemy zainstalowany plugin (ścieżka ~/.mozilla/firefox/folder_z_profilem/extensions/VMwareVMRC\@vmware.com/). Wewnątrz znajduje się katalog plugins, który nas interesuje. Kopiujemy sobie go w miejsce, z którego łatwiej nam będzie z niego korzystać, a następnie uruchamiamy vmware-vmrc znajdujący się wewnątrz (może być potrzebne nadanie uprawnień wykonywania dla tego skryptu oraz paru innych znajdujących się w katalogu plugins). Po uruchomieniu dostaniemy interfejs podobny do tego, jaki oferuje nam VMware Player. Podajemy dane do logowania do serwera. Uwaga - u mnie zadziałało tylko połączenie po SSL (na porcie 8883), zwykłe połączenie po porcie 8882 powodowało wieczne łączenie się z serwerem. Po połączeniu wybieramy maszynę, którą wcześniej utworzyliśmy poprzez Web Access. Teraz możemy cieszyć się działającą maszyną wirtualną. Ufff :)</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/"> Prev</a>  
+          <a class="btn next " href="http://blog.kars7e.io/2010/05/10/arp-spoofing/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+  
+  <p>Powered by <a href="http://gohugo.io">Hugo</a>. This theme—Slim—is open sourced on <a href="https://github.com/zhe/hugo-theme-slim">Github</a>.</p>
+  
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.iojs/slim.js"></script>
+  <script src="http://blog.kars7e.iojs/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+  
+</body>
+
+</html>
