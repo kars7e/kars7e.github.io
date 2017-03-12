@@ -1,9 +1,0 @@
----
-baseURL: http://blog.kars7e.io
-disablePathToLower: true
-languageCode: en-us
-title: kars7e's Blog
-googleAnalytics: UA-7878188-6
-disqusShortname: kars7e
-theme: slim
-pygmentsstyle: colorful
