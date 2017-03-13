@@ -11,6 +11,8 @@ url: /2013/09/12/creating-vcards-in-rails-using-vpim-which-works/
 ---
 
 Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+
+<!--more-->
 I’m using awsome vpim gem.
 In controller, where you will generate vcard, add this require:
 

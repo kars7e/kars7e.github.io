@@ -14,7 +14,10 @@ title: My introduction to Elixir programming language
 url: /2016/03/04/dsp-my-introduction-to-elixir/
 ---
 
-Today I'm going to talk a bit about Elixir, the programming language that I chose to write my [project]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir's most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:
+Today I'm going to talk a bit about Elixir, the programming language that I chose to write my [project]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir's most interesting features, and why I think this language has a bright future ahead of it.
+
+<!--more-->
+If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:
 
 - [A getting started guide](http://elixir-lang.org/getting-started/introduction.html) - Official guide on Elixir website, one of the best I've seen.
 - [Programming Elixir 1.2](https://pragprog.com/book/elixir12/programming-elixir-1-2) - A book by the one and only [Dave Thomas](https://twitter.com/pragdave). I've read it and I wholeheartedly recommend it.

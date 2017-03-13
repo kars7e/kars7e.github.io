@@ -11,6 +11,7 @@ url: /2012/07/04/bright-sides-of-php-it-evolved/
 
 Today [Fabien Potencier](https://twitter.com/fabpot) published a [great post](http://fabien.potencier.org/php-is-much-better-than-you-think.html) about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.
 
+<!--more-->
 I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())->bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
 Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.
 

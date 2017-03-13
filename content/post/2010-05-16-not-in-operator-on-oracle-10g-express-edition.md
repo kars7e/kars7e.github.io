@@ -7,7 +7,7 @@ url: /2010/05/16/not-in-operator-on-oracle-10g-express-edition/
 ---
 
 Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:
-
+<!--more-->
 
 select department_name from departments where departments.department_id not in (employees.department_id from employees group by department_id );
 

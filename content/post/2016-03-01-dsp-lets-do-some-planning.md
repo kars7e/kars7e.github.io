@@ -10,9 +10,10 @@ url: /2016/03/01/dsp-lets-do-some-planning/
 ---
 
 The competition I mentioned in my [previous post]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) has just [started](http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/)!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called [Exploding Kittens](http://www.explodingkittens.com/), using Elixir language and Phoenix framework.
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called [Exploding Kittens](http://www.explodingkittens.com/), using Elixir language and Phoenix framework. And what's that planning I mentioned in the title of this post?
 
-And what's that planning I mentioned in the title of this post? I want to talk a bit about how I'm gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I'm on track, let's define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:
+<!--more-->
+I want to talk a bit about how I'm gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I'm on track, let's define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:
 
 ### Week 1 - The Game
 I will introduce basic game concepts and rules, and how I envision the game will look like at the end of this challenge.

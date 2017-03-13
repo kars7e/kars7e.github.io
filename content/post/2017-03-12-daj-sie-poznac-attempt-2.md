@@ -8,7 +8,8 @@ title: Daj Się poznać - challange accepted (again)
 description: How I decided to challenge myself again and to prove one learns from his/her mistakes
 ---
 
-Some time ago (or, one year ago) I [decided to take a challange]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) of DSP contest. It wasn't much of a success (to put it mildly). I've been very reluctant to try it again, but finally, few hours before the registration closed, I have [signed up](http://uczestnicy.dajsiepoznac.pl/lista). I'm going to give some details here what was my thought process.
+Some time ago (or, one year ago) I [decided to take a challange]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) of DSP contest. It wasn't much of a success (to put it mildly). I've been very reluctant to try it again, but finally, few hours before the registration closed, I have [signed up](http://uczestnicy.dajsiepoznac.pl/lista). I'm going to give some details here what was my thought process.<!--more-->
+
 
 ## DSP in short ##
 DSP, or Daj Się poznać, is a coding competition, but very different from what one may expect from something called a "coding competition." There is no solving of algorithmic challenges, or doing that in most optimal an elegant way (but it may be part of your work!). Instead, the goal is to actually **deliver**. Write two posts/week, push code to your repo. The quality of the code doesn't matter (for real!). DSP promotes two things:
