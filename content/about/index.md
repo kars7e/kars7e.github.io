@@ -2,11 +2,8 @@
 layout: page
 title: About me
 tags: [about, Karol Stepniewski, blog]
-modified: 2016-02-16T20:53:07.573882-04:00
+date: 2016-02-16
 comments: false
-share: false
-image:
-  feature: drogowskaz.png
 ---
 
 ### Short version
