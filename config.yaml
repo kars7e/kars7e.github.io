@@ -14,3 +14,14 @@ taxonomies:
 permalinks:
   post: /:year/:month/:day/:title/
 
+params:
+  Subtitle: "Personal blog of Karol Stepniewski"
+  GithubID: "kars7e"
+  TwitterID: "kars7e"
+  LinkedInID: "karolstepniewski"
+  AnalyticsID: "UA-7878188-6"
+  DisqusShortname: "kars7e"
+  Summary: true # takes true or false
+  Content: false # takes true or false
+  FooterMsg: "2017 Karol Stepniewski"
+

@@ -8,12 +8,11 @@
     <ul class="nav-list">
       {{ range .Site.Menus.main }}
       <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-      {{end}} 
-	  <li class="spacer">&ac;</li>
-{{ with .Site.Params.GithubID }}
-      <li><a href="https://github.com/{{.}}">Github</a></li>{{ end }} {{ with .Site.Params.TwitterID }}
-      <li><a href="https://twitter.com/{{.}}">Twitter</a></li>{{ end }} {{ with .Site.Params.LinkedInID }}
-      <li><a href="http://linkedin.com/in/{{.}}">LinkedIn</a></li>{{ end }}
+      {{end}}
+	    <li class="spacer">&ac;</li>
+      {{ with .Site.Params.GithubID }}<li><a href="https://github.com/{{.}}" target="_blank">Github</a></li>{{ end }}
+      {{ with .Site.Params.TwitterID }}<li><a href="https://twitter.com/{{.}}" target="_blank">Twitter</a></li>{{ end }}
+      {{ with .Site.Params.LinkedInID }}<li><a href="http://linkedin.com/in/{{.}}" target="_blank">LinkedIn</a></li>{{ end }}
     </ul>
   </div>
 </div>
