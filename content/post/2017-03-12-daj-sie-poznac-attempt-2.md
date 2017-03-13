@@ -4,7 +4,7 @@ comments: true
 date: "2017-03-12"
 tags:
   - dajsiepoznac2017
-title: Daj Się poznać - challange accepted (again)
+title: Daj Się poznać - challenge accepted (again)
 description: How I decided to challenge myself again and to prove one learns from his/her mistakes
 ---
 
