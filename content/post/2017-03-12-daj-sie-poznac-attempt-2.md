@@ -6,6 +6,7 @@ tags:
   - dajsiepoznac2017
 title: Daj Się poznać - challenge accepted (again)
 description: How I decided to challenge myself again and to prove one learns from his/her mistakes
+url: /2017/03/12/Daj-Się-poznać---challange-accepted-again/
 ---
 
 Some time ago (or, one year ago) I [decided to take a challange]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) of DSP contest. It wasn't much of a success (to put it mildly). I've been very reluctant to try it again, but finally, few hours before the registration closed, I have [signed up](http://uczestnicy.dajsiepoznac.pl/lista). I'm going to give some details here what was my thought process.<!--more-->
