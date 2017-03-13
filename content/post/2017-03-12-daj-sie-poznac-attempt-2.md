@@ -1,12 +1,9 @@
 ---
 author: karol_stepniewski
-categories:
-- dajsiepoznac
 comments: true
 date: 2017-03-12T09:05:45Z
 tags:
-- dajsiepoznac
-- programming
+- dajsiepoznac2017
 title: Daj Się poznać - challange accepted (again)
 ---
 

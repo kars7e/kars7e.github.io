@@ -1,13 +1,11 @@
 ---
 author: karol_stepniewski
-categories:
-- dajsiepoznac
 comments: true
 date: 2016-03-04T14:05:45Z
 image:
   feature: elixir-screen2.png
 tags:
-- dajsiepoznac
+- dajsiepoznac2016
 - programming
 - elixir
 - erlang

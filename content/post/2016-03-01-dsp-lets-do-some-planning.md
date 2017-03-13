@@ -1,13 +1,9 @@
 ---
 author: karol_stepniewski
-categories:
-- dajsiepoznac
 comments: true
 date: 2016-03-01T09:05:45Z
-image:
-  feature: dajsiepoznac_logo.png
 tags:
-- dajsiepoznac
+- dajsiepoznac2016
 - planning
 title: '[DSP] Let''s do some planning'
 url: /2016/03/01/dsp-lets-do-some-planning/

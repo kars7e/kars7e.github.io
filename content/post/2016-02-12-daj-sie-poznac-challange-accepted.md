@@ -1,13 +1,11 @@
 ---
 author: karol_stepniewski
-categories:
-- dajsiepoznac
 comments: true
 date: 2016-02-12T09:05:45Z
 image:
   feature: dajsiepoznac_logo.png
 tags:
-- dajsiepoznac
+- dajsiepoznac2016
 - elixir
 - phoenix
 - programming
