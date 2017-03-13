@@ -44,12 +44,11 @@
           <h2 class="post-title"><a href="http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/">[DSP] Let&#39;s do some planning</a></h2>
           <span class="post-date">Mar 1, 2016 </span>
           <div class="post-content">
-            
+            <p>The competition I mentioned in my <a href="http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/">previous post</a> has just <a href="http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/">started</a>!
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called <a href="http://www.explodingkittens.com/">Exploding Kittens</a>, using Elixir language and Phoenix framework. And what&rsquo;s that planning I mentioned in the title of this post?</p>
 
-<p>The competition I mentioned in my <a href="http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/">previous post</a> has just <a href="http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/">started</a>!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called <a href="http://www.explodingkittens.com/">Exploding Kittens</a>, using Elixir language and Phoenix framework.</p>
-
-<p>And what&rsquo;s that planning I mentioned in the title of this post? I want to talk a bit about how I&rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&rsquo;m on track, let&rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:</p>
+<p>
+I want to talk a bit about how I&rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&rsquo;m on track, let&rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:</p>
 
 <h3 id="week-1-the-game">Week 1 - The Game</h3>
 
@@ -81,7 +80,6 @@ I honestly have no idea how it will work, what technologies will I use, or where
 <p>Elixir is really a <a href="http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections">high performance language</a>, but at some point there is always a need to scale out and use more servers than just one. I&rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.</p>
 
 <p>As we&rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!</p>
-
           </div>
         </div>
         <div class="pagination">

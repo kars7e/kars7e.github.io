@@ -14,7 +14,8 @@
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description>&lt;p&gt;In case u receive this error with such explanation:&lt;/p&gt;
+      <description>&lt;p&gt;
+In case u receive this error with such explanation:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
@@ -30,9 +31,7 @@
         few: “Artykuły”
         many: “Artykułów”
         other: “Artykuły”
-&lt;/pre&gt;&lt;/div&gt;
-
-</description>
+&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

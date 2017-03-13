@@ -14,9 +14,10 @@
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;
 
-&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
+&lt;p&gt;
+If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
@@ -141,8 +142,7 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
 
 &lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
 
-&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;
-</description>
+&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -151,12 +151,11 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
       <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
-      <description>
+      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;
 
-&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework.&lt;/p&gt;
-
-&lt;p&gt;And what&amp;rsquo;s that planning I mentioned in the title of this post? I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
+&lt;p&gt;
+I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
 
 &lt;h3 id=&#34;week-1-the-game&#34;&gt;Week 1 - The Game&lt;/h3&gt;
 
@@ -187,8 +186,7 @@ I honestly have no idea how it will work, what technologies will I use, or where
 
 &lt;p&gt;Elixir is really a &lt;a href=&#34;http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections&#34;&gt;high performance language&lt;/a&gt;, but at some point there is always a need to scale out and use more servers than just one. I&amp;rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&amp;rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.&lt;/p&gt;
 
-&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;
-</description>
+&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -197,7 +195,10 @@ I honestly have no idea how it will work, what technologies will I use, or where
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
-      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;
+
+&lt;p&gt;
+I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
 
 &lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
 
@@ -214,8 +215,7 @@ I honestly have no idea how it will work, what technologies will I use, or where
 &lt;/ul&gt;
 
 &lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
-Wish me good luck! :-)&lt;/p&gt;
-</description>
+Wish me good luck! :-)&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -14,9 +14,10 @@
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;
 
-&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
+&lt;p&gt;
+If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
@@ -141,8 +142,7 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
 
 &lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
 
-&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;
-</description>
+&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -151,7 +151,10 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
-      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;
+
+&lt;p&gt;
+I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
 
 &lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
 
@@ -168,8 +171,7 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
 &lt;/ul&gt;
 
 &lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
-Wish me good luck! :-)&lt;/p&gt;
-</description>
+Wish me good luck! :-)&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -178,19 +180,17 @@ Wish me good luck! :-)&lt;/p&gt;
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
-      <description>
+      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
 
-&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
-
-&lt;p&gt;I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
+&lt;p&gt;
+I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
 Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.&lt;/p&gt;
 
 &lt;h2 id=&#34;still-long-way-to-go-but-not-that-long-anymore&#34;&gt;Still long way to go? (but not that long anymore)&lt;/h2&gt;
 
 &lt;p&gt;Well, things went well for PHP recently, but there are still two main problems slowing down PHP progress - which of course would change what developers think of PHP, because the success on a software market is indisputable (look at statistics about PHP-based CMS usage provided by Fabien in his article).
 First is the massive amount of legacy code hanging on servers all around the world. And when i’m talking legacy, i don’t have in mind bad designed code which can’t be developed because some poor coders had no idea about design patterns that time. I&amp;rdquo;n talking about old, pre-5.3 PHP code, without namespaces, sometimes even without classes, You can’t touch it. You can’t do anything. 
-Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;
-</description>
+Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;</description>
     </item>
     
   </channel>

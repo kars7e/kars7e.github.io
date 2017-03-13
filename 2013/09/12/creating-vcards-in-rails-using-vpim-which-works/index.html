@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<title> Creating vcards in rails using vpim - which works in outlook with correct encoding &middot; kars7e&#39;s Blog </title>
+<title> Creating vcards in rails using vpim &middot; kars7e&#39;s Blog </title>
 
 
 <link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
@@ -41,10 +41,12 @@
     <div class="content">
       <div class="posts">
         <div class="post">
-          <h2 class="post-title"><a href="http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/">Creating vcards in rails using vpim - which works in outlook with correct encoding</a></h2>
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/">Creating vcards in rails using vpim</a></h2>
           <span class="post-date">Sep 12, 2013 </span>
           <div class="post-content">
-            <p>Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+            <p>Short info - how to create vcards in rails, which work correctly in Outlook 20xx.</p>
+
+<p>
 I’m using awsome vpim gem.
 In controller, where you will generate vcard, add this require:</p>
 
@@ -123,7 +125,6 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
 * Make correct charset
 * set content-type (:type option) - you can sent charset also in content-type.
 * URI:encode helps when filename includes non-ASCII characters</p>
-
           </div>
         </div>
         <div class="pagination">

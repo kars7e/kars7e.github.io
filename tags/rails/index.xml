@@ -9,12 +9,14 @@
     <atom:link href="http://blog.kars7e.io/tags/rails/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Creating vcards in rails using vpim - which works in outlook with correct encoding</title>
+      <title>Creating vcards in rails using vpim</title>
       <link>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
-      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.&lt;/p&gt;
+
+&lt;p&gt;
 I’m using awsome vpim gem.
 In controller, where you will generate vcard, add this require:&lt;/p&gt;
 
@@ -92,8 +94,7 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
 &lt;p&gt;Things to remember:
 * Make correct charset
 * set content-type (:type option) - you can sent charset also in content-type.
-* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;
-</description>
+* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -102,7 +103,8 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description>&lt;p&gt;In case u receive this error with such explanation:&lt;/p&gt;
+      <description>&lt;p&gt;
+In case u receive this error with such explanation:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
@@ -118,9 +120,7 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
         few: “Artykuły”
         many: “Artykułów”
         other: “Artykuły”
-&lt;/pre&gt;&lt;/div&gt;
-
-</description>
+&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
   </channel>

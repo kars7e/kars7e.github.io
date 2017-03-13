@@ -15,9 +15,7 @@
       <pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</guid>
-      <description>
-
-&lt;p&gt;Some time ago (or, one year ago) I &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;
+      <description>&lt;p&gt;Some time ago (or, one year ago) I &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;
 
 &lt;h2 id=&#34;dsp-in-short&#34;&gt;DSP in short&lt;/h2&gt;
 
@@ -52,8 +50,7 @@
 &lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t try to predict everything upfront&lt;/strong&gt; - yes, my biggest problem. Works perfectly well in my daily job (I can save us months of work by spending a week on analyzing stuff). But this is not the place, and I need to give up this attitude.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Ok, I feel motivated. Let&amp;rsquo;s do it!&lt;/p&gt;
-</description>
+&lt;p&gt;Ok, I feel motivated. Let&amp;rsquo;s do it!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -62,9 +59,10 @@
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;
 
-&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it. If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
+&lt;p&gt;
+If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
@@ -189,8 +187,7 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
 
 &lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
 
-&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;
-</description>
+&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -199,12 +196,11 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
       <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
-      <description>
+      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;
 
-&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework.&lt;/p&gt;
-
-&lt;p&gt;And what&amp;rsquo;s that planning I mentioned in the title of this post? I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
+&lt;p&gt;
+I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
 
 &lt;h3 id=&#34;week-1-the-game&#34;&gt;Week 1 - The Game&lt;/h3&gt;
 
@@ -235,8 +231,7 @@ I honestly have no idea how it will work, what technologies will I use, or where
 
 &lt;p&gt;Elixir is really a &lt;a href=&#34;http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections&#34;&gt;high performance language&lt;/a&gt;, but at some point there is always a need to scale out and use more servers than just one. I&amp;rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&amp;rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.&lt;/p&gt;
 
-&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;
-</description>
+&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -245,7 +240,10 @@ I honestly have no idea how it will work, what technologies will I use, or where
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
-      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project. I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;
+
+&lt;p&gt;
+I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
 
 &lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
 
@@ -262,17 +260,18 @@ I honestly have no idea how it will work, what technologies will I use, or where
 &lt;/ul&gt;
 
 &lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
-Wish me good luck! :-)&lt;/p&gt;
-</description>
+Wish me good luck! :-)&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Creating vcards in rails using vpim - which works in outlook with correct encoding</title>
+      <title>Creating vcards in rails using vpim</title>
       <link>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
-      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.
+      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.&lt;/p&gt;
+
+&lt;p&gt;
 I’m using awsome vpim gem.
 In controller, where you will generate vcard, add this require:&lt;/p&gt;
 
@@ -350,8 +349,7 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
 &lt;p&gt;Things to remember:
 * Make correct charset
 * set content-type (:type option) - you can sent charset also in content-type.
-* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;
-</description>
+* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -360,7 +358,8 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description>&lt;p&gt;In case u receive this error with such explanation:&lt;/p&gt;
+      <description>&lt;p&gt;
+In case u receive this error with such explanation:&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
@@ -376,9 +375,7 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
         few: “Artykuły”
         many: “Artykułów”
         other: “Artykuły”
-&lt;/pre&gt;&lt;/div&gt;
-
-</description>
+&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -387,19 +384,17 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
-      <description>
+      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
 
-&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
-
-&lt;p&gt;I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
+&lt;p&gt;
+I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
 Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.&lt;/p&gt;
 
 &lt;h2 id=&#34;still-long-way-to-go-but-not-that-long-anymore&#34;&gt;Still long way to go? (but not that long anymore)&lt;/h2&gt;
 
 &lt;p&gt;Well, things went well for PHP recently, but there are still two main problems slowing down PHP progress - which of course would change what developers think of PHP, because the success on a software market is indisputable (look at statistics about PHP-based CMS usage provided by Fabien in his article).
 First is the massive amount of legacy code hanging on servers all around the world. And when i’m talking legacy, i don’t have in mind bad designed code which can’t be developed because some poor coders had no idea about design patterns that time. I&amp;rdquo;n talking about old, pre-5.3 PHP code, without namespaces, sometimes even without classes, You can’t touch it. You can’t do anything. 
-Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;
-</description>
+Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -408,7 +403,8 @@ Second obstacle is hosting companies and their support for PHP. The main reason 
       <pubDate>Sun, 16 May 2010 18:39:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</guid>
-      <description>&lt;p&gt;Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:&lt;/p&gt;
+      <description>&lt;p&gt;Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:
+&lt;/p&gt;
 
 &lt;p&gt;select department_name from departments where departments.department_id not in (employees.department_id from employees group by department_id );&lt;/p&gt;
 
@@ -420,8 +416,7 @@ Anyway, the fixed version of query:&lt;/p&gt;
 
 &lt;p&gt;select department_name from departments where departments.department_id not in (select NVL(employees.department_id,0) from employees group by department_id );&lt;/p&gt;
 
-&lt;p&gt;Remember: always ensure that you are not getting NULL values in NOT IN subqueries!&lt;/p&gt;
-</description>
+&lt;p&gt;Remember: always ensure that you are not getting NULL values in NOT IN subqueries!&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -430,14 +425,17 @@ Anyway, the fixed version of query:&lt;/p&gt;
       <pubDate>Thu, 13 May 2010 20:49:54 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</guid>
-      <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment. My first idea was that i had enough of KDE4, so i installed Gnome on OpenSUSE. However, Gnome on OpenSUSE… no, thats wrong. After really short time i burned Ubuntu 10.04 CD and put it on install. It wasn’t too hard to do it - all important data was on different partition, i just had to rememeber to remove all gnome config files, because i didn’t want to format my home partition (i left all my stuff as it was). Without removing these files Ubuntu after installation looks awful (it detects gnome files and does not override them).
+      <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment.&lt;/p&gt;
+
+&lt;p&gt;
+My first idea was that i had enough of KDE4, so i installed Gnome on OpenSUSE. However, Gnome on OpenSUSE… no, thats wrong.
+After really short time i burned Ubuntu 10.04 CD and put it on install. It wasn’t too hard to do it - all important data was on different partition, i just had to rememeber to remove all gnome config files, because i didn’t want to format my home partition (i left all my stuff as it was). Without removing these files Ubuntu after installation looks awful (it detects gnome files and does not override them).
 Summary:
 pros:
  * my laptop’s VGA output works! (now i can connect my monitor… yeah)
  * it’s really fast
 cons:
-- a lot of stuff to setup again….&lt;/p&gt;
-</description>
+- a lot of stuff to setup again….&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -446,11 +444,12 @@ cons:
       <pubDate>Mon, 10 May 2010 13:49:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</guid>
-      <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).
+      <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).&lt;/p&gt;
+
+&lt;p&gt;
 Fortunately, there is great software called dd-wrt.com, which makes your $60 worth router to a $600 worth one. It adds a lot of great features, also the one i needed most - port redirection. Simply download the package (version for WEB interface was good for me) and update the router firmware - it goes through easy web interface, few clicks - and it’s done! Just remember to stay away from power connector during the proccess.
 After that, i got new handy web interface. Then i could simply redirect from different WAN ports to the same 80 port but on different hosts.
-There are more supported routers, full list is available here.&lt;/p&gt;
-</description>
+There are more supported routers, full list is available here.&lt;/p&gt;</description>
     </item>
     
     <item>
