@@ -6,8 +6,7 @@ tags:
 - rails
 - outlook
 - encoding
-title: Creating vcards in rails using vpim - which works in outlook with correct encoding
-tumblr_url: http://blog.bigfun.eu/post/61013239846/creating-vcards-in-rails-using-vpim-which-works
+title: Creating vcards in rails using vpim
 url: /2013/09/12/creating-vcards-in-rails-using-vpim-which-works/
 ---
 
