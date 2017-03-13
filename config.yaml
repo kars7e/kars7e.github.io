@@ -11,3 +11,6 @@ taxonomies:
   tag: "tags"
   category: "categories"
   series: "series"
+permalinks:
+  post: /:year/:month/:day/:title/
+
