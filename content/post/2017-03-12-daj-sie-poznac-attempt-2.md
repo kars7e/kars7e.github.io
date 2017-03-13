@@ -7,4 +7,4 @@ tags:
 title: Daj Się poznać - challange accepted (again)
 ---
 
-Some time ago I decied to take a challange of DSP contest. Last time however, I didn't have time to finish it. Let's see how it goes this time!
+Some time ago I [decided to take a challange]({{< ref "2016-02-12-daj-sie-poznac-challange-accepted.md" >}}) of DSP contest. Last time however, I didn't have time to finish it. Let's see how it goes this time!
