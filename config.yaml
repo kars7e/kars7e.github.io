@@ -7,3 +7,7 @@ googleAnalytics: UA-7878188-6
 disqusShortname: kars7e
 theme: slim
 pygmentsstyle: colorful
+taxonomies:
+  tag: "tags"
+  category: "categories"
+  series: "series"
