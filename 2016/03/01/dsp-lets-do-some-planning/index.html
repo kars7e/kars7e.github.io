@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> [DSP] Let&#39;s do some planning &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline">Personal blog of Karol Stepniewski</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/about/">About</a></li>
+      
+	    <li class="spacer">&ac;</li>
+      <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
+      <li><a href="https://twitter.com/kars7e" target="_blank">Twitter</a></li>
+      <li><a href="http://linkedin.com/in/karolstepniewski" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/">[DSP] Let&#39;s do some planning</a></h2>
+          <span class="post-date">Mar 1, 2016 </span>
+          <div class="post-content">
+            
+
+<p>The competition I mentioned in my <a href="http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/">previous post</a> has just <a href="http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/">started</a>!
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called <a href="http://www.explodingkittens.com/">Exploding Kittens</a>, using Elixir language and Phoenix framework.</p>
+
+<p>And what&rsquo;s that planning I mentioned in the title of this post? I want to talk a bit about how I&rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&rsquo;m on track, let&rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:</p>
+
+<h3 id="week-1-the-game">Week 1 - The Game</h3>
+
+<p>I will introduce basic game concepts and rules, and how I envision the game will look like at the end of this challenge.</p>
+
+<h3 id="week-2-hello-elixir">Week 2 - Hello Elixir</h3>
+
+<p>Week 2 will be about elixir - what is this language, what interesting features does it have, and how can we model the game in it.</p>
+
+<h3 id="week-3-mvp">Week 3 - MVP</h3>
+
+<p>By the end of week 3 I&rsquo;d like to have a running version of the game in pure Elixir, available to play through iex (Elixir REPL).</p>
+
+<h3 id="week-4-we-re-going-web-wide">Week 4 - We&rsquo;re going web-wide</h3>
+
+<p>I&rsquo;ll do an introduction to Phoenix, Elixir based high performance web framework.</p>
+
+<h3 id="week-5-work-work-work">Week 5 - Work, work, work</h3>
+
+<p>I will spend this week on implementing the game in phoenix, and I will slowly transition to frontend.</p>
+
+<h3 id="week-6-7-8-show-me-your-pretty-face">Week 6, 7 &amp; 8 - Show me your pretty face</h3>
+
+<p>Well, we&rsquo;re talking games here, and it ain&rsquo;t <a href="https://en.wikipedia.org/wiki/MUD">mud</a>-type, so we need to create some UI.
+I honestly have no idea how it will work, what technologies will I use, or where will I take some decent graphics from. Fun ride, as usual.</p>
+
+<h3 id="week-9-10-let-s-scale-it-baby">Week 9 &amp; 10 - Let&rsquo;s scale it baby!</h3>
+
+<p>Elixir is really a <a href="http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections">high performance language</a>, but at some point there is always a need to scale out and use more servers than just one. I&rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.</p>
+
+<p>As we&rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!</p>
+
+          </div>
+        </div>
+        <div class="pagination">
+          <a class="btn previous " href="http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/"> Prev</a>  
+          <a class="btn next " href="http://blog.kars7e.io/about/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/";
+        
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//kars7e.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    
+    <div class="footer">
+  <p>2017 Karol Stepniewski</p>
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7878188-6', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>
