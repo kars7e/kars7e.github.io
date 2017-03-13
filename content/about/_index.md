@@ -1,9 +1,9 @@
 ---
-layout: page
-title: About me
-tags: [about, Karol Stepniewski, blog]
+title: About
+tags: [about, blog]
 date: 2016-02-16
 comments: false
+menu: "main"
 ---
 
 ### Short version

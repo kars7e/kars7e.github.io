@@ -13,7 +13,7 @@ taxonomies:
   series: "series"
 permalinks:
   post: /:year/:month/:day/:title/
-
+enableRobotsTXT: true
 params:
   Subtitle: "Personal blog of Karol Stepniewski"
   GithubID: "kars7e"
