@@ -13,7 +13,7 @@ description: Details of my filesyncer project I'm working on as a part of DSP co
 I've became a huge fan of describing ideas using single sentence. If you can't describe an idea this way, it may be that this idea needs more thought or it's too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year's edition of [DSP contest]({{< ref "2017-03-12-daj-sie-poznac-attempt-2.md" >}}) using single sentence then:
 <!--more-->
 
-*An application that continously runs on a computer, **monitors for changes in selected path** and **communicates these changes to other instances** of the same application running on different computers connected together in **single L2 network**.
+>An application that continously runs on a computer, **monitors for changes in selected path** and **communicates these changes to other instances** of the same application running on different computers connected together in **single L2 network**.
 
 There, I did it. I hope it conveys something meaningful to you. Of course, this is still very vague and, depending on the person who reads it, could be visualised as simple rsync running in daemon mode as well as very sophisticated distributed file system. Let me further clarify by providing some simple use cases.
 
