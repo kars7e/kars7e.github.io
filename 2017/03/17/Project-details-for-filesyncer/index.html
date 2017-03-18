@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Project details for filesyncer &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline">Personal blog of Karol Stepniewski</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/about/">About</a></li>
+      
+	    <li class="spacer">&ac;</li>
+      <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
+      <li><a href="https://twitter.com/kars7e" target="_blank">Twitter</a></li>
+      <li><a href="http://linkedin.com/in/karolstepniewski" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/">Project details for filesyncer</a></h2>
+          <span class="post-date">Mar 17, 2017 </span>
+          <div class="post-content">
+            <p>I&rsquo;ve became a huge fan of describing ideas using single sentence. If you can&rsquo;t describe an idea this way, it may be that this idea needs more thought or it&rsquo;s too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year&rsquo;s edition of <a href="http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/">DSP contest</a> using single sentence then:
+</p>
+
+<p>*An application that continously runs on a computer, <strong>monitors for changes in selected path</strong> and <strong>communicates these changes to other instances</strong> of the same application running on different computers connected together in <strong>single L2 network</strong>.</p>
+
+<p>There, I did it. I hope it conveys something meaningful to you. Of course, this is still very vague and, depending on the person who reads it, could be visualised as simple rsync running in daemon mode as well as very sophisticated distributed file system. Let me further clarify by providing some simple use cases.</p>
+
+<h2 id="feature-requirements">Feature requirements</h2>
+
+<p>A short list of features I would like to have, ordered by increasing complexity:</p>
+
+<ul>
+<li>Once executed, application runs continously, until user stops it using ctrl-C combination (or it receives TERM signal some other way).</li>
+<li>Application should take an argument which is a path to a directory on local filesystem.</li>
+<li>Application should monitor the specified directory by registering any changes to any files/subdirectories in that directory. Specifically, it should register new file or directory being created, existing file/directory being deleted, existing file or directory being renamed (why rename is a separate requirement I will write on a different occasion), and existing file&rsquo;s content being modified.</li>
+<li>Application should be able to detect other instances of itself running in the same network by using network broadcasting</li>
+<li>Application should share the changes it detects with other instances of itself running in the same network.</li>
+<li>Application should listen for changes coming from other instances of itself</li>
+<li>Application should apply changes coming from other instances of itself to it&rsquo;s local state.</li>
+</ul>
+
+<p>I will stop here. It doesn&rsquo;t seem like a lot of requirements, especially given that I won&rsquo;t spend too much time veryfing if these features have been implemented correctly. <strong>The main goal here is to deliver MVP</strong>, and the challenge is using language knew to me to achieve that MVP.</p>
+
+<h2 id="one-more-thing-rust-installation">One more thing - rust installation</h2>
+
+<p>I don&rsquo;t want to produce another introductory post again, so let&rsquo;s document some work. This will be trivial, but&hellip; you have to start somewhere. I&rsquo;m using <a href="https://www.rust-lang.org">Rust programming language</a>, which means I should have installed on my system. Let&rsquo;s do it then. I&rsquo;m using MacOS, and de facto a standard <a href="https://brew.sh/">package manager</a> for MacOS. Rust installation couldn&rsquo;t be simpler:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ brew install rust
+</pre></div>
+
+
+<p>Which after a minute or so gives us <code>rustc</code> command:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc --help
+Usage: rustc <span style="color: #333333">[</span>OPTIONS<span style="color: #333333">]</span> INPUT
+
+Options:
+    -h --help           Display this message
+    --cfg SPEC          Configure the compilation environment
+    .
+    .
+    .
+    <span style="color: #888888"># Omitted</span>
+</pre></div>
+
+
+<p>Let&rsquo;s finish this post with simple, classic and mandatory &ldquo;Hello world&rdquo;:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Hello, world!&quot;</span>);<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
+
+<p>that we compile with <code>rustc</code>:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc main.rs
+$ ./main
+Hello, world!
+</pre></div>
+
+
+<p>That&rsquo;s it! Environment ready. I will follow up in the next post, where I will attempt to write a daemon that handles signals gracefully.</p>
+
+<blockquote>
+<p><strong>Note</strong>: I&rsquo;m learning Rust as I write these posts. Hence, there will be a lot of modifications and sudden changes of course in my code.</p>
+</blockquote>
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/";
+        
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//kars7e.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    
+    <div class="footer">
+  <p>2017 Karol Stepniewski</p>
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7878188-6', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>
