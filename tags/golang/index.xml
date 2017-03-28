@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rust on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/rust/index.xml</link>
-    <description>Recent content in Rust on kars7e&#39;s Blog</description>
+    <title>Golang on kars7e&#39;s Blog</title>
+    <link>http://blog.kars7e.io/tags/golang/index.xml</link>
+    <description>Recent content in Golang on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://blog.kars7e.io/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://blog.kars7e.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Rust: first impressions</title>
@@ -274,83 +274,6 @@ Application started
 &lt;p&gt;When reading through Rust documentation, I&amp;rsquo;ve had few &amp;ldquo;OMG This is awesome!&amp;rdquo; moments. Pattern matching, variable bindings, &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;/code&gt; type, all these sound familiar from languages like Haskell or Elixir, and seem like a great addition to a system programming language, which is Rust&amp;rsquo;s main priority. As such, however, Rust focused on providing value in different areas, so certain things (like these I described above) are harder to achieve compared to Go. Having written that, I definitely see value in Rust. It&amp;rsquo;s too early for me to give full comparison of these languages (I will write such post once I get more proficient in Rust), but the much broader control over your program that Rust gives by default is already appealing.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;What about you? Go or Rust? What do you pick and why?&lt;/strong&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Project details for filesyncer</title>
-      <link>http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</link>
-      <pubDate>Fri, 17 Mar 2017 01:31:17 -0700</pubDate>
-      
-      <guid>http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve became a huge fan of describing ideas using single sentence. If you can&amp;rsquo;t describe an idea this way, it may be that this idea needs more thought or it&amp;rsquo;s too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year&amp;rsquo;s edition of &lt;a href=&#34;http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/&#34;&gt;DSP contest&lt;/a&gt; using single sentence then:
-&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;An application that continously runs on a computer, &lt;strong&gt;monitors for changes in selected path&lt;/strong&gt; and &lt;strong&gt;communicates these changes to other instances&lt;/strong&gt; of the same application running on different computers connected together in &lt;strong&gt;single L2 network&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;There, I did it. I hope it conveys something meaningful to you. Of course, this is still very vague and, depending on the person who reads it, could be visualised as simple rsync running in daemon mode as well as very sophisticated distributed file system. Let me further clarify by providing some simple use cases.&lt;/p&gt;
-
-&lt;h2 id=&#34;feature-requirements&#34;&gt;Feature requirements&lt;/h2&gt;
-
-&lt;p&gt;A short list of features I would like to have, ordered by increasing complexity:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Once executed, application runs continously, until user stops it using ctrl-C combination (or it receives TERM signal some other way).&lt;/li&gt;
-&lt;li&gt;Application should take an argument which is a path to a directory on local filesystem.&lt;/li&gt;
-&lt;li&gt;Application should monitor the specified directory by registering any changes to any files/subdirectories in that directory. Specifically, it should register new file or directory being created, existing file/directory being deleted, existing file or directory being renamed (why rename is a separate requirement I will write on a different occasion), and existing file&amp;rsquo;s content being modified.&lt;/li&gt;
-&lt;li&gt;Application should be able to detect other instances of itself running in the same network by using network broadcasting&lt;/li&gt;
-&lt;li&gt;Application should share the changes it detects with other instances of itself running in the same network.&lt;/li&gt;
-&lt;li&gt;Application should listen for changes coming from other instances of itself&lt;/li&gt;
-&lt;li&gt;Application should apply changes coming from other instances of itself to it&amp;rsquo;s local state.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I will stop here. It doesn&amp;rsquo;t seem like a lot of requirements, especially given that I won&amp;rsquo;t spend too much time veryfing if these features have been implemented correctly. &lt;strong&gt;The main goal here is to deliver MVP&lt;/strong&gt;, and the challenge is using language knew to me to achieve that MVP.&lt;/p&gt;
-
-&lt;h2 id=&#34;one-more-thing-rust-installation&#34;&gt;One more thing - rust installation&lt;/h2&gt;
-
-&lt;p&gt;I don&amp;rsquo;t want to produce another introductory post again, so let&amp;rsquo;s document some work. This will be trivial, but&amp;hellip; you have to start somewhere. I&amp;rsquo;m using &lt;a href=&#34;https://www.rust-lang.org&#34;&gt;Rust programming language&lt;/a&gt;, which means I should have installed on my system. Let&amp;rsquo;s do it then. I&amp;rsquo;m using MacOS, and de facto a standard &lt;a href=&#34;https://brew.sh/&#34;&gt;package manager&lt;/a&gt; for MacOS. Rust installation couldn&amp;rsquo;t be simpler:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install rust
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Which after a minute or so gives us &lt;code&gt;rustc&lt;/code&gt; command:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc --help
-Usage: rustc &lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt; INPUT
-
-Options:
-    -h --help           Display this message
-    --cfg SPEC          Configure the compilation environment
-    .
-    .
-    .
-    &lt;span style=&#34;color: #888888&#34;&gt;# Omitted&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Let&amp;rsquo;s finish this post with simple, classic and mandatory &amp;ldquo;Hello world&amp;rdquo;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;that we compile with &lt;code&gt;rustc&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
-$ ./main
-Hello, world!
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;That&amp;rsquo;s it! Environment ready. I will follow up in the next post, where I will attempt to write a daemon that handles signals gracefully.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: I&amp;rsquo;m learning Rust as I write these posts. Hence, there will be a lot of modifications and sudden changes of course in my code.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
     </item>
     
   </channel>

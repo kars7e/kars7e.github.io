@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Rust: first impressions &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline">Personal blog of Karol Stepniewski</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/about/">About</a></li>
+      
+	    <li class="spacer">&ac;</li>
+      <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
+      <li><a href="https://twitter.com/kars7e" target="_blank">Twitter</a></li>
+      <li><a href="http://linkedin.com/in/karolstepniewski" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2017/03/28/Rust-first-impressions/">Rust: first impressions</a></h2>
+          <span class="post-date">Mar 28, 2017 </span>
+          <div class="post-content">
+            <p>It&rsquo;s been a while since my last <a href="http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/">DSP post</a>, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&rsquo;s get back to the business, though. <strong>In this post, I will share my first impressions on Rust, as well as some code in filesyncer project</strong>.</p>
+
+<p>Let&rsquo;s dig in!
+</p>
+
+<h2 id="implementing-simple-daemon">Implementing simple daemon</h2>
+
+<p>I will reverse the order a bit, and start with the code of filesyncer first. It will give some &ldquo;meat&rdquo; to discuss. Goals for the first iteration of filesyncer code are:</p>
+
+<ul>
+<li><em>Application should run continuously, until it&rsquo;s explicitly stopped by the user or an unrecoverable error occurred.</em></li>
+<li><em>Application should be able to listen to and handle <code>INT</code> (Ctrl+c) signal</em></li>
+</ul>
+
+<p>These goals seem relatively clear. The first requirement sounds very much like a <a href="https://en.wikipedia.org/wiki/Daemon_(computing)">daemon</a>. In old days, one would add special logic to &ldquo;daemonize&rdquo; his/her application: ensure application is owned by <code>init</code> process, standard output/input/error is correctly handled, file descriptors are closed, etc. This is not needed anymore, as today&rsquo;s init systems (like systemd or upstart) are able to handle &ldquo;normal&rdquo; applications so that they can run in the background without an issue. We can also follow The <a href="https://12factor.net/">Twelve-factor app document</a>, specifically the &ldquo;<a href="https://12factor.net/logs">Treat logs as event streams</a>&rdquo; recommendation, and just print our messages to standard output, leaving their proper logging/storing to dedicated systems.</p>
+
+<p>We can then implement our first goal using the following piece of code:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Starting our application...&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #888888">// Initialization logic</span>
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application started&quot;</span>);<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">loop</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    	</span><span style="color: #888888">// Handle file events</span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span>)<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
+
+<p>We can compile and run this code:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc main.rs
+warning: unreachable statement, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+ --&gt; main.rs:9:5
+  |
+<span style="color: #6600EE; font-weight: bold">9</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+
+$ ls
+LICENSE   README.md main      main.rs
+$ ./main
+Starting our application...
+Application started
+^C
+</pre></div>
+
+
+<p><strong>Woah!</strong> There are several things that happened here. <strong>Let&rsquo;s break it down.</strong> First of all, this code compiles and produces an executable binary (we can see &ldquo;main&rdquo; file in <strong>ls</strong> command output). However, it produces a warning: &ldquo;unreachable statement&rdquo;. Also, after running it, we can see it&rsquo;s running continuously, but after sending INT signal (with the ctrl+c combination), we don&rsquo;t see our &ldquo;Shutting down&hellip;&rdquo; message! The compiler already warned us about that - the <code>println!</code> statement is unreachable because there is no logic to break out of the loop. And since we haven&rsquo;t implemented any <code>INT</code> signal handler, the default action is taken, which is to immediately terminate program execution. Let&rsquo;s fix that, and handle the <code>INT</code> signal explicitly.</p>
+
+<h2 id="adding-signal-handling">Adding signal handling</h2>
+
+<p>Before we dive into signal handling in Rust, I would like to first mention how this is being done in Go - my &ldquo;native&rdquo; language. Go includes signal handling in its standard library. The <a href="https://golang.org/pkg/os/signal/"><code>os/signal</code> package</a> provides simple and elegant API to deal with signals through <a href="https://tour.golang.org/concurrency/2">channels</a>. Here&rsquo;s a quick example:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">package</span> main
+
+<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;fmt&quot;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;os&quot;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;os/signal&quot;</span>
+<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;syscall&quot;</span>
+
+<span style="color: #008800; font-weight: bold">func</span> main() {
+
+    sigs <span style="color: #333333">:=</span> <span style="color: #007020">make</span>(<span style="color: #008800; font-weight: bold">chan</span> os.Signal, <span style="color: #0000DD; font-weight: bold">1</span>)
+    done <span style="color: #333333">:=</span> <span style="color: #007020">make</span>(<span style="color: #008800; font-weight: bold">chan</span> <span style="color: #333399; font-weight: bold">bool</span>, <span style="color: #0000DD; font-weight: bold">1</span>)
+
+    signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+
+    <span style="color: #008800; font-weight: bold">go</span> <span style="color: #008800; font-weight: bold">func</span>() {
+        sig <span style="color: #333333">:=</span> <span style="color: #333333">&lt;-</span>sigs
+        fmt.Println()
+        fmt.Println(sig)
+        done <span style="color: #333333">&lt;-</span> <span style="color: #008800; font-weight: bold">true</span>
+    }()
+
+    fmt.Println(<span style="background-color: #fff0f0">&quot;awaiting signal&quot;</span>)
+    <span style="color: #333333">&lt;-</span>done
+    fmt.Println(<span style="background-color: #fff0f0">&quot;exiting&quot;</span>)
+}
+</pre></div>
+
+
+<p>This sample creates two channels, registering one of them as an endpoint for signal handling. Next, it spins out a <a href="https://tour.golang.org/concurrency/1">goroutine</a> which blocks until a signal is received, and when that happens it prints it to stdout and sends a message to &ldquo;done&rdquo; channel, effectively exiting the application (main function blocks until a message from &ldquo;done&rdquo; is received).</p>
+
+<p>This example shows how easy it is to handle signals in Go, and I hoped to find something similar in Rust. Turns out Rust does not have anything dedicated to signal handling in the standard library yet - there is an <a href="https://github.com/rust-lang/rfcs/issues/1368">RFC</a>, however with no actual proposal yet. Reading through the discussion I stumbled upon crate called <a href="https://crates.io/crates/chan-signal">chan-signal</a>. The docs say: <em>&ldquo;This crate provides a simplistic interface to subscribe to operating system signals through a channel API.&rdquo;</em>. Sounds exactly like what I was looking for! <strong>Let&rsquo;s give it a try</strong>.</p>
+
+<p>First, I need to obtain this crate into my project. so far I was using single <code>main.rs</code> file directly compiled using <code>rustc</code> compiler. Let&rsquo;s switch to the official way of doing things: <a href="https://crates.io/">Cargo</a>. To &ldquo;add&rdquo; Cargo to our project, we need to create Cargo config file. <code>Cargo</code> binary gives us an easy way to do that:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ Cargo init --bin
+     Created binary <span style="color: #333333">(</span>application<span style="color: #333333">)</span> project
+</pre></div>
+
+
+<p><code>--bin</code> switch was needed since our project is a binary (default mode is to create Rust library). We ended up with <code>Cargo.toml</code> file, which looks more or less like this:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
+<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
+<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
+<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+
+<span style="color: #008800; font-weight: bold">[dependencies]</span>
+
+<span style="color: #008800; font-weight: bold">[[bin]]</span>
+<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
+<span style="color: #0000CC">path</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;main.rs&quot;</span>
+</pre></div>
+
+
+<p>we have three sections in this file: package, dependencies and bin. The bin section was created because syncer&rsquo;s source code (<code>main.rs</code> file) lives directly in project main directory. Rust convention is to store source code in <code>src/</code> subdirectory. Let&rsquo;s move our code and remove the bin section:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ mkdir src
+$ move main.rs src/
+</pre></div>
+
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
+<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
+<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
+<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+
+<span style="color: #008800; font-weight: bold">[dependencies]</span>
+</pre></div>
+
+
+<p>Let&rsquo;s check if it works, by running <code>cargo build</code>:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
+   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
+warning: unreachable expression, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+  --&gt; src/main.rs:10:5
+   |
+<span style="color: #6600EE; font-weight: bold">10</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+
+    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">0</span>.81 secs
+$ ls
+Cargo.lock Cargo.toml LICENSE    README.md  src        target
+$ ls target/debug/
+build       deps        examples    incremental native      syncer      syncer.d
+$ target/debug/syncer
+Starting our application...
+Application started
+^C
+</pre></div>
+
+
+<p>Looks like it does! Now, let&rsquo;s add the <code>chan-signal</code> dependency (it also requires <code>chan</code> crate):</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
+<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
+<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
+<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+
+<span style="color: #008800; font-weight: bold">[dependencies]</span>
+<span style="color: #0000CC">chan</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.19&quot;</span>
+<span style="color: #0000CC">chan-signal</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.2.0&quot;</span>
+</pre></div>
+
+
+<p>now, we build our application again:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
+    Updating registry <span style="background-color: #fff0f0">`</span>https://github.com/rust-lang/crates.io-index<span style="background-color: #fff0f0">`</span>
+ Downloading chan-signal v0.2.0
+ Downloading chan v0.1.19
+ Downloading lazy_static v0.2.5
+ Downloading libc v0.2.21
+ Downloading bit-set v0.4.0
+ Downloading rand v0.3.15
+ Downloading bit-vec v0.4.3
+   Compiling lazy_static v0.2.5
+   Compiling libc v0.2.21
+   Compiling bit-vec v0.4.3
+   Compiling bit-set v0.4.0
+   Compiling rand v0.3.15
+   Compiling chan v0.1.19
+   Compiling chan-signal v0.2.0
+   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
+warning: unreachable expression, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+  --&gt; src/main.rs:10:5
+   |
+<span style="color: #6600EE; font-weight: bold">10</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+
+    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">5</span>.30 secs
+</pre></div>
+
+
+<p>It builds correctly! Time to use it. I&rsquo;ve adapted the sample code from <code>chan-signal</code> documentation:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #557799">#[macro_use]</span><span style="color: #bbbbbb"></span>
+<span style="color: #008800; font-weight: bold">extern</span><span style="color: #bbbbbb"> </span><span style="color: #008800; font-weight: bold">crate</span><span style="color: #bbbbbb"> </span>chan;<span style="color: #bbbbbb"></span>
+<span style="color: #008800; font-weight: bold">extern</span><span style="color: #bbbbbb"> </span><span style="color: #008800; font-weight: bold">crate</span><span style="color: #bbbbbb"> </span>chan_signal;<span style="color: #bbbbbb"></span>
+
+<span style="color: #008800; font-weight: bold">use</span><span style="color: #bbbbbb"> </span>chan_signal::Signal;<span style="color: #bbbbbb"></span>
+
+<span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Starting our application...&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #888888">// Initialization logic</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>signal<span style="color: #bbbbbb"> </span><span style="color: #333333">=</span><span style="color: #bbbbbb"> </span>chan_signal::notify(<span style="color: #333333">&amp;</span>[Signal::INT,<span style="color: #bbbbbb"> </span>Signal::TERM]);<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span><span style="color: #888888">// We create a channel to be used when application wants to stop itself.</span>
+<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>(sdone,<span style="color: #bbbbbb"> </span>rdone)<span style="color: #bbbbbb"> </span><span style="color: #333333">=</span><span style="color: #bbbbbb"> </span>chan::sync(<span style="color: #0000DD; font-weight: bold">0</span>);<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span><span style="color: #888888">// Run our application logic in a separate thread.</span>
+<span style="color: #bbbbbb">	</span>::std::thread::spawn(<span style="color: #008800; font-weight: bold">move</span><span style="color: #bbbbbb"> </span><span style="color: #333333">||</span><span style="color: #bbbbbb"> </span>run(sdone));<span style="color: #bbbbbb"></span>
+
+<span style="color: #bbbbbb">    </span><span style="color: #888888">// Wait for a signal or for application to stop itself.</span>
+<span style="color: #bbbbbb">    </span>chan_select<span style="color: #333333">!</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>signal.recv()<span style="color: #bbbbbb"> </span>-&gt; <span style="color: #BB0066; font-weight: bold">signal</span><span style="color: #bbbbbb"> </span><span style="color: #333333">=&gt;</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Shutting down... (received signal: {:?})&quot;</span>,<span style="color: #bbbbbb"> </span>signal)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>},<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>rdone.recv()<span style="color: #bbbbbb"> </span><span style="color: #333333">=&gt;</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">            </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application stopped.&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+
+<span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">run</span>(_sdone: <span style="color: #BB0066; font-weight: bold">chan</span>::Sender<span style="color: #333333">&lt;</span>()<span style="color: #333333">&gt;</span>)<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application started&quot;</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">loop</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    	</span><span style="color: #888888">// Application logic</span>
+<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+}<span style="color: #bbbbbb"></span>
+</pre></div>
+
+
+<p><strong>Woah (again)!</strong> There is a lot going on here. First, we&rsquo;ve imported two external crates: <code>chan</code> and <code>chan_signal</code>. <code>chan</code> is a multi-producer/multi-consumer channel library. Standard rust library already contains channels support, however, their implementation follows multi-producer/single-consumer semantics.</p>
+
+<p>Our main function grew considerably. We define a <code>signal</code> variable via <code>chan_signal::notify</code> static method. This method returns a special channel, that we can further read from to obtain our signal (if such is sent). We also declare a synchronous <code>(sdone, rdone)</code> channel (it&rsquo;s used for the same purpose as its Go version). We spawn new OS thread used to run our application logic through <code>run()</code> function, passing <code>done</code> channel as a mean to stop application execution if needed. Finally, we use <a href="http://burntsushi.net/rustdoc/chan/macro.chan_select.html"><code>chan_select!</code></a> macro to &ldquo;poll&rdquo; our channels for messages - it will block until either of them returns a message. Let&rsquo;s see how that works:</p>
+
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
+   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
+    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">0</span>.89 secs
+$ target/debug/syncer
+Starting our application...
+Application started
+^CShutting down... <span style="color: #333333">(</span>received signal: Some<span style="color: #333333">(</span>INT<span style="color: #333333">))</span>
+</pre></div>
+
+
+<p>Tada! We successfully handled the INT signal!</p>
+
+<h2 id="caveats">Caveats</h2>
+
+<p>There are always some! You probably spotted differences between Go and Rust version. Firstly, Go version uses only standard library packages, while Rust uses external creates to achieve a similar effect. Secondly, while Rust version uses native OS thread to run application logic, Go version utilizies lightweight goroutines (note: There seems to be <a href="https://github.com/rustcc/coroutine-rs">WIP on library</a> to support coroutines in Rust). Finally, <code>chan-signal</code> crate has no support for Windows. This is not very surprising, as signals are a POSIX thing, however Go is able to INT signal (as invoked through ctrl+c or ctrl+break) in Windows through <code>os/signal</code>. I imagine such support could be added to <code>chan-signal</code> as well if needed.</p>
+
+<h2 id="what-about-those-first-impressions">What about those first impressions?</h2>
+
+<p>When reading through Rust documentation, I&rsquo;ve had few &ldquo;OMG This is awesome!&rdquo; moments. Pattern matching, variable bindings, <code>Option&lt;T&gt;</code> type, all these sound familiar from languages like Haskell or Elixir, and seem like a great addition to a system programming language, which is Rust&rsquo;s main priority. As such, however, Rust focused on providing value in different areas, so certain things (like these I described above) are harder to achieve compared to Go. Having written that, I definitely see value in Rust. It&rsquo;s too early for me to give full comparison of these languages (I will write such post once I get more proficient in Rust), but the much broader control over your program that Rust gives by default is already appealing.</p>
+
+<p><strong>What about you? Go or Rust? What do you pick and why?</strong></p>
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "http://blog.kars7e.io/2017/03/28/Rust-first-impressions/";
+        
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//kars7e.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    
+    <div class="footer">
+  <p>2017 Karol Stepniewski</p>
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7878188-6', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>
