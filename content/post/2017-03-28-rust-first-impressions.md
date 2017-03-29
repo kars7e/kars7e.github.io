@@ -163,7 +163,7 @@ Application started
 
 Looks like it does! Now, let's add the `chan-signal` dependency (it also requires `chan` crate):
 
-{{< highlight ini >}}
+{{< highlight ini "linenos=inline,hl_lines=7 8">}}
 [package]
 name = "syncer"
 version = "0.1.0"
