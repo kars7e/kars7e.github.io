@@ -73,14 +73,14 @@
 
 <p>I don&rsquo;t want to produce another introductory post again, so let&rsquo;s document some work. This will be trivial, but&hellip; you have to start somewhere. I&rsquo;m using <a href="https://www.rust-lang.org">Rust programming language</a>, which means I should have installed on my system. Let&rsquo;s do it then. I&rsquo;m using MacOS, and de facto a standard <a href="https://brew.sh/">package manager</a> for MacOS. Rust installation couldn&rsquo;t be simpler:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ brew install rust
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ brew install rust
 </pre></div>
 
 
 <p>Which after a minute or so gives us <code>rustc</code> command:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc --help
-Usage: rustc <span style="color: #333333">[</span>OPTIONS<span style="color: #333333">]</span> INPUT
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ rustc --help
+Usage: rustc <span style="color: #ce5c00; font-weight: bold">[</span>OPTIONS<span style="color: #ce5c00; font-weight: bold">]</span> INPUT
 
 Options:
     -h --help           Display this message
@@ -88,21 +88,21 @@ Options:
     .
     .
     .
-    <span style="color: #888888"># Omitted</span>
+    <span style="color: #8f5902; font-style: italic"># Omitted</span>
 </pre></div>
 
 
 <p>Let&rsquo;s finish this post with simple, classic and mandatory &ldquo;Hello world&rdquo;:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Hello, world!&quot;</span>);<span style="color: #bbbbbb"></span>
-}<span style="color: #bbbbbb"></span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">fn</span> <span style="color: #000000">main</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Hello, world!&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 </pre></div>
 
 
 <p>that we compile with <code>rustc</code>:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc main.rs
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ rustc main.rs
 $ ./main
 Hello, world!
 </pre></div>

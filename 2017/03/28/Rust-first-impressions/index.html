@@ -62,30 +62,30 @@
 
 <p>We can then implement our first goal using the following piece of code:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Starting our application...&quot;</span>);<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span><span style="color: #888888">// Initialization logic</span>
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application started&quot;</span>);<span style="color: #bbbbbb"></span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">fn</span> <span style="color: #000000">main</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Starting our application...&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #8f5902; font-style: italic">// Initialization logic</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Application started&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">loop</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    	</span><span style="color: #888888">// Handle file events</span>
-<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #204a87; font-weight: bold">loop</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    	</span><span style="color: #8f5902; font-style: italic">// Handle file events</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span>)<span style="color: #bbbbbb"></span>
-}<span style="color: #bbbbbb"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Shutting down...&quot;</span><span style="color: #000000; font-weight: bold">)</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 </pre></div>
 
 
 <p>We can compile and run this code:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ rustc main.rs
-warning: unreachable statement, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ rustc main.rs
+warning: unreachable statement, <span style="color: #8f5902; font-style: italic">#[warn(unreachable_code)] on by default</span>
  --&gt; main.rs:9:5
-  |
-<span style="color: #6600EE; font-weight: bold">9</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>;
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |
-  <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+  <span style="color: #000000; font-weight: bold">|</span>
+<span style="color: #0000cf; font-weight: bold">9</span> <span style="color: #000000; font-weight: bold">|</span>     println!<span style="color: #ce5c00; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Shutting down...&quot;</span><span style="color: #ce5c00; font-weight: bold">)</span><span style="color: #000000; font-weight: bold">;</span>
+  <span style="color: #000000; font-weight: bold">|</span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  <span style="color: #000000; font-weight: bold">|</span>
+  <span style="color: #ce5c00; font-weight: bold">=</span> note: this error originates in a macro outside of the current crate
 
 $ ls
 LICENSE   README.md main      main.rs
@@ -102,31 +102,31 @@ Application started
 
 <p>Before we dive into signal handling in Rust, I would like to first mention how this is being done in Go - my &ldquo;native&rdquo; language. Go includes signal handling in its standard library. The <a href="https://golang.org/pkg/os/signal/"><code>os/signal</code> package</a> provides simple and elegant API to deal with signals through <a href="https://tour.golang.org/concurrency/2">channels</a>. Here&rsquo;s a quick example:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">package</span> main
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">package</span> <span style="color: #000000">main</span>
 
-<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;fmt&quot;</span>
-<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;os&quot;</span>
-<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;os/signal&quot;</span>
-<span style="color: #008800; font-weight: bold">import</span> <span style="background-color: #fff0f0">&quot;syscall&quot;</span>
+<span style="color: #204a87; font-weight: bold">import</span> <span style="color: #4e9a06">&quot;fmt&quot;</span>
+<span style="color: #204a87; font-weight: bold">import</span> <span style="color: #4e9a06">&quot;os&quot;</span>
+<span style="color: #204a87; font-weight: bold">import</span> <span style="color: #4e9a06">&quot;os/signal&quot;</span>
+<span style="color: #204a87; font-weight: bold">import</span> <span style="color: #4e9a06">&quot;syscall&quot;</span>
 
-<span style="color: #008800; font-weight: bold">func</span> main() {
+<span style="color: #204a87; font-weight: bold">func</span> <span style="color: #000000">main</span><span style="color: #000000; font-weight: bold">()</span> <span style="color: #000000; font-weight: bold">{</span>
 
-    sigs <span style="color: #333333">:=</span> <span style="color: #007020">make</span>(<span style="color: #008800; font-weight: bold">chan</span> os.Signal, <span style="color: #0000DD; font-weight: bold">1</span>)
-    done <span style="color: #333333">:=</span> <span style="color: #007020">make</span>(<span style="color: #008800; font-weight: bold">chan</span> <span style="color: #333399; font-weight: bold">bool</span>, <span style="color: #0000DD; font-weight: bold">1</span>)
+    <span style="color: #000000">sigs</span> <span style="color: #ce5c00; font-weight: bold">:=</span> <span style="color: #204a87">make</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #204a87; font-weight: bold">chan</span> <span style="color: #000000">os</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Signal</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #0000cf; font-weight: bold">1</span><span style="color: #000000; font-weight: bold">)</span>
+    <span style="color: #000000">done</span> <span style="color: #ce5c00; font-weight: bold">:=</span> <span style="color: #204a87">make</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #204a87; font-weight: bold">chan</span> <span style="color: #204a87; font-weight: bold">bool</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #0000cf; font-weight: bold">1</span><span style="color: #000000; font-weight: bold">)</span>
 
-    signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+    <span style="color: #000000">signal</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Notify</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">sigs</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #000000">syscall</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">SIGINT</span><span style="color: #000000; font-weight: bold">,</span> <span style="color: #000000">syscall</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">SIGTERM</span><span style="color: #000000; font-weight: bold">)</span>
 
-    <span style="color: #008800; font-weight: bold">go</span> <span style="color: #008800; font-weight: bold">func</span>() {
-        sig <span style="color: #333333">:=</span> <span style="color: #333333">&lt;-</span>sigs
-        fmt.Println()
-        fmt.Println(sig)
-        done <span style="color: #333333">&lt;-</span> <span style="color: #008800; font-weight: bold">true</span>
-    }()
+    <span style="color: #204a87; font-weight: bold">go</span> <span style="color: #204a87; font-weight: bold">func</span><span style="color: #000000; font-weight: bold">()</span> <span style="color: #000000; font-weight: bold">{</span>
+        <span style="color: #000000">sig</span> <span style="color: #ce5c00; font-weight: bold">:=</span> <span style="color: #ce5c00; font-weight: bold">&lt;-</span><span style="color: #000000">sigs</span>
+        <span style="color: #000000">fmt</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Println</span><span style="color: #000000; font-weight: bold">()</span>
+        <span style="color: #000000">fmt</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Println</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">sig</span><span style="color: #000000; font-weight: bold">)</span>
+        <span style="color: #000000">done</span> <span style="color: #ce5c00; font-weight: bold">&lt;-</span> <span style="color: #204a87; font-weight: bold">true</span>
+    <span style="color: #000000; font-weight: bold">}()</span>
 
-    fmt.Println(<span style="background-color: #fff0f0">&quot;awaiting signal&quot;</span>)
-    <span style="color: #333333">&lt;-</span>done
-    fmt.Println(<span style="background-color: #fff0f0">&quot;exiting&quot;</span>)
-}
+    <span style="color: #000000">fmt</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Println</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;awaiting signal&quot;</span><span style="color: #000000; font-weight: bold">)</span>
+    <span style="color: #ce5c00; font-weight: bold">&lt;-</span><span style="color: #000000">done</span>
+    <span style="color: #000000">fmt</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">Println</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;exiting&quot;</span><span style="color: #000000; font-weight: bold">)</span>
+<span style="color: #000000; font-weight: bold">}</span>
 </pre></div>
 
 
@@ -136,55 +136,55 @@ Application started
 
 <p>First, I need to obtain this crate into my project. so far I was using single <code>main.rs</code> file directly compiled using <code>rustc</code> compiler. Let&rsquo;s switch to the official way of doing things: <a href="https://crates.io/">Cargo</a>. To &ldquo;add&rdquo; Cargo to our project, we need to create Cargo config file. <code>Cargo</code> binary gives us an easy way to do that:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ Cargo init --bin
-     Created binary <span style="color: #333333">(</span>application<span style="color: #333333">)</span> project
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ Cargo init --bin
+     Created binary <span style="color: #ce5c00; font-weight: bold">(</span>application<span style="color: #ce5c00; font-weight: bold">)</span> project
 </pre></div>
 
 
 <p><code>--bin</code> switch was needed since our project is a binary (default mode is to create Rust library). We ended up with <code>Cargo.toml</code> file, which looks more or less like this:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
-<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
-<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
-<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">[package]</span>
+<span style="color: #c4a000">name</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;syncer&quot;</span>
+<span style="color: #c4a000">version</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;0.1.0&quot;</span>
+<span style="color: #c4a000">authors</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
 
-<span style="color: #008800; font-weight: bold">[dependencies]</span>
+<span style="color: #204a87; font-weight: bold">[dependencies]</span>
 
-<span style="color: #008800; font-weight: bold">[[bin]]</span>
-<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
-<span style="color: #0000CC">path</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;main.rs&quot;</span>
+<span style="color: #204a87; font-weight: bold">[[bin]]</span>
+<span style="color: #c4a000">name</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;syncer&quot;</span>
+<span style="color: #c4a000">path</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;main.rs&quot;</span>
 </pre></div>
 
 
 <p>we have three sections in this file: package, dependencies and bin. The bin section was created because syncer&rsquo;s source code (<code>main.rs</code> file) lives directly in project main directory. Rust convention is to store source code in <code>src/</code> subdirectory. Let&rsquo;s move our code and remove the bin section:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ mkdir src
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ mkdir src
 $ move main.rs src/
 </pre></div>
 
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
-<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
-<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
-<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">[package]</span>
+<span style="color: #c4a000">name</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;syncer&quot;</span>
+<span style="color: #c4a000">version</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;0.1.0&quot;</span>
+<span style="color: #c4a000">authors</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
 
-<span style="color: #008800; font-weight: bold">[dependencies]</span>
+<span style="color: #204a87; font-weight: bold">[dependencies]</span>
 </pre></div>
 
 
 <p>Let&rsquo;s check if it works, by running <code>cargo build</code>:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
-   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
-warning: unreachable expression, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ cargo build
+   Compiling syncer v0.1.0 <span style="color: #ce5c00; font-weight: bold">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #ce5c00; font-weight: bold">)</span>
+warning: unreachable expression, <span style="color: #8f5902; font-style: italic">#[warn(unreachable_code)] on by default</span>
   --&gt; src/main.rs:10:5
-   |
-<span style="color: #6600EE; font-weight: bold">10</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+   <span style="color: #000000; font-weight: bold">|</span>
+<span style="color: #0000cf; font-weight: bold">10</span> <span style="color: #000000; font-weight: bold">|</span>     println!<span style="color: #ce5c00; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Shutting down...&quot;</span><span style="color: #ce5c00; font-weight: bold">)</span>
+   <span style="color: #000000; font-weight: bold">|</span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   <span style="color: #000000; font-weight: bold">|</span>
+   <span style="color: #ce5c00; font-weight: bold">=</span> note: this error originates in a macro outside of the current crate
 
-    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">0</span>.81 secs
+    Finished dev <span style="color: #ce5c00; font-weight: bold">[</span>unoptimized + debuginfo<span style="color: #ce5c00; font-weight: bold">]</span> target<span style="color: #ce5c00; font-weight: bold">(</span>s<span style="color: #ce5c00; font-weight: bold">)</span> in <span style="color: #0000cf; font-weight: bold">0</span>.81 secs
 $ ls
 Cargo.lock Cargo.toml LICENSE    README.md  src        target
 $ ls target/debug/
@@ -198,21 +198,21 @@ Application started
 
 <p>Looks like it does! Now, let&rsquo;s add the <code>chan-signal</code> dependency (it also requires <code>chan</code> crate):</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #008800; font-weight: bold">[package]</span>
-<span style="color: #0000CC">name</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;syncer&quot;</span>
-<span style="color: #0000CC">version</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.0&quot;</span>
-<span style="color: #0000CC">authors</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
-
-<span style="color: #008800; font-weight: bold">[dependencies]</span>
-<span style="color: #0000CC">chan</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.1.19&quot;</span>
-<span style="color: #0000CC">chan-signal</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;0.2.0&quot;</span>
-</pre></div>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="background-color: #f0f0f0; padding: 0 5px 0 5px">1 </span><span style="color: #204a87; font-weight: bold">[package]</span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">2 </span><span style="color: #c4a000">name</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;syncer&quot;</span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">3 </span><span style="color: #c4a000">version</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;0.1.0&quot;</span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">4 </span><span style="color: #c4a000">authors</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">[&quot;Karol Stepniewski &lt;kstepniewski@vmware.com&gt;&quot;]</span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">5 </span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">6 </span><span style="color: #204a87; font-weight: bold">[dependencies]</span>
+<span style="background-color: #f0f0f0; padding: 0 5px 0 5px">7 </span><span style="background-color: #ffffcc"><span style="color: #c4a000">chan</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;0.1.19&quot;</span>
+</span><span style="background-color: #f0f0f0; padding: 0 5px 0 5px">8 </span><span style="background-color: #ffffcc"><span style="color: #c4a000">chan-signal</span> <span style="color: #ce5c00; font-weight: bold">=</span> <span style="color: #4e9a06">&quot;0.2.0&quot;</span>
+</span></pre></div>
 
 
 <p>now, we build our application again:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
-    Updating registry <span style="background-color: #fff0f0">`</span>https://github.com/rust-lang/crates.io-index<span style="background-color: #fff0f0">`</span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ cargo build
+    Updating registry <span style="color: #4e9a06">`</span>https://github.com/rust-lang/crates.io-index<span style="color: #4e9a06">`</span>
  Downloading chan-signal v0.2.0
  Downloading chan v0.1.19
  Downloading lazy_static v0.2.5
@@ -227,55 +227,55 @@ Application started
    Compiling rand v0.3.15
    Compiling chan v0.1.19
    Compiling chan-signal v0.2.0
-   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
-warning: unreachable expression, <span style="color: #888888">#[warn(unreachable_code)] on by default</span>
+   Compiling syncer v0.1.0 <span style="color: #ce5c00; font-weight: bold">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #ce5c00; font-weight: bold">)</span>
+warning: unreachable expression, <span style="color: #8f5902; font-style: italic">#[warn(unreachable_code)] on by default</span>
   --&gt; src/main.rs:10:5
-   |
-<span style="color: #6600EE; font-weight: bold">10</span> |     println!<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Shutting down...&quot;</span><span style="color: #333333">)</span>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   <span style="color: #333333">=</span> note: this error originates in a macro outside of the current crate
+   <span style="color: #000000; font-weight: bold">|</span>
+<span style="color: #0000cf; font-weight: bold">10</span> <span style="color: #000000; font-weight: bold">|</span>     println!<span style="color: #ce5c00; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Shutting down...&quot;</span><span style="color: #ce5c00; font-weight: bold">)</span>
+   <span style="color: #000000; font-weight: bold">|</span>     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   <span style="color: #000000; font-weight: bold">|</span>
+   <span style="color: #ce5c00; font-weight: bold">=</span> note: this error originates in a macro outside of the current crate
 
-    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">5</span>.30 secs
+    Finished dev <span style="color: #ce5c00; font-weight: bold">[</span>unoptimized + debuginfo<span style="color: #ce5c00; font-weight: bold">]</span> target<span style="color: #ce5c00; font-weight: bold">(</span>s<span style="color: #ce5c00; font-weight: bold">)</span> in <span style="color: #0000cf; font-weight: bold">5</span>.30 secs
 </pre></div>
 
 
 <p>It builds correctly! Time to use it. I&rsquo;ve adapted the sample code from <code>chan-signal</code> documentation:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span><span style="color: #557799">#[macro_use]</span><span style="color: #bbbbbb"></span>
-<span style="color: #008800; font-weight: bold">extern</span><span style="color: #bbbbbb"> </span><span style="color: #008800; font-weight: bold">crate</span><span style="color: #bbbbbb"> </span>chan;<span style="color: #bbbbbb"></span>
-<span style="color: #008800; font-weight: bold">extern</span><span style="color: #bbbbbb"> </span><span style="color: #008800; font-weight: bold">crate</span><span style="color: #bbbbbb"> </span>chan_signal;<span style="color: #bbbbbb"></span>
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #8f5902; font-style: italic">#[macro_use]</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #204a87; font-weight: bold">extern</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #204a87; font-weight: bold">crate</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">chan</span><span style="color: #000000; font-weight: bold">;</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #204a87; font-weight: bold">extern</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #204a87; font-weight: bold">crate</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">chan_signal</span><span style="color: #000000; font-weight: bold">;</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #008800; font-weight: bold">use</span><span style="color: #bbbbbb"> </span>chan_signal::Signal;<span style="color: #bbbbbb"></span>
+<span style="color: #204a87; font-weight: bold">use</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">chan_signal</span>::<span style="color: #000000">Signal</span><span style="color: #000000; font-weight: bold">;</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">main</span>()<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Starting our application...&quot;</span>);<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span><span style="color: #888888">// Initialization logic</span>
-<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>signal<span style="color: #bbbbbb"> </span><span style="color: #333333">=</span><span style="color: #bbbbbb"> </span>chan_signal::notify(<span style="color: #333333">&amp;</span>[Signal::INT,<span style="color: #bbbbbb"> </span>Signal::TERM]);<span style="color: #bbbbbb"></span>
+<span style="color: #204a87; font-weight: bold">fn</span> <span style="color: #000000">main</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Starting our application...&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #8f5902; font-style: italic">// Initialization logic</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #204a87; font-weight: bold">let</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">signal</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">chan_signal</span>::<span style="color: #000000">notify</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #ce5c00; font-weight: bold">&amp;</span><span style="color: #000000; font-weight: bold">[</span><span style="color: #000000">Signal</span>::<span style="color: #000000">INT</span><span style="color: #000000; font-weight: bold">,</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">Signal</span>::<span style="color: #000000">TERM</span><span style="color: #000000; font-weight: bold">]);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #bbbbbb">    </span><span style="color: #888888">// We create a channel to be used when application wants to stop itself.</span>
-<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">let</span><span style="color: #bbbbbb"> </span>(sdone,<span style="color: #bbbbbb"> </span>rdone)<span style="color: #bbbbbb"> </span><span style="color: #333333">=</span><span style="color: #bbbbbb"> </span>chan::sync(<span style="color: #0000DD; font-weight: bold">0</span>);<span style="color: #bbbbbb"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #8f5902; font-style: italic">// We create a channel to be used when application wants to stop itself.</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #204a87; font-weight: bold">let</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">sdone</span><span style="color: #000000; font-weight: bold">,</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">rdone</span><span style="color: #000000; font-weight: bold">)</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #ce5c00; font-weight: bold">=</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">chan</span>::<span style="color: #000000">sync</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #0000cf; font-weight: bold">0</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #bbbbbb">    </span><span style="color: #888888">// Run our application logic in a separate thread.</span>
-<span style="color: #bbbbbb">	</span>::std::thread::spawn(<span style="color: #008800; font-weight: bold">move</span><span style="color: #bbbbbb"> </span><span style="color: #333333">||</span><span style="color: #bbbbbb"> </span>run(sdone));<span style="color: #bbbbbb"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #8f5902; font-style: italic">// Run our application logic in a separate thread.</span>
+<span style="color: #f8f8f8; text-decoration: underline">	</span>::<span style="color: #000000">std</span>::<span style="color: #000000">thread</span>::<span style="color: #000000">spawn</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #204a87; font-weight: bold">move</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #ce5c00; font-weight: bold">||</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">run</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">sdone</span><span style="color: #000000; font-weight: bold">));</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #bbbbbb">    </span><span style="color: #888888">// Wait for a signal or for application to stop itself.</span>
-<span style="color: #bbbbbb">    </span>chan_select<span style="color: #333333">!</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">        </span>signal.recv()<span style="color: #bbbbbb"> </span>-&gt; <span style="color: #BB0066; font-weight: bold">signal</span><span style="color: #bbbbbb"> </span><span style="color: #333333">=&gt;</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">            </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Shutting down... (received signal: {:?})&quot;</span>,<span style="color: #bbbbbb"> </span>signal)<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">        </span>},<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">        </span>rdone.recv()<span style="color: #bbbbbb"> </span><span style="color: #333333">=&gt;</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">            </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application stopped.&quot;</span>);<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">        </span>}<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
-}<span style="color: #bbbbbb"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #8f5902; font-style: italic">// Wait for a signal or for application to stop itself.</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">chan_select</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">        </span><span style="color: #000000">signal</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">recv</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span>-&gt; <span style="color: #000000">signal</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #ce5c00; font-weight: bold">=&gt;</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">            </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Shutting down... (received signal: {:?})&quot;</span><span style="color: #000000; font-weight: bold">,</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000">signal</span><span style="color: #000000; font-weight: bold">)</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">        </span><span style="color: #000000; font-weight: bold">},</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">        </span><span style="color: #000000">rdone</span><span style="color: #000000; font-weight: bold">.</span><span style="color: #000000">recv</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #ce5c00; font-weight: bold">=&gt;</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">            </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Application stopped.&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">        </span><span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 
-<span style="color: #008800; font-weight: bold">fn</span> <span style="color: #0066BB; font-weight: bold">run</span>(_sdone: <span style="color: #BB0066; font-weight: bold">chan</span>::Sender<span style="color: #333333">&lt;</span>()<span style="color: #333333">&gt;</span>)<span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span>println<span style="color: #333333">!</span>(<span style="background-color: #fff0f0">&quot;Application started&quot;</span>);<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    </span><span style="color: #008800; font-weight: bold">loop</span><span style="color: #bbbbbb"> </span>{<span style="color: #bbbbbb"></span>
-<span style="color: #bbbbbb">    	</span><span style="color: #888888">// Application logic</span>
-<span style="color: #bbbbbb">    </span>}<span style="color: #bbbbbb"></span>
-}<span style="color: #bbbbbb"></span>
+<span style="color: #204a87; font-weight: bold">fn</span> <span style="color: #000000">run</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #000000">_sdone</span>: <span style="color: #000000">chan</span>::<span style="color: #000000">Sender</span><span style="color: #ce5c00; font-weight: bold">&lt;</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #ce5c00; font-weight: bold">&gt;</span><span style="color: #000000; font-weight: bold">)</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Application started&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #204a87; font-weight: bold">loop</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #f8f8f8; text-decoration: underline">    	</span><span style="color: #8f5902; font-style: italic">// Application logic</span>
+<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
+<span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
 </pre></div>
 
 
@@ -283,15 +283,15 @@ warning: unreachable expression, <span style="color: #888888">#[warn(unreachable
 
 <p>Our main function grew considerably. We define a <code>signal</code> variable via <code>chan_signal::notify</code> static method. This method returns a special channel, that we can further read from to obtain our signal (if such is sent). We also declare a synchronous <code>(sdone, rdone)</code> channel (it&rsquo;s used for the same purpose as its Go version). We spawn new OS thread used to run our application logic through <code>run()</code> function, passing <code>done</code> channel as a mean to stop application execution if needed. Finally, we use <a href="http://burntsushi.net/rustdoc/chan/macro.chan_select.html"><code>chan_select!</code></a> macro to &ldquo;poll&rdquo; our channels for messages - it will block until either of them returns a message. Let&rsquo;s see how that works:</p>
 
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%"><span></span>$ cargo build
-   Compiling syncer v0.1.0 <span style="color: #333333">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #333333">)</span>
-    Finished dev <span style="color: #333333">[</span>unoptimized + debuginfo<span style="color: #333333">]</span> target<span style="color: #333333">(</span>s<span style="color: #333333">)</span> in <span style="color: #6600EE; font-weight: bold">0</span>.89 secs
+<p><div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ cargo build
+   Compiling syncer v0.1.0 <span style="color: #ce5c00; font-weight: bold">(</span>file:///Users/kstepniewski/projects/syncer<span style="color: #ce5c00; font-weight: bold">)</span>
+    Finished dev <span style="color: #ce5c00; font-weight: bold">[</span>unoptimized + debuginfo<span style="color: #ce5c00; font-weight: bold">]</span> target<span style="color: #ce5c00; font-weight: bold">(</span>s<span style="color: #ce5c00; font-weight: bold">)</span> in <span style="color: #0000cf; font-weight: bold">0</span>.89 secs
 $ target/debug/syncer
 Starting our application...
 Application started
-^CShutting down... <span style="color: #333333">(</span>received signal: Some<span style="color: #333333">(</span>INT<span style="color: #333333">))</span>
+^CShutting down... <span style="color: #ce5c00; font-weight: bold">(</span>received signal: Some<span style="color: #ce5c00; font-weight: bold">(</span>INT<span style="color: #ce5c00; font-weight: bold">))</span>
 </pre></div>
-
+</p>
 
 <p>Tada! We successfully handled the INT signal!</p>
 

@@ -32,30 +32,30 @@
 
 &lt;p&gt;We can then implement our first goal using the following piece of code:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Initialization logic&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Initialization logic&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Handle file events&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Handle file events&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;)&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;We can compile and run this code:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
-warning: unreachable statement, &lt;span style=&#34;color: #888888&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
+warning: unreachable statement, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
  --&amp;gt; main.rs:9:5
-  |
-&lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;9&lt;/span&gt; |     println!&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;;
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  |
-  &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
+  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;
+  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+  &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
 
 $ ls
 LICENSE   README.md main      main.rs
@@ -72,31 +72,31 @@ Application started
 
 &lt;p&gt;Before we dive into signal handling in Rust, I would like to first mention how this is being done in Go - my &amp;ldquo;native&amp;rdquo; language. Go includes signal handling in its standard library. The &lt;a href=&#34;https://golang.org/pkg/os/signal/&#34;&gt;&lt;code&gt;os/signal&lt;/code&gt; package&lt;/a&gt; provides simple and elegant API to deal with signals through &lt;a href=&#34;https://tour.golang.org/concurrency/2&#34;&gt;channels&lt;/a&gt;. Here&amp;rsquo;s a quick example:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;package&lt;/span&gt; main
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;os&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;os/signal&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;syscall&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;os&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;os/signal&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syscall&amp;quot;&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;func&lt;/span&gt; main() {
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;
 
-    sigs &lt;span style=&#34;color: #333333&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #007020&#34;&gt;make&lt;/span&gt;(&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;chan&lt;/span&gt; os.Signal, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;1&lt;/span&gt;)
-    done &lt;span style=&#34;color: #333333&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #007020&#34;&gt;make&lt;/span&gt;(&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #333399; font-weight: bold&#34;&gt;bool&lt;/span&gt;, &lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;1&lt;/span&gt;)
+    &lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;make&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;make&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;bool&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
 
-    signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+    &lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Notify&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;SIGINT&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;SIGTERM&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
 
-    &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;func&lt;/span&gt;() {
-        sig &lt;span style=&#34;color: #333333&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;&amp;lt;-&lt;/span&gt;sigs
-        fmt.Println()
-        fmt.Println(sig)
-        done &lt;span style=&#34;color: #333333&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;true&lt;/span&gt;
-    }()
+    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;func&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #000000&#34;&gt;sig&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt;
+        &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;
+        &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sig&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;true&lt;/span&gt;
+    &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}()&lt;/span&gt;
 
-    fmt.Println(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;awaiting signal&amp;quot;&lt;/span&gt;)
-    &lt;span style=&#34;color: #333333&#34;&gt;&amp;lt;-&lt;/span&gt;done
-    fmt.Println(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;exiting&amp;quot;&lt;/span&gt;)
-}
+    &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;awaiting signal&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt;
+    &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;exiting&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -106,55 +106,55 @@ Application started
 
 &lt;p&gt;First, I need to obtain this crate into my project. so far I was using single &lt;code&gt;main.rs&lt;/code&gt; file directly compiled using &lt;code&gt;rustc&lt;/code&gt; compiler. Let&amp;rsquo;s switch to the official way of doing things: &lt;a href=&#34;https://crates.io/&#34;&gt;Cargo&lt;/a&gt;. To &amp;ldquo;add&amp;rdquo; Cargo to our project, we need to create Cargo config file. &lt;code&gt;Cargo&lt;/code&gt; binary gives us an easy way to do that:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ Cargo init --bin
-     Created binary &lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;application&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt; project
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ Cargo init --bin
+     Created binary &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;application&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; project
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;--bin&lt;/code&gt; switch was needed since our project is a binary (default mode is to create Rust library). We ended up with &lt;code&gt;Cargo.toml&lt;/code&gt; file, which looks more or less like this:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[[bin]]&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;path&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;main.rs&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[[bin]]&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;path&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;main.rs&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;we have three sections in this file: package, dependencies and bin. The bin section was created because syncer&amp;rsquo;s source code (&lt;code&gt;main.rs&lt;/code&gt; file) lives directly in project main directory. Rust convention is to store source code in &lt;code&gt;src/&lt;/code&gt; subdirectory. Let&amp;rsquo;s move our code and remove the bin section:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mkdir src
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mkdir src
 $ move main.rs src/
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Let&amp;rsquo;s check if it works, by running &lt;code&gt;cargo build&lt;/code&gt;:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;
-warning: unreachable expression, &lt;span style=&#34;color: #888888&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
+   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
+warning: unreachable expression, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
   --&amp;gt; src/main.rs:10:5
-   |
-&lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;10&lt;/span&gt; |     println!&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+   &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
 
-    Finished dev &lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;0&lt;/span&gt;.81 secs
+    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;.81 secs
 $ ls
 Cargo.lock Cargo.toml LICENSE    README.md  src        target
 $ ls target/debug/
@@ -168,21 +168,21 @@ Application started
 
 &lt;p&gt;Looks like it does! Now, let&amp;rsquo;s add the &lt;code&gt;chan-signal&lt;/code&gt; dependency (it also requires &lt;code&gt;chan&lt;/code&gt; crate):&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
-
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;0.1.19&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #0000CC&#34;&gt;chan-signal&lt;/span&gt; &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;0.2.0&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;1 &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;2 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;3 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;4 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;5 &lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;6 &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
+&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;7 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.19&amp;quot;&lt;/span&gt;
+&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;8 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;chan-signal&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.2.0&amp;quot;&lt;/span&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;now, we build our application again:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-    Updating registry &lt;span style=&#34;background-color: #fff0f0&#34;&gt;`&lt;/span&gt;https://github.com/rust-lang/crates.io-index&lt;span style=&#34;background-color: #fff0f0&#34;&gt;`&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
+    Updating registry &lt;span style=&#34;color: #4e9a06&#34;&gt;`&lt;/span&gt;https://github.com/rust-lang/crates.io-index&lt;span style=&#34;color: #4e9a06&#34;&gt;`&lt;/span&gt;
  Downloading chan-signal v0.2.0
  Downloading chan v0.1.19
  Downloading lazy_static v0.2.5
@@ -197,55 +197,55 @@ Application started
    Compiling rand v0.3.15
    Compiling chan v0.1.19
    Compiling chan-signal v0.2.0
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;
-warning: unreachable expression, &lt;span style=&#34;color: #888888&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
+   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
+warning: unreachable expression, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
   --&amp;gt; src/main.rs:10:5
-   |
-&lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;10&lt;/span&gt; |     println!&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   &lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
+   &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
 
-    Finished dev &lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;5&lt;/span&gt;.30 secs
+    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;5&lt;/span&gt;.30 secs
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;It builds correctly! Time to use it. I&amp;rsquo;ve adapted the sample code from &lt;code&gt;chan-signal&lt;/code&gt; documentation:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #557799&#34;&gt;#[macro_use]&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;chan;&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;chan_signal;&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[macro_use]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;use&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;chan_signal::Signal;&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;use&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Initialization logic&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;signal&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;chan_signal::notify(&lt;span style=&#34;color: #333333&#34;&gt;&amp;amp;&lt;/span&gt;[Signal::INT,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;Signal::TERM]);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Initialization logic&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;notify&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;INT&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;TERM&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;]);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// We create a channel to be used when application wants to stop itself.&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;(sdone,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;rdone)&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;chan::sync(&lt;span style=&#34;color: #0000DD; font-weight: bold&#34;&gt;0&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// We create a channel to be used when application wants to stop itself.&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;rdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;sync&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Run our application logic in a separate thread.&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;	&lt;/span&gt;::std::thread::spawn(&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;move&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;||&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;run(sdone));&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Run our application logic in a separate thread.&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;	&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;std&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;thread&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;spawn&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;move&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;||&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;run&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;));&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Wait for a signal or for application to stop itself.&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;chan_select&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;        &lt;/span&gt;signal.recv()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;            &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Shutting down... (received signal: {:?})&amp;quot;&lt;/span&gt;,&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;signal)&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;        &lt;/span&gt;},&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;        &lt;/span&gt;rdone.recv()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #333333&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;            &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Application stopped.&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;        &lt;/span&gt;}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Wait for a signal or for application to stop itself.&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_select&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;recv&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down... (received signal: {:?})&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;},&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;rdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;recv&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application stopped.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 
-&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;run&lt;/span&gt;(_sdone: &lt;span style=&#34;color: #BB0066; font-weight: bold&#34;&gt;chan&lt;/span&gt;::Sender&lt;span style=&#34;color: #333333&#34;&gt;&amp;lt;&lt;/span&gt;()&lt;span style=&#34;color: #333333&#34;&gt;&amp;gt;&lt;/span&gt;)&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #888888&#34;&gt;// Application logic&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;run&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;_sdone&lt;/span&gt;: &lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;Sender&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Application logic&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -253,15 +253,15 @@ warning: unreachable expression, &lt;span style=&#34;color: #888888&#34;&gt;#[wa
 
 &lt;p&gt;Our main function grew considerably. We define a &lt;code&gt;signal&lt;/code&gt; variable via &lt;code&gt;chan_signal::notify&lt;/code&gt; static method. This method returns a special channel, that we can further read from to obtain our signal (if such is sent). We also declare a synchronous &lt;code&gt;(sdone, rdone)&lt;/code&gt; channel (it&amp;rsquo;s used for the same purpose as its Go version). We spawn new OS thread used to run our application logic through &lt;code&gt;run()&lt;/code&gt; function, passing &lt;code&gt;done&lt;/code&gt; channel as a mean to stop application execution if needed. Finally, we use &lt;a href=&#34;http://burntsushi.net/rustdoc/chan/macro.chan_select.html&#34;&gt;&lt;code&gt;chan_select!&lt;/code&gt;&lt;/a&gt; macro to &amp;ldquo;poll&amp;rdquo; our channels for messages - it will block until either of them returns a message. Let&amp;rsquo;s see how that works:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt;
-    Finished dev &lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #333333&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #6600EE; font-weight: bold&#34;&gt;0&lt;/span&gt;.89 secs
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
+   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
+    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;.89 secs
 $ target/debug/syncer
 Starting our application...
 Application started
-^CShutting down... &lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;received signal: Some&lt;span style=&#34;color: #333333&#34;&gt;(&lt;/span&gt;INT&lt;span style=&#34;color: #333333&#34;&gt;))&lt;/span&gt;
+^CShutting down... &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;received signal: Some&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;INT&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-
+&lt;/p&gt;
 
 &lt;p&gt;Tada! We successfully handled the INT signal!&lt;/p&gt;
 
@@ -311,14 +311,14 @@ Application started
 
 &lt;p&gt;I don&amp;rsquo;t want to produce another introductory post again, so let&amp;rsquo;s document some work. This will be trivial, but&amp;hellip; you have to start somewhere. I&amp;rsquo;m using &lt;a href=&#34;https://www.rust-lang.org&#34;&gt;Rust programming language&lt;/a&gt;, which means I should have installed on my system. Let&amp;rsquo;s do it then. I&amp;rsquo;m using MacOS, and de facto a standard &lt;a href=&#34;https://brew.sh/&#34;&gt;package manager&lt;/a&gt; for MacOS. Rust installation couldn&amp;rsquo;t be simpler:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install rust
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install rust
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Which after a minute or so gives us &lt;code&gt;rustc&lt;/code&gt; command:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc --help
-Usage: rustc &lt;span style=&#34;color: #333333&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color: #333333&#34;&gt;]&lt;/span&gt; INPUT
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc --help
+Usage: rustc &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; INPUT
 
 Options:
     -h --help           Display this message
@@ -326,21 +326,21 @@ Options:
     .
     .
     .
-    &lt;span style=&#34;color: #888888&#34;&gt;# Omitted&lt;/span&gt;
+    &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;# Omitted&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Let&amp;rsquo;s finish this post with simple, classic and mandatory &amp;ldquo;Hello world&amp;rdquo;:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #008800; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #0066BB; font-weight: bold&#34;&gt;main&lt;/span&gt;()&lt;span style=&#34;color: #bbbbbb&#34;&gt; &lt;/span&gt;{&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #bbbbbb&#34;&gt;    &lt;/span&gt;println&lt;span style=&#34;color: #333333&#34;&gt;!&lt;/span&gt;(&lt;span style=&#34;background-color: #fff0f0&#34;&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;);&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
-}&lt;span style=&#34;color: #bbbbbb&#34;&gt;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;that we compile with &lt;code&gt;rustc&lt;/code&gt;:&lt;/p&gt;
 
-&lt;div class=&#34;highlight&#34; style=&#34;background: #ffffff&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
+&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
 $ ./main
 Hello, world!
 &lt;/pre&gt;&lt;/div&gt;
