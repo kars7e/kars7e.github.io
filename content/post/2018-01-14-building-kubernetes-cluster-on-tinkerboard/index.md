@@ -122,24 +122,7 @@ and finally, log in to each of the nodes, run `visudo`, and make sure the follow
 The above will make sudo passwordless, and your ansible will run smoothly. 
 
 [Here](https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml) is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:
-```
-git clone https://github.com/kars7e/tinker-cluster
-cd tinker-cluster/ansible
-cat > inventory.ini<<EOF
-tinker-0
-tinker-1
-tinker-2
-tinker-3
-
-[k8s-master]
-tinker-0
-
-[k8s-node]
-tinker-1
-tinker-2
-tinker-3
-EOF
-``` 
+{{< gist kars7e 09b97d4ff1aaf379d9dae94f03fa01c9 >}}
 (Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add `ansible_host=192.0.2.50` to each entry in first four lines of the inventory file, replacing the IP with the correct one).
 
 Then run it like this:
@@ -172,15 +155,15 @@ It will bring the nodes back to the state before Kubernetes was provisioned.
 
 ## Installing OpenFaaS ##
 Before installing OpenFaaS, make sure you have `kubectl` installed (`brew install kubernetes-cli` on macos), and you have it configured (Copy `/etc/kubernetes/admin.conf` from your master node to `~/.kube/config`). Once you have the above, just run:
-```bash
-git clone https://github.com/openfaas/faas-netes
-cd faas-netes/yaml_armhf
-kubectl apply -f nats.armhf.yml,faas.async.armhf.yml,rbac.yml,monitoring.armhf.yml
-```
+
+{{< gist kars7e dd73367f0db9e1397b7d50fab7aa558d >}}
 
 You can retrieve the URL for OpenFaaS UI running following command (replace `tinker-0` with your node's hostname or IP):
+{{< gist kars7e 61e75bcf5c75f924aed066bb74383cdd >}}
+
+To get something like this:
 ```bash
-echo "http://tinker-0:$(kubectl get svc/gateway -o go-template --template='{{ (index .spec.ports 0).nodePort }}')/ui"
+http://tinker-0:31112/ui
 ```
 
 ***And you should be good to go!***
