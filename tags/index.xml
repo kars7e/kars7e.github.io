@@ -30,6 +30,24 @@
     </item>
     
     <item>
+      <title>Arm</title>
+      <link>http://blog.kars7e.io/tags/arm/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/arm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Armbian</title>
+      <link>http://blog.kars7e.io/tags/armbian/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/armbian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Blog</title>
       <link>http://blog.kars7e.io/tags/blog/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
@@ -120,6 +138,33 @@
     </item>
     
     <item>
+      <title>K8s 1.9</title>
+      <link>http://blog.kars7e.io/tags/k8s-1.9/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/k8s-1.9/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>http://blog.kars7e.io/tags/kubernetes/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Openfaas</title>
+      <link>http://blog.kars7e.io/tags/openfaas/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Outlook</title>
       <link>http://blog.kars7e.io/tags/outlook/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
@@ -192,6 +237,15 @@
     </item>
     
     <item>
+      <title>Raspberrypi</title>
+      <link>http://blog.kars7e.io/tags/raspberrypi/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/raspberrypi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ruby</title>
       <link>http://blog.kars7e.io/tags/ruby/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
@@ -206,6 +260,15 @@
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
       <guid>http://blog.kars7e.io/tags/rust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tinkerboard</title>
+      <link>http://blog.kars7e.io/tags/tinkerboard/</link>
+      <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
+      
+      <guid>http://blog.kars7e.io/tags/tinkerboard/</guid>
       <description></description>
     </item>
     

@@ -12,12 +12,12 @@
     
     
     <item>
-      <title>Kubernetes cluster &amp; OpenFaaS on ARM using Asus Tinkerboard</title>
-      <link>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster--OpenFaaS-on-ARM-using-Asus-Tinkerboard/</link>
+      <title>Kubernetes cluster on ARM using Asus Tinkerboard</title>
+      <link>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster--OpenFaaS-on-ARM-using-Asus-Tinkerboard/</guid>
-      <description>&lt;p&gt;Over the winter holiday break of 2017 I&amp;rsquo;ve spent some time to play with Kubernetes on ARM. I had a lot of fun building this beast:&lt;/p&gt;
+      <guid>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</guid>
+      <description>&lt;p&gt;Over the winter holiday break of 2017 I&amp;rsquo;ve spent some time playing with Kubernetes on ARM. I had a lot of fun building this beast:&lt;/p&gt;
 
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Ok, I&amp;#39;ve got &lt;a href=&#34;https://twitter.com/hashtag/kubernetes?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#kubernetes&lt;/a&gt; running on 4 nodes Asus Tinkerboard ARM cluster with ARMbian (with some ultra-advanced cooling), and it&amp;#39;s a beast!  Oh, did I mention it runs &lt;a href=&#34;https://twitter.com/openfaas?ref_src=twsrc%5Etfw&#34;&gt;@openfaas&lt;/a&gt; like a champ?&lt;br&gt;&lt;br&gt;Blog post incoming! &lt;a href=&#34;https://t.co/CiqnSPiPb7&#34;&gt;pic.twitter.com/CiqnSPiPb7&lt;/a&gt;&lt;/p&gt;&amp;mdash; Karol Stępniewski (@kars7e) &lt;a href=&#34;https://twitter.com/kars7e/status/948122096969818113?ref_src=twsrc%5Etfw&#34;&gt;January 2, 2018&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Kubernetes cluster on ARM using Asus Tinkerboard &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro|Merriweather' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline">Personal blog of Karol Stepniewski</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/page/about/">About</a></li>
+      
+	    <li class="spacer">&ac;</li>
+      <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
+      <li><a href="https://twitter.com/kars7e" target="_blank">Twitter</a></li>
+      <li><a href="http://linkedin.com/in/karolstepniewski" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/">Kubernetes cluster on ARM using Asus Tinkerboard</a></h2>
+          <span class="post-date">Jan 14, 2018 </span>
+          <div class="post-content">
+            <p>Over the winter holiday break of 2017 I&rsquo;ve spent some time playing with Kubernetes on ARM. I had a lot of fun building this beast:</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ok, I&#39;ve got <a href="https://twitter.com/hashtag/kubernetes?src=hash&amp;ref_src=twsrc%5Etfw">#kubernetes</a> running on 4 nodes Asus Tinkerboard ARM cluster with ARMbian (with some ultra-advanced cooling), and it&#39;s a beast!  Oh, did I mention it runs <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> like a champ?<br><br>Blog post incoming! <a href="https://t.co/CiqnSPiPb7">pic.twitter.com/CiqnSPiPb7</a></p>&mdash; Karol Stępniewski (@kars7e) <a href="https://twitter.com/kars7e/status/948122096969818113?ref_src=twsrc%5Etfw">January 2, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>I finally found some time to write about it in details. Let&rsquo;s go!
+</p>
+
+<h2 id="shopping-list">Shopping list</h2>
+
+<p>The most popular choice for ARM cluster is of course <a href="http://amzn.to/2Dfa9V7">Raspberry Pi</a>, well-tested board with a huge community. I&rsquo;ve decided to use something else for my cluster, and I picked <a href="http://amzn.to/2DdTwJH">Asus Tinker board</a>. The most important differences:</p>
+
+<ul>
+<li><strong>2GB of RAM</strong> (compared to 1GB in RPi)</li>
+<li><strong>Gigabit Ethernet</strong> (compared to 100Mbit)</li>
+</ul>
+
+<p>Twice the amount of memory will come very useful when running a larger number of containers (no surprise here, bigger is better!).
+Since I want to expose persistent volumes to <a href="https://kubernetes.io/docs/concepts/storage/volumes/#nfs">Kubernetes pods via NFS</a> from my <a href="http://amzn.to/2FFpCw7">Synology DS 218+</a> NAS, the Gigabit Ethernet will definitely improve that experience.</p>
+
+<p>Here is the complete list of required components:</p>
+
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Sum</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://amzn.to/2DdTwJH">Asus Tinker board</a></td>
+<td>$59.45</td>
+<td>4</td>
+<td>$237.80</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2D4kG29">16GB SD Card</a></td>
+<td>$9.97</td>
+<td>4</td>
+<td>$39.88</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2mu1yDI">Anker 3A 63W USB Charger</a></td>
+<td>$35.99</td>
+<td>1</td>
+<td>$35.99</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2D2mpVI">1ft microUSB cable, set of 4</a></td>
+<td>$9.99</td>
+<td>1</td>
+<td>$9.99</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2DvDSa2">8 Port Gigabit Switch</a></td>
+<td>$25.32</td>
+<td>1</td>
+<td>$25.32</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2Dx9wEo">Cat 6 Ethernet cable 1ft, set of 4</a></td>
+<td>$8.90</td>
+<td>1</td>
+<td>$8.90</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a></td>
+<td>$22.93</td>
+<td>2</td>
+<td>$45.86</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2Dw7mon">Arctic USB Fan</a></td>
+<td>$4.12</td>
+<td>1</td>
+<td>$4.12</td>
+</tr>
+
+<tr>
+<td><a href="https://www.wdc.com/products/wdlabs/wd-pidrive-foundation-edition.html#WD3750LMCW">WD PiDrive 375GB</a></td>
+<td>$29.99</td>
+<td>4</td>
+<td>$119.96</td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>$527.82</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Woah</strong>, a whopping <em>$527.82</em>! Well, no one said it&rsquo;s a cheap hobby&hellip; but you can make it less expensive. For example, you could reduce the number of nodes to 3; this will cut the cost by $100 (and a 3-node cluster is still kick-ass!). You could also remove the PiDrives. I&rsquo;m using them as a mount point for <code>/var</code> directory, which will hold logs, and most importantly, docker container file system. These tend to be write-intensive, and storing them on  SD card may result in a much shorter card lifetime, so it&rsquo;s your call (you might need a bigger SD card if you decide to go without PiDrives). Finally, you could change Tinker board to some cheaper board, even the previously mentioned Raspberry Pi&hellip; but this post is about deploying Kubernetes on Tinker board and switching to a different board will make the rest of this post useless for you :-).</p>
+
+<p>There are two differences between the list above and the actual parts I&rsquo;ve used:</p>
+
+<ul>
+<li>I swapped 32GB SD card I&rsquo;ve used in my build with 16GB - you don&rsquo;t need that much space if you are using external HDD.</li>
+<li>I&rsquo;ve used 5-port gigabit switch instead of 8. However, now that I&rsquo;ve assembled everything, I saw I might have made a mistake - I&rsquo;ve used all the ports, with no room for expansion! The 5-port switch has one nice advantage; it fits nicely on top of the case. It&rsquo;s up to you!</li>
+</ul>
+
+<p><strong>NOTE: Make sure the charger you use can deliver at least 2.5 Amp per USB port</strong>. 3 Amps are preferred. Tinker board needs more current than Raspberry Pi, and also that single port will be used to power both disk and the board. The Anker Charger I&rsquo;ve included in the list can squeeze out 3 Amps per port, so you&rsquo;re covered.</p>
+
+<h2 id="assembling">Assembling</h2>
+
+<p>We&rsquo;ve got all parts. <strong>Let&rsquo;s assemble them!</strong>
+
+
+
+
+
+
+
+<figure>
+	<img src="/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/all_parts_hu1094f846a89c913d498b231b500161b9_2182655_700x1024_fit_q75_box_center.jpg" width="700" style="max-width: 100%; height: auto;" height="525">
+	<figcaption style="text-align: center">All parts ready for assembly!</figcaption>
+</figure>   </p>
+
+<p>I&rsquo;ve started with Tinker board and <a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a>. Tinker board is fully compatible (size-wise) with Raspberry Pi, so I thought it could not have been easier. The first time I used the washers, however, I used them in the wrong way&hellip; (hint: they are supposed to go <em>between</em> the board and the case, as spacers, to ensure proper space left for the bottom side of the board). <strong>Make sure you attached the radiator to the CPU before you mount another layer</strong> - they tend to heat much more than RPi. In fact, I&rsquo;ve added even more cooling; I will come back to that soon.</p>
+
+
+
+
+
+
+
+
+<figure>
+	<img src="/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/single_board_hu9ae861d273be3231ff632072c13bd714_1410231_700x1024_fit_q75_box_center.jpg" width="700" style="max-width: 100%; height: auto;" height="525">
+	<figcaption style="text-align: center">Single board attached to the first case layer</figcaption>
+</figure>   
+
+<p>I knew that <a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a> would fit Tinker board as well, but I had no idea about the drives. In fact, they are much bigger, and screw holes in drives do not match much those in the case (not to mention they need completely different screws). So&hellip; double-sided tape to the rescue! I&rsquo;ve taped the disks to the case layers, and the result was very satisfying.</p>
+
+<p>Now it&rsquo;s time to connect disks and Tinker boards. The idea is simple - the micro USB cable goes from the charger to disk via another cable included with the disk. This cable is then connected to the board twice - once via micro USB (to supply power), and once via USB-A (for data). The USB cable is quite short, so make sure it fits well before securing the two cases together!</p>
+
+
+
+
+
+
+
+
+<figure>
+	<img src="/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/charged_not_mounted_powered_on_3_hu20de36ae0e0896020841d7f05a31f18d_2078706_700x1024_fit_q75_box_center.jpg" width="700" style="max-width: 100%; height: auto;" height="525">
+	<figcaption style="text-align: center">Two cases combined together</figcaption>
+</figure>   
+
+<p>Once both cases (the case with boards and case with disks) were fully stacked, I&rsquo;ve &ldquo;secured&rdquo; them together using velcro ties that came with micro USB cables.</p>
+
+<p>I mentioned that these boards tend to heat quite a lot. In fact, after I deployed Kubernetes and kept them running for some time (without any additional workload), the temperature went up to 60-65C.  I figured that&rsquo;s too much (especially that I wanted to store the cluster in a closet without much air ventilation. I ordered a <a href="http://amzn.to/2Dw7mon">$4 Arctic USB Fan</a> and used the last remaining USB port in the charger for it. The result? <strong>the average temperature dropped to 35-40 degrees!</strong>.</p>
+
+
+
+
+
+
+
+
+<figure>
+	<img src="/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/fan_mounted_1_huf6a45fe7779118494bf060a27567de84_2092215_700x1024_fit_q75_box_center.jpg" width="700" style="max-width: 100%; height: auto;" height="525">
+	<figcaption style="text-align: center">Final result, placed in the closet, with USB fan mounted</figcaption>
+</figure>   
+
+<p><strong>Woop, woop, our Cluster is ready for containers!</strong></p>
+
+<h2 id="imaging-first-boot">Imaging &amp; First boot</h2>
+
+<p>&hellip; But first, we need to prepare our SD cards with an OS image. I&rsquo;ve used <a href="https://www.armbian.com/">Armbian</a> with great success. Head over to <a href="https://dl.armbian.com/tinkerboard/">https://dl.armbian.com/tinkerboard/</a> to download the image. I&rsquo;ve used nightly Ubuntu Xenial mainline build. The thing is&hellip; this image is no longer available. It looks like there is <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next_desktop.7z">Ubuntu Xenial Next Desktop</a> available. However, this image is much bigger as it includes the desktop bits. If that&rsquo;s ok for you, feel free to use it. The currently available <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next.7z">server image</a> is from 2017-10-18, which is too old and does not include <a href="https://github.com/armbian/build/commit/72b42b5b10495d16562cd87bfbb889a054ced2a1">this fix</a>. If you don&rsquo;t mind downloading images from random internet locations, <a href="https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img">here is the image</a> I&rsquo;ve used, uploaded by me. I&rsquo;m also in process of building my own Armbian image following <a href="https://docs.armbian.com/Developer-Guide_Build-Preparation/">this guide</a> to have customized kernel and all the important goodies useful for kubernetes - I will update the article once the image ready and well tested.</p>
+
+<p><strong>NOTE:</strong> The rest of this guide was tested using the nightly image <a href="https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img">available here</a>. <strong>Make sure you use this image to have smooth sailing!</strong>.</p>
+
+<p>Now it&rsquo;s time to &ldquo;burn&rdquo; image to SD card. Armbian recommends <a href="https://etcher.io/">Etcher</a>, I can wholeheartedly recommend it as well. It&rsquo;s straight-forward, multi-platform, and it simplifies the multi-card burning process.</p>
+
+<p>Once all the cards are ready, it&rsquo;s time to <strong>boot your cluster for the first time!</strong>.
+Before moving forward with configuration, you have to log in to each board via SSH (or use monitor/keyboard) as <code>root</code>, with password <code>1234</code>. First login will require you to change the <code>root</code> password and set up non-root account.</p>
+
+<p>While you are logged in, there are two steps that you can do here (everything else we will automate, I promise!) on each of the boards:</p>
+
+<h3 id="make-sure-networking-will-not-get-borked-after-you-reboot">Make sure networking will not get borked after you reboot</h3>
+
+<p>It seems to me that there is an issue between <code>/etc/network/interfaces</code> and <code>NetworkManager</code>, both trying to claim ownership of networking card. I&rsquo;ve resolved that issue by
+ensuring NetworkManager is the winner - just run <code>cp /etc/network/interfaces.network-manager /etc/network/interfaces</code>, which will basically remove all interfaces from this file.</p>
+
+<h3 id="format-and-mount-the-pidrive-skip-if-not-using-pidrive">Format and mount the PiDrive (skip if not using PiDrive)</h3>
+
+<p>Run <code>cfdisk /dev/sda</code> to create new Linux partition, run <code>mkfs.ext4 /dev/sda1</code> to format it as <code>ext4</code> file system, and finally add <code>UUID=e4ea132a-2f0f-418c-928a-c3d0503c6b44 /var ext4 defaults,noatime,nodiratime,errors=remount-ro 0 2</code> to <code>/etc/fstab</code> (You can find the uuid of the disk by running <code>ls -l /dev/disk/by-uuid/ | grep sda1</code> or <code>blkid /dev/sda1 | awk '{print $2;}'</code>). Finally, run the following sequence of commands:</p>
+
+<pre><code>cp -a /var /var.bak
+mkdir /var
+mount /var
+cp -a /var.bak/* /var/
+reboot
+rm -rf /var.bak
+</code></pre>
+
+<p>The above will ensure that your <code>/var</code> directory is using PiDrive, and that its current content is copied over.</p>
+
+<p>That was a lot of manual work, yuck! But from now on, we will <strong>automate all the things!</strong></p>
+
+<h2 id="preparing-os">Preparing OS</h2>
+
+<p>There are still few things we want to configure on our boards before we can install Kubernetes. Updating packages, installing dependencies, and so on&hellip; but we will do that all using <a href="https://www.ansible.com/">Ansible</a>. Make sure you have ansible installed before proceeding (you can find install docs on Ansible website). One more thing to do before running ansible: <strong>configure your SSH</strong>. First, copy your public key to all nodes: <code>ssh-copy-id -i ~/.ssh/id_rsa YOUR_USERNAME@tinker-0</code> for each of the nodes. Ensure your <code>~/.ssh/config</code> has following lines:</p>
+
+<pre><code>Host tinker-0 tinker-1 tinker-2 tinker-3
+    User YOUR_USERNAME
+</code></pre>
+
+<p>and finally, log in to each of the nodes, run <code>visudo</code>, and make sure the following line is there:</p>
+
+<pre><code>%sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+</code></pre>
+
+<p>The above will make sudo passwordless, and your ansible will run smoothly.</p>
+
+<p><a href="https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml">Here</a> is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:</p>
+
+<pre><code>git clone https://github.com/kars7e/tinker-cluster
+cd tinker-cluster/ansible
+cat &gt; inventory.ini&lt;&lt;EOF
+tinker-0
+tinker-1
+tinker-2
+tinker-3
+
+[k8s-master]
+tinker-0
+
+[k8s-node]
+tinker-1
+tinker-2
+tinker-3
+EOF
+</code></pre>
+
+<p>(Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add <code>ansible_host=192.0.2.50</code> to each entry in first four lines of the inventory file, replacing the IP with the correct one).</p>
+
+<p>Then run it like this:</p>
+
+<pre><code>ansible-playbook -i inventory.ini configure.yml
+</code></pre>
+
+<p>And Voila! you system has been prepared. So what does this playbook do? You can of course look into the source, but let&rsquo;s include few notable tasks:</p>
+
+<ul>
+<li>Configures hostnames across all nodes</li>
+<li>Reconfigures machine id (needed as all nodes have been started from the same image)</li>
+<li>Disables Wifi</li>
+<li>Upgrades packages and install NFS dependency</li>
+<li>disables zram and swap</li>
+<li>Installs Docker</li>
+</ul>
+
+<h2 id="installing-kubernetes">Installing Kubernetes</h2>
+
+<p>This step couldn&rsquo;t be simpler. just run:</p>
+
+<pre><code>ansible-playbook -i inventory.ini kubernetes.yml
+</code></pre>
+
+<p><strong>That&rsquo;s it; now you have fully functional Kubernetes 1.9 cluster!</strong></p>
+
+<p>Under the hood, it uses <a href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">kubeadm</a> to provision the cluster. If anything goes wrong with kubernetes installation, just run:</p>
+
+<pre><code>ansible-playbook -i inventory.ini k8s-reset.yml
+</code></pre>
+
+<p>It will bring the nodes back to the state before Kubernetes was provisioned.</p>
+
+<h2 id="installing-openfaas">Installing OpenFaaS</h2>
+
+<p>Before installing OpenFaaS, make sure you have <code>kubectl</code> installed (<code>brew install kubernetes-cli</code> on macos), and you have it configured (Copy <code>/etc/kubernetes/admin.conf</code> from your master node to <code>~/.kube/config</code>). Once you have the above, just run:</p>
+
+<pre><code class="language-bash">git clone https://github.com/openfaas/faas-netes
+cd faas-netes/yaml_armhf
+kubectl apply -f nats.armhf.yml,faas.async.armhf.yml,rbac.yml,monitoring.armhf.yml
+</code></pre>
+
+<p>You can retrieve the URL for OpenFaaS UI running following command (replace <code>tinker-0</code> with your node&rsquo;s hostname or IP):</p>
+
+<pre><code class="language-bash">echo &quot;http://tinker-0:$(kubectl get svc/gateway -o go-template --template='{{ (index .spec.ports 0).nodePort }}')/ui&quot;
+</code></pre>
+
+<p><strong><em>And you should be good to go!</em></strong></p>
+
+
+
+
+
+
+
+
+<figure>
+	<img src="/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/openfaas_ui_hubdf7485691f1d4eb1dd68c7a7c32e774_216956_700x1024_fit_box_center.png" width="700" style="max-width: 100%; height: auto;" height="570">
+	<figcaption style="text-align: center">OpenFaaS UI, running on Kubernetes on Tinkerboard</figcaption>
+</figure>   
+
+<p><strong>Feel free to let me know how did it go for you or if you have any questions. You can do it via comments or <a href="https://twitter.com/kars7e">Twitter</a>.</strong></p>
+
+<p><strong>Until the next one!</strong></p>
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://blog.kars7e.io/2017/03/28/Rust-first-impressions/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/";
+        
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//kars7e.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    
+    <div class="footer">
+  <p>2017 Karol Stepniewski</p>
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7878188-6', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>
