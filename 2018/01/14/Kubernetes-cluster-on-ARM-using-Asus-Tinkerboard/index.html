@@ -46,7 +46,7 @@
           <h2 class="post-title"><a href="http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/">Kubernetes cluster on ARM using Asus Tinkerboard</a></h2>
           <span class="post-date">Jan 14, 2018 </span>
           <div class="post-content">
-            <p>Over the winter holiday break of 2017 I&rsquo;ve spent some time playing with Kubernetes on ARM. I had a lot of fun building this beast:</p>
+            <p>Over the winter holiday break of 2017, I&rsquo;ve spent some time playing with Kubernetes on ARM. I had a lot of fun building this beast:</p>
 
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ok, I&#39;ve got <a href="https://twitter.com/hashtag/kubernetes?src=hash&amp;ref_src=twsrc%5Etfw">#kubernetes</a> running on 4 nodes Asus Tinkerboard ARM cluster with ARMbian (with some ultra-advanced cooling), and it&#39;s a beast!  Oh, did I mention it runs <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> like a champ?<br><br>Blog post incoming! <a href="https://t.co/CiqnSPiPb7">pic.twitter.com/CiqnSPiPb7</a></p>&mdash; Karol Stępniewski (@kars7e) <a href="https://twitter.com/kars7e/status/948122096969818113?ref_src=twsrc%5Etfw">January 2, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -178,7 +178,7 @@ Since I want to expose persistent volumes to <a href="https://kubernetes.io/docs
 	<figcaption style="text-align: center">All parts ready for assembly!</figcaption>
 </figure>   </p>
 
-<p>I&rsquo;ve started with Tinker board and <a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a>. Tinker board is fully compatible (size-wise) with Raspberry Pi, so I thought it could not have been easier. The first time I used the washers, however, I used them in the wrong way&hellip; (hint: they are supposed to go <em>between</em> the board and the case, as spacers, to ensure proper space left for the bottom side of the board). <strong>Make sure you attached the radiator to the CPU before you mount another layer</strong> - they tend to heat much more than RPi. In fact, I&rsquo;ve added even more cooling; I will come back to that soon.</p>
+<p>I&rsquo;ve started with Tinker board and <a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a>. Tinker board is fully compatible (size-wise) with Raspberry Pi, so I thought it could not have been easier. The first time I used the washers, however, I used them in the wrong way&hellip; (hint: they are supposed to go <em>between</em> the board and the case, as spacers, to ensure proper space left for the bottom side of the board). <strong>Make sure you attached the heat sink to the CPU before you mount another layer</strong> - once you mount it, it will be very hard to attach the sink. Tinker board tends to heat much more than RPi. In fact, I&rsquo;ve added even more cooling; I will come back to that soon.</p>
 
 
 
@@ -210,7 +210,7 @@ Since I want to expose persistent volumes to <a href="https://kubernetes.io/docs
 
 <p>Once both cases (the case with boards and case with disks) were fully stacked, I&rsquo;ve &ldquo;secured&rdquo; them together using velcro ties that came with micro USB cables.</p>
 
-<p>I mentioned that these boards tend to heat quite a lot. In fact, after I deployed Kubernetes and kept them running for some time (without any additional workload), the temperature went up to 60-65C.  I figured that&rsquo;s too much (especially that I wanted to store the cluster in a closet without much air ventilation. I ordered a <a href="http://amzn.to/2Dw7mon">$4 Arctic USB Fan</a> and used the last remaining USB port in the charger for it. The result? <strong>the average temperature dropped to 35-40 degrees!</strong>.</p>
+<p>I mentioned that these boards tend to heat quite a lot. In fact, after I deployed Kubernetes and kept them running for some time (without any additional workload), the temperature went up to 60-65C.  I figured that&rsquo;s too much, especially that I wanted to store the cluster in a closet without much air ventilation. I ordered a <a href="http://amzn.to/2Dw7mon">$4 Arctic USB Fan</a> and used the last remaining USB port in the charger for it. The result? <strong>the average temperature dropped to 35-40 degrees!</strong>.</p>
 
 
 
@@ -228,14 +228,20 @@ Since I want to expose persistent volumes to <a href="https://kubernetes.io/docs
 
 <h2 id="imaging-first-boot">Imaging &amp; First boot</h2>
 
-<p>&hellip; But first, we need to prepare our SD cards with an OS image. I&rsquo;ve used <a href="https://www.armbian.com/">Armbian</a> with great success. Head over to <a href="https://dl.armbian.com/tinkerboard/">https://dl.armbian.com/tinkerboard/</a> to download the image. I&rsquo;ve used nightly Ubuntu Xenial mainline build. The thing is&hellip; this image is no longer available. It looks like there is <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next_desktop.7z">Ubuntu Xenial Next Desktop</a> available. However, this image is much bigger as it includes the desktop bits. If that&rsquo;s ok for you, feel free to use it. The currently available <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next.7z">server image</a> is from 2017-10-18, which is too old and does not include <a href="https://github.com/armbian/build/commit/72b42b5b10495d16562cd87bfbb889a054ced2a1">this fix</a>. If you don&rsquo;t mind downloading images from random internet locations, <a href="https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img">here is the image</a> I&rsquo;ve used, uploaded by me. I&rsquo;m also in process of building my own Armbian image following <a href="https://docs.armbian.com/Developer-Guide_Build-Preparation/">this guide</a> to have customized kernel and all the important goodies useful for kubernetes - I will update the article once the image ready and well tested.</p>
+<p>&hellip; But first, we need to prepare our SD cards with an OS image. I&rsquo;ve used <a href="https://www.armbian.com/">Armbian</a> with great success.
+Head over to <a href="https://dl.armbian.com/tinkerboard/">https://dl.armbian.com/tinkerboard/</a> to download the image.
+I&rsquo;ve used nightly Ubuntu Xenial mainline build. The thing is&hellip; this image is no longer available.
+It looks like there is <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next_desktop.7z">Ubuntu Xenial Next Desktop</a> available.
+However, this image is much bigger as it includes the desktop bits. If that&rsquo;s ok for you, feel free to use it. The currently available <a href="https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next.7z">server image</a> is from 2017-10-18, which is too old and does not include <a href="https://github.com/armbian/build/commit/72b42b5b10495d16562cd87bfbb889a054ced2a1">this fix</a>.
+If you don&rsquo;t mind downloading images from random internet locations, <a href="https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img">here is the image</a> I&rsquo;ve used, uploaded by me.
+I&rsquo;m also in the process of building my Armbian image following <a href="https://docs.armbian.com/Developer-Guide_Build-Preparation/">this guide</a> to have a customized kernel and all the great goodies useful for Kubernetes - I will update the article once the image ready and well tested.</p>
 
 <p><strong>NOTE:</strong> The rest of this guide was tested using the nightly image <a href="https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img">available here</a>. <strong>Make sure you use this image to have smooth sailing!</strong>.</p>
 
 <p>Now it&rsquo;s time to &ldquo;burn&rdquo; image to SD card. Armbian recommends <a href="https://etcher.io/">Etcher</a>, I can wholeheartedly recommend it as well. It&rsquo;s straight-forward, multi-platform, and it simplifies the multi-card burning process.</p>
 
 <p>Once all the cards are ready, it&rsquo;s time to <strong>boot your cluster for the first time!</strong>.
-Before moving forward with configuration, you have to log in to each board via SSH (or use monitor/keyboard) as <code>root</code>, with password <code>1234</code>. First login will require you to change the <code>root</code> password and set up non-root account.</p>
+Before moving forward with configuration, you have to log in to each board via SSH (or use monitor/keyboard) as <code>root</code>, with password <code>1234</code>. The first login will require you to change the <code>root</code> password and set up non-root account.</p>
 
 <p>While you are logged in, there are two steps that you can do here (everything else we will automate, I promise!) on each of the boards:</p>
 
@@ -277,18 +283,18 @@ rm -rf /var.bak
 
 <p><a href="https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml">Here</a> is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:
 <script src="//gist.github.com/kars7e/09b97d4ff1aaf379d9dae94f03fa01c9.js"></script>
-(Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add <code>ansible_host=192.0.2.50</code> to each entry in first four lines of the inventory file, replacing the IP with the correct one).</p>
+Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add <code>ansible_host=192.0.2.50</code> to each entry in first four lines of the inventory file, replacing the IP with the correct one.</p>
 
 <p>Then run it like this:</p>
 
 <pre><code>ansible-playbook -i inventory.ini configure.yml
 </code></pre>
 
-<p>And Voila! you system has been prepared. So what does this playbook do? You can of course look into the source, but let&rsquo;s include few notable tasks:</p>
+<p>And Voila! OS on all nodes is ready for Kubernetes installation. So what did this playbook do? You can, of course, look into the source, but let&rsquo;s mention some notable tasks here:</p>
 
 <ul>
 <li>Configures hostnames across all nodes</li>
-<li>Reconfigures machine id (needed as all nodes have been started from the same image)</li>
+<li>Reconfigures machine id (needed as all nodes are started from the same image)</li>
 <li>Disables Wifi</li>
 <li>Upgrades packages and install NFS dependency</li>
 <li>disables zram and swap</li>
@@ -297,14 +303,14 @@ rm -rf /var.bak
 
 <h2 id="installing-kubernetes">Installing Kubernetes</h2>
 
-<p>This step couldn&rsquo;t be simpler. just run:</p>
+<p>This step couldn&rsquo;t be simpler. Just run:</p>
 
 <pre><code>ansible-playbook -i inventory.ini kubernetes.yml
 </code></pre>
 
 <p><strong>That&rsquo;s it; now you have fully functional Kubernetes 1.9 cluster!</strong></p>
 
-<p>Under the hood, it uses <a href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">kubeadm</a> to provision the cluster. If anything goes wrong with kubernetes installation, just run:</p>
+<p>Under the hood, it uses <a href="https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/">kubeadm</a> to provision the cluster. If anything goes wrong with Kubernetes installation, just run:</p>
 
 <pre><code>ansible-playbook -i inventory.ini k8s-reset.yml
 </code></pre>
