@@ -3,7 +3,6 @@ title: "Kubernetes cluster on ARM using Asus Tinkerboard"
 description: How to build Kubernetes cluster on ARM, using Asus Tinkerboard as a base and OpenFaaS as the serverless platform
 date: 2018-01-14T16:13:20-08:00
 author: karol_stepniewski
-draft: true
 comments: true
 tags:
 - kubernetes
@@ -23,13 +22,13 @@ I finally found some time to write about it in details. Let's go!
 <!--more-->
 
 ## Shopping list ##
-The most popular choice for ARM cluster is of course [Raspberry Pi](http://amzn.to/2Dfa9V7), well-tested board with a huge community. I've decided to use something else for my cluster, and I based it on [Asus Tinker board](http://amzn.to/2DdTwJH). The most important differences:
+The most popular choice for ARM cluster is of course [Raspberry Pi](http://amzn.to/2Dfa9V7), well-tested board with a huge community. I've decided to use something else for my cluster, and I picked [Asus Tinker board](http://amzn.to/2DdTwJH). The most important differences:
 
 * **2GB of RAM** (compared to 1GB in RPi)
 * **Gigabit Ethernet** (compared to 100Mbit)
 
-Twice the amount of memory will come very useful when running a bigger number of containers (for example, [Prometheus uses](https://prometheus.io/docs/prometheus/1.8/storage/#memory-usage) a significant amount of memory, subject to tunning).
-1 Gbit/s Ethernet link will come useful as I want to expose persistent volumes to [Kubernetes pods via NFS](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) from my [Synology DS 218+](http://amzn.to/2FFpCw7) NAS. 
+Twice the amount of memory will come very useful when running a larger number of containers (no surprise here, bigger is better!).
+Since I want to expose persistent volumes to [Kubernetes pods via NFS](https://kubernetes.io/docs/concepts/storage/volumes/#nfs) from my [Synology DS 218+](http://amzn.to/2FFpCw7) NAS, the Gigabit Ethernet will definitely improve that experience.
 
 Here is the complete list of required components:
  
@@ -46,7 +45,7 @@ Here is the complete list of required components:
 | [WD PiDrive 375GB](https://www.wdc.com/products/wdlabs/wd-pidrive-foundation-edition.html#WD3750LMCW)     | $29.99     | 4            | $119.96     |
 |                                                                                                           |            |              | **$527.82** |
 
-**Woah**, a whopping *$527.82*! Well, no one said it's a cheap hobby... but you can make it less expensive. For example, you could reduce the number of nodes to 3; this will cut the cost by $100 (and a 3-node cluster is still kick-ass!). You could also remove the PiDrives. I'm using them as a mount point for `/var` directory, which will hold logs, and most importantly, docker container file system. These tend to be write-intensive, and storing them on  SD card may result in a much shorter card lifetime. Finally, you could change Tinker board to some cheaper board, even the previously mentioned Raspberry Pi... but this post is about deploying Kubernetes on Tinker board and switching to a different board will make the rest of this post useless for you :-).
+**Woah**, a whopping *$527.82*! Well, no one said it's a cheap hobby... but you can make it less expensive. For example, you could reduce the number of nodes to 3; this will cut the cost by $100 (and a 3-node cluster is still kick-ass!). You could also remove the PiDrives. I'm using them as a mount point for `/var` directory, which will hold logs, and most importantly, docker container file system. These tend to be write-intensive, and storing them on  SD card may result in a much shorter card lifetime, so it's your call (you might need a bigger SD card if you decide to go without PiDrives). Finally, you could change Tinker board to some cheaper board, even the previously mentioned Raspberry Pi... but this post is about deploying Kubernetes on Tinker board and switching to a different board will make the rest of this post useless for you :-).
 
 There are two differences between the list above and the actual parts I've used:
 
@@ -80,20 +79,22 @@ I mentioned that these boards tend to heat quite a lot. In fact, after I deploye
 **Woop, woop, our Cluster is ready for containers!**
 
 ## Imaging & First boot ##
-... But first, we need to prepare our SD cards with an OS image. I've used [Armbian](https://www.armbian.com/) with great success. Head over to [https://dl.armbian.com/tinkerboard/](https://dl.armbian.com/tinkerboard/) to download the image. I've used nightly Ubuntu Xenial mainline build. The thing is... this image is no longer available. It looks like there is [Ubuntu Xenial Next Desktop](https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next_desktop.7z) available. However, this image is much bigger as it includes the desktop bits. If that's ok for you, feel free to use it. The currently available [server image](https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next.7z) is from 2017-10-18, which is too old and does not include [this fix](https://github.com/armbian/build/commit/72b42b5b10495d16562cd87bfbb889a054ced2a1). If you don't mind downloading images from random internet locations, [here is the image](http://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img) I've used, uploaded by me. I see updated images based on Debian - my guessing is that Armbian maintainers expect users to use Debian for server purposes. I haven't tried it yet, but I'll update the post if I try it and it works. 
+... But first, we need to prepare our SD cards with an OS image. I've used [Armbian](https://www.armbian.com/) with great success. Head over to [https://dl.armbian.com/tinkerboard/](https://dl.armbian.com/tinkerboard/) to download the image. I've used nightly Ubuntu Xenial mainline build. The thing is... this image is no longer available. It looks like there is [Ubuntu Xenial Next Desktop](https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next_desktop.7z) available. However, this image is much bigger as it includes the desktop bits. If that's ok for you, feel free to use it. The currently available [server image](https://dl.armbian.com/tinkerboard/Ubuntu_xenial_next.7z) is from 2017-10-18, which is too old and does not include [this fix](https://github.com/armbian/build/commit/72b42b5b10495d16562cd87bfbb889a054ced2a1). If you don't mind downloading images from random internet locations, [here is the image](https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img) I've used, uploaded by me. I'm also in process of building my own Armbian image following [this guide](https://docs.armbian.com/Developer-Guide_Build-Preparation/) to have customized kernel and all the important goodies useful for kubernetes - I will update the article once the image ready and well tested.
+
+**NOTE:** The rest of this guide was tested using the nightly image [available here](https://kars7e-public.e24files.com/Armbian_5.35.171201_Tinkerboard_Ubuntu_xenial_next_4.14.2.img). **Make sure you use this image to have smooth sailing!**.
 
 Now it's time to "burn" image to SD card. Armbian recommends [Etcher](https://etcher.io/), I can wholeheartedly recommend it as well. It's straight-forward, multi-platform, and it simplifies the multi-card burning process.
 
 Once all the cards are ready, it's time to **boot your cluster for the first time!**.
-Note that, however, the first boot will require monitor and keyboard...  you will need to log in with default credentials, change the root password, and create a new non-root user. I haven't figured out how to avoid that step, but to be honest, I haven't even tried - I'm guessing it might be well-documented on Armbian website. I will update the article if I find a way.
+Before moving forward with configuration, you have to log in to each board via SSH (or use monitor/keyboard) as `root`, with password `1234`. First login will require you to change the `root` password and set up non-root account.
 
-While you are logged in to the board via monitor & keyboard, there are two steps that you can do here (everything else we will automate, I promise!) on each of the boards:
+While you are logged in, there are two steps that you can do here (everything else we will automate, I promise!) on each of the boards:
 
 ### Make sure networking will not get borked after you reboot
 It seems to me that there is an issue between `/etc/network/interfaces` and `NetworkManager`, both trying to claim ownership of networking card. I've resolved that issue by
 ensuring NetworkManager is the winner - just run `cp /etc/network/interfaces.network-manager /etc/network/interfaces`, which will basically remove all interfaces from this file.
 
-### Format and mount the PiDrive 
+### Format and mount the PiDrive (skip if not using PiDrive)
  Run `cfdisk /dev/sda` to create new Linux partition, run `mkfs.ext4 /dev/sda1` to format it as `ext4` file system, and finally add `UUID=e4ea132a-2f0f-418c-928a-c3d0503c6b44 /var ext4 defaults,noatime,nodiratime,errors=remount-ro 0 2` to `/etc/fstab` (You can find the uuid of the disk by running `ls -l /dev/disk/by-uuid/ | grep sda1` or `blkid /dev/sda1 | awk '{print $2;}'`). Finally, run the following sequence of commands:
 ```
 cp -a /var /var.bak
@@ -107,7 +108,7 @@ The above will ensure that your `/var` directory is using PiDrive, and that its 
 
 That was a lot of manual work, yuck! But from now on, we will **automate all the things!**
 
-## Preparing OS & installing Kubernetes##
+## Preparing OS ##
 There are still few things we want to configure on our boards before we can install Kubernetes. Updating packages, installing dependencies, and so on... but we will do that all using [Ansible](https://www.ansible.com/). Make sure you have ansible installed before proceeding (you can find install docs on Ansible website). One more thing to do before running ansible: **configure your SSH**. First, copy your public key to all nodes: `ssh-copy-id -i ~/.ssh/id_rsa YOUR_USERNAME@tinker-0` for each of the nodes. Ensure your `~/.ssh/config` has following lines:
 ```
 Host tinker-0 tinker-1 tinker-2 tinker-3
@@ -122,6 +123,9 @@ The above will make sudo passwordless, and your ansible will run smoothly.
 
 [Here](https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml) is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:
 ```
+git clone https://github.com/kars7e/tinker-cluster
+cd tinker-cluster/ansible
+cat > inventory.ini<<EOF
 tinker-0
 tinker-1
 tinker-2
@@ -134,6 +138,7 @@ tinker-0
 tinker-1
 tinker-2
 tinker-3
+EOF
 ``` 
 (Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add `ansible_host=192.0.2.50` to each entry in first four lines of the inventory file, replacing the IP with the correct one).
 
@@ -141,15 +146,48 @@ Then run it like this:
 ```
 ansible-playbook -i inventory.ini configure.yml
 ```
+And Voila! you system has been prepared. So what does this playbook do? You can of course look into the source, but let's include few notable tasks:
+
+* Configures hostnames across all nodes
+* Reconfigures machine id (needed as all nodes have been started from the same image)
+* Disables Wifi
+* Upgrades packages and install NFS dependency
+* disables zram and swap
+* Installs Docker
+
+## Installing Kubernetes
+
+This step couldn't be simpler. just run:
+```
+ansible-playbook -i inventory.ini kubernetes.yml
+```
+
 **That's it; now you have fully functional Kubernetes 1.9 cluster!**
+
+Under the hood, it uses [kubeadm](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/) to provision the cluster. If anything goes wrong with kubernetes installation, just run:
+```
+ansible-playbook -i inventory.ini k8s-reset.yml
+```
+It will bring the nodes back to the state before Kubernetes was provisioned. 
 
 ## Installing OpenFaaS ##
 Before installing OpenFaaS, make sure you have `kubectl` installed (`brew install kubernetes-cli` on macos), and you have it configured (Copy `/etc/kubernetes/admin.conf` from your master node to `~/.kube/config`). Once you have the above, just run:
-```
+```bash
 git clone https://github.com/openfaas/faas-netes
 cd faas-netes/yaml_armhf
 kubectl apply -f nats.armhf.yml,faas.async.armhf.yml,rbac.yml,monitoring.armhf.yml
 ```
 
+You can retrieve the URL for OpenFaaS UI running following command (replace `tinker-0` with your node's hostname or IP):
+```bash
+echo "http://tinker-0:$(kubectl get svc/gateway -o go-template --template='{{ (index .spec.ports 0).nodePort }}')/ui"
+```
+
 ***And you should be good to go!***
 
+{{< imgproc openfaas_ui Fit "700x1024" "OpenFaaS UI, running on Kubernetes on Tinkerboard">}}
+
+
+**Feel free to let me know how did it go for you or if you have any questions. You can do it via comments or [Twitter](https://twitter.com/kars7e).**
+
+**Until the next one!**
