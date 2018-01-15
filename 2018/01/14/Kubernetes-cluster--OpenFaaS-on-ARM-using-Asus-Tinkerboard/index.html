@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title> Kubernetes cluster &amp; OpenFaaS on ARM using Asus Tinkerboard &middot; kars7e&#39;s Blog </title>
+
+
+<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="/favicon.ico">
+
+
+<link href="" rel="alternate" type="application/rss+xml" title="kars7e&#39;s Blog" />
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <p class="site-tagline">Personal blog of Karol Stepniewski</p>
+  <div class="nav">
+    <a class="nav-btn" href="#">
+      <span class="ci ci-burger"></span>
+    </a>
+    <ul class="nav-list">
+      
+	    <li class="spacer">&ac;</li>
+      <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
+      <li><a href="https://twitter.com/kars7e" target="_blank">Twitter</a></li>
+      <li><a href="http://linkedin.com/in/karolstepniewski" target="_blank">LinkedIn</a></li>
+    </ul>
+  </div>
+</div>
+    <div class="content">
+      <div class="posts">
+        <div class="post">
+          <h2 class="post-title"><a href="http://blog.kars7e.io/2018/01/14/Kubernetes-cluster--OpenFaaS-on-ARM-using-Asus-Tinkerboard/">Kubernetes cluster &amp; OpenFaaS on ARM using Asus Tinkerboard</a></h2>
+          <span class="post-date">Jan 14, 2018 </span>
+          <div class="post-content">
+            <p>Over the winter holiday break of 2017 I&rsquo;ve spent some time to play with Kubernetes on ARM. I had a lot of fun building this beast:</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Ok, I&#39;ve got <a href="https://twitter.com/hashtag/kubernetes?src=hash&amp;ref_src=twsrc%5Etfw">#kubernetes</a> running on 4 nodes Asus Tinkerboard ARM cluster with ARMbian (with some ultra-advanced cooling), and it&#39;s a beast!  Oh, did I mention it runs <a href="https://twitter.com/openfaas?ref_src=twsrc%5Etfw">@openfaas</a> like a champ?<br><br>Blog post incoming! <a href="https://t.co/CiqnSPiPb7">pic.twitter.com/CiqnSPiPb7</a></p>&mdash; Karol Stępniewski (@kars7e) <a href="https://twitter.com/kars7e/status/948122096969818113?ref_src=twsrc%5Etfw">January 2, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>I finally found some time to write about it in details. Let&rsquo;s go!
+</p>
+
+<h2 id="shopping-list">Shopping list</h2>
+
+<p>The most popular choice for ARM cluster is of course <a href="http://amzn.to/2Dfa9V7">Raspberry Pi</a>, well-tested board with a huge community. I&rsquo;ve decided to use something else for my cluster, and I based it on <a href="http://amzn.to/2DdTwJH">Asus Tinker board</a>. The most important differences:</p>
+
+<ul>
+<li><strong>2GB of RAM</strong> (compared to 1GB in RPi)</li>
+<li><strong>Gigabit Ethernet</strong> (compared to 100Mbit)</li>
+</ul>
+
+<p>Twice the amount of memory will come very useful when running a bigger number of containers (for example, <a href="https://prometheus.io/docs/prometheus/1.8/storage/#memory-usage">Prometheus uses</a> significant amount of memory, subject to tunning).
+1 Gbit/s Ethernet link will come useful as I want to expose persistent volumes to <a href="https://kubernetes.io/docs/concepts/storage/volumes/#nfs">Kubernetes pods via NFS</a> from my <a href="http://amzn.to/2FFpCw7">Synology DS 218+</a> NAS.</p>
+
+<p>Here is the complete list of parts I&rsquo;ve used:</p>
+
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Sum</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://amzn.to/2DdTwJH">Asus Tinker board</a></td>
+<td>$59.45</td>
+<td>4</td>
+<td>$237.80</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2D4kG29">16GB SD Card</a></td>
+<td>$9.97</td>
+<td>4</td>
+<td>$39.88</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2mu1yDI">Anker 3A 63W USB Charger</a></td>
+<td>$35.99</td>
+<td>1</td>
+<td>$35.99</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2D2mpVI">1ft microUSB cable, set of 4</a></td>
+<td>$9.99</td>
+<td>1</td>
+<td>$9.99</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2DvDSa2">8 Port Gigabit Switch</a></td>
+<td>$25.32</td>
+<td>1</td>
+<td>$25.32</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2Dx9wEo">Cat 6 Ethernet cable 1ft, set of 4</a></td>
+<td>$8.90</td>
+<td>1</td>
+<td>$8.90</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2rbgZqb">RPi stackable Dog Bone Case</a></td>
+<td>$22.93</td>
+<td>2</td>
+<td>$45.86</td>
+</tr>
+
+<tr>
+<td><a href="http://amzn.to/2Dw7mon">Arctic USB Fan</a></td>
+<td>$4.12</td>
+<td>1</td>
+<td>$4.12</td>
+</tr>
+
+<tr>
+<td><a href="https://www.wdc.com/products/wdlabs/wd-pidrive-foundation-edition.html#WD3750LMCW">WD PiDrive 375GB</a></td>
+<td>$29.99</td>
+<td>4</td>
+<td>$119.96</td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>$527.82</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Woah</strong>, a whopping <em>$527.82</em>! Well, no one said it&rsquo;s a cheap hobby&hellip; but you can make it less expensive. For example, you could reduce the number of nodes to 3; this will cut the cost by $100 (and a 3-node cluster is still kick-ass!). You could also remove the PiDrives. I&rsquo;m using them as a mount point for <code>/var</code> directory, which will hold logs, and most importantly, docker container file system. These tend to be write-intensive, and storing them on  SD card may result in a much shorter card lifetime. Finally, you could change Tinker board to some cheaper board, even the previously mentioned Raspberry Pi&hellip; but this post is about deploying Kubernetes on Tinker board and switching to a different board will make the rest of this post useless for you :-).</p>
+
+<h2 id="assembling">Assembling</h2>
+
+<p>
+
+
+
+
+
+
+<figure style="width: 703px; padding: 3px;">
+	<img src="/2018/01/14/Kubernetes-cluster--OpenFaaS-on-ARM-using-Asus-Tinkerboard/all_parts_hu1094f846a89c913d498b231b500161b9_2182655_700x1024_fit_q75_box_center.jpg" width="700" height="525">
+	<figcaption>All parts ready for assembly!</figcaption>
+</figure>   </p>
+
+<h2 id="first-boot">First boot</h2>
+
+<h2 id="preparing-os">Preparing OS</h2>
+
+<h2 id="installing-kubernetes">Installing Kubernetes</h2>
+
+<h2 id="installing-openfaas">Installing OpenFaaS</h2>
+          </div>
+        </div>
+        <div class="pagination"> 
+          <a class="btn next " href="http://blog.kars7e.io/2017/03/28/Rust-first-impressions/"> Next</a> 
+        </div>
+      </div>
+    </div>
+    
+    <div id="disqus_thread"></div>
+    <script>
+      var disqus_config = function () {
+        this.page.url = "http://blog.kars7e.io/2018/01/14/Kubernetes-cluster--OpenFaaS-on-ARM-using-Asus-Tinkerboard/";
+        
+      };
+      (function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//kars7e.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    
+    <div class="footer">
+  <p>2017 Karol Stepniewski</p>
+</div>
+
+  </div>
+  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-7878188-6', 'auto');
+ga('send', 'pageview');
+
+</script>
+
+</body>
+
+</html>

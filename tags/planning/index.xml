@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Planning on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/planning/index.xml</link>
+    <link>http://blog.kars7e.io/tags/planning/</link>
     <description>Recent content in Planning on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://blog.kars7e.io/tags/planning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Mar 2016 09:05:45 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kars7e.io/tags/planning/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>[DSP] Let&#39;s do some planning</title>
@@ -15,41 +18,7 @@
       
       <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
       <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;
-
-&lt;p&gt;
-I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
-
-&lt;h3 id=&#34;week-1-the-game&#34;&gt;Week 1 - The Game&lt;/h3&gt;
-
-&lt;p&gt;I will introduce basic game concepts and rules, and how I envision the game will look like at the end of this challenge.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-2-hello-elixir&#34;&gt;Week 2 - Hello Elixir&lt;/h3&gt;
-
-&lt;p&gt;Week 2 will be about elixir - what is this language, what interesting features does it have, and how can we model the game in it.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-3-mvp&#34;&gt;Week 3 - MVP&lt;/h3&gt;
-
-&lt;p&gt;By the end of week 3 I&amp;rsquo;d like to have a running version of the game in pure Elixir, available to play through iex (Elixir REPL).&lt;/p&gt;
-
-&lt;h3 id=&#34;week-4-we-re-going-web-wide&#34;&gt;Week 4 - We&amp;rsquo;re going web-wide&lt;/h3&gt;
-
-&lt;p&gt;I&amp;rsquo;ll do an introduction to Phoenix, Elixir based high performance web framework.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-5-work-work-work&#34;&gt;Week 5 - Work, work, work&lt;/h3&gt;
-
-&lt;p&gt;I will spend this week on implementing the game in phoenix, and I will slowly transition to frontend.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-6-7-8-show-me-your-pretty-face&#34;&gt;Week 6, 7 &amp;amp; 8 - Show me your pretty face&lt;/h3&gt;
-
-&lt;p&gt;Well, we&amp;rsquo;re talking games here, and it ain&amp;rsquo;t &lt;a href=&#34;https://en.wikipedia.org/wiki/MUD&#34;&gt;mud&lt;/a&gt;-type, so we need to create some UI.
-I honestly have no idea how it will work, what technologies will I use, or where will I take some decent graphics from. Fun ride, as usual.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-9-10-let-s-scale-it-baby&#34;&gt;Week 9 &amp;amp; 10 - Let&amp;rsquo;s scale it baby!&lt;/h3&gt;
-
-&lt;p&gt;Elixir is really a &lt;a href=&#34;http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections&#34;&gt;high performance language&lt;/a&gt;, but at some point there is always a need to scale out and use more servers than just one. I&amp;rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&amp;rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.&lt;/p&gt;
-
-&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;</description>
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;</description>
     </item>
     
   </channel>

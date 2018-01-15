@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rails3 on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/rails3/index.xml</link>
+    <link>http://blog.kars7e.io/tags/rails3/</link>
     <description>Recent content in Rails3 on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://blog.kars7e.io/tags/rails3/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Jun 2013 13:50:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kars7e.io/tags/rails3/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>I18n::InvalidPluralizationData in rails 3.2 with polish locale</title>
@@ -14,24 +17,7 @@
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description>&lt;p&gt;
-In case u receive this error with such explanation:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;pl&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;  activerecord&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;    models&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;      article&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        one&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuł”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        few&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuły”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        many&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykułów”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        other&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuły”&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</description>
+      <description></description>
     </item>
     
   </channel>

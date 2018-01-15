@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>http://blog.kars7e.io/2017/03/28/Rust-first-impressions/</loc>
@@ -27,7 +28,7 @@
   </url>
   
   <url>
-    <loc>http://blog.kars7e.io/about/</loc>
+    <loc>http://blog.kars7e.io/page/about/</loc>
     <lastmod>2016-02-16T00:00:00+00:00</lastmod>
   </url>
   
@@ -95,6 +96,11 @@
   </url>
   
   <url>
+    <loc>http://blog.kars7e.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.kars7e.io/tags/dajsiepoznac2016/</loc>
     <lastmod>2016-03-04T14:05:45+00:00</lastmod>
     <priority>0</priority>
@@ -151,6 +157,12 @@
   <url>
     <loc>http://blog.kars7e.io/tags/outlook/</loc>
     <lastmod>2013-09-12T12:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.kars7e.io/page/</loc>
+    <lastmod>2016-02-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -215,7 +227,13 @@
   </url>
   
   <url>
+    <loc>http://blog.kars7e.io/series/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.kars7e.io/tags/</loc>
+    <lastmod>2016-02-16T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

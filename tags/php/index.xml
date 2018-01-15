@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Php on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/php/index.xml</link>
+    <link>http://blog.kars7e.io/tags/php/</link>
     <description>Recent content in Php on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://blog.kars7e.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 04 Jul 2012 00:12:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kars7e.io/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Bright sides of PHP - it evolved!</title>
@@ -14,17 +17,7 @@
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
-      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
-
-&lt;p&gt;
-I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
-Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.&lt;/p&gt;
-
-&lt;h2 id=&#34;still-long-way-to-go-but-not-that-long-anymore&#34;&gt;Still long way to go? (but not that long anymore)&lt;/h2&gt;
-
-&lt;p&gt;Well, things went well for PHP recently, but there are still two main problems slowing down PHP progress - which of course would change what developers think of PHP, because the success on a software market is indisputable (look at statistics about PHP-based CMS usage provided by Fabien in his article).
-First is the massive amount of legacy code hanging on servers all around the world. And when i’m talking legacy, i don’t have in mind bad designed code which can’t be developed because some poor coders had no idea about design patterns that time. I&amp;rdquo;n talking about old, pre-5.3 PHP code, without namespaces, sometimes even without classes, You can’t touch it. You can’t do anything. 
-Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/index.xml</link>
+    <link>http://blog.kars7e.io/</link>
     <description>Recent content on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 28 Mar 2017 17:09:31 -0700</lastBuildDate>
-    <atom:link href="http://blog.kars7e.io/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://blog.kars7e.io/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Rust: first impressions</title>
@@ -18,263 +20,7 @@
       <description>&lt;p&gt;It&amp;rsquo;s been a while since my last &lt;a href=&#34;http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/&#34;&gt;DSP post&lt;/a&gt;, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&amp;rsquo;s get back to the business, though. &lt;strong&gt;In this post, I will share my first impressions on Rust, as well as some code in filesyncer project&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s dig in!
-&lt;/p&gt;
-
-&lt;h2 id=&#34;implementing-simple-daemon&#34;&gt;Implementing simple daemon&lt;/h2&gt;
-
-&lt;p&gt;I will reverse the order a bit, and start with the code of filesyncer first. It will give some &amp;ldquo;meat&amp;rdquo; to discuss. Goals for the first iteration of filesyncer code are:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;Application should run continuously, until it&amp;rsquo;s explicitly stopped by the user or an unrecoverable error occurred.&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Application should be able to listen to and handle &lt;code&gt;INT&lt;/code&gt; (Ctrl+c) signal&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These goals seem relatively clear. The first requirement sounds very much like a &lt;a href=&#34;https://en.wikipedia.org/wiki/Daemon_(computing)&#34;&gt;daemon&lt;/a&gt;. In old days, one would add special logic to &amp;ldquo;daemonize&amp;rdquo; his/her application: ensure application is owned by &lt;code&gt;init&lt;/code&gt; process, standard output/input/error is correctly handled, file descriptors are closed, etc. This is not needed anymore, as today&amp;rsquo;s init systems (like systemd or upstart) are able to handle &amp;ldquo;normal&amp;rdquo; applications so that they can run in the background without an issue. We can also follow The &lt;a href=&#34;https://12factor.net/&#34;&gt;Twelve-factor app document&lt;/a&gt;, specifically the &amp;ldquo;&lt;a href=&#34;https://12factor.net/logs&#34;&gt;Treat logs as event streams&lt;/a&gt;&amp;rdquo; recommendation, and just print our messages to standard output, leaving their proper logging/storing to dedicated systems.&lt;/p&gt;
-
-&lt;p&gt;We can then implement our first goal using the following piece of code:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Initialization logic&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Handle file events&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;We can compile and run this code:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
-warning: unreachable statement, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
- --&amp;gt; main.rs:9:5
-  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;9&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;
-  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-  &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
-
-$ ls
-LICENSE   README.md main      main.rs
-$ ./main
-Starting our application...
-Application started
-^C
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;strong&gt;Woah!&lt;/strong&gt; There are several things that happened here. &lt;strong&gt;Let&amp;rsquo;s break it down.&lt;/strong&gt; First of all, this code compiles and produces an executable binary (we can see &amp;ldquo;main&amp;rdquo; file in &lt;strong&gt;ls&lt;/strong&gt; command output). However, it produces a warning: &amp;ldquo;unreachable statement&amp;rdquo;. Also, after running it, we can see it&amp;rsquo;s running continuously, but after sending INT signal (with the ctrl+c combination), we don&amp;rsquo;t see our &amp;ldquo;Shutting down&amp;hellip;&amp;rdquo; message! The compiler already warned us about that - the &lt;code&gt;println!&lt;/code&gt; statement is unreachable because there is no logic to break out of the loop. And since we haven&amp;rsquo;t implemented any &lt;code&gt;INT&lt;/code&gt; signal handler, the default action is taken, which is to immediately terminate program execution. Let&amp;rsquo;s fix that, and handle the &lt;code&gt;INT&lt;/code&gt; signal explicitly.&lt;/p&gt;
-
-&lt;h2 id=&#34;adding-signal-handling&#34;&gt;Adding signal handling&lt;/h2&gt;
-
-&lt;p&gt;Before we dive into signal handling in Rust, I would like to first mention how this is being done in Go - my &amp;ldquo;native&amp;rdquo; language. Go includes signal handling in its standard library. The &lt;a href=&#34;https://golang.org/pkg/os/signal/&#34;&gt;&lt;code&gt;os/signal&lt;/code&gt; package&lt;/a&gt; provides simple and elegant API to deal with signals through &lt;a href=&#34;https://tour.golang.org/concurrency/2&#34;&gt;channels&lt;/a&gt;. Here&amp;rsquo;s a quick example:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;package&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;os&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;os/signal&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syscall&amp;quot;&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;func&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;
-
-    &lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;make&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;make&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;bool&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-
-    &lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Notify&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;SIGINT&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;SIGTERM&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;go&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;func&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;sig&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sigs&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sig&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;true&lt;/span&gt;
-    &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}()&lt;/span&gt;
-
-    &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;awaiting signal&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;-&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;done&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;fmt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Println&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;exiting&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;This sample creates two channels, registering one of them as an endpoint for signal handling. Next, it spins out a &lt;a href=&#34;https://tour.golang.org/concurrency/1&#34;&gt;goroutine&lt;/a&gt; which blocks until a signal is received, and when that happens it prints it to stdout and sends a message to &amp;ldquo;done&amp;rdquo; channel, effectively exiting the application (main function blocks until a message from &amp;ldquo;done&amp;rdquo; is received).&lt;/p&gt;
-
-&lt;p&gt;This example shows how easy it is to handle signals in Go, and I hoped to find something similar in Rust. Turns out Rust does not have anything dedicated to signal handling in the standard library yet - there is an &lt;a href=&#34;https://github.com/rust-lang/rfcs/issues/1368&#34;&gt;RFC&lt;/a&gt;, however with no actual proposal yet. Reading through the discussion I stumbled upon crate called &lt;a href=&#34;https://crates.io/crates/chan-signal&#34;&gt;chan-signal&lt;/a&gt;. The docs say: &lt;em&gt;&amp;ldquo;This crate provides a simplistic interface to subscribe to operating system signals through a channel API.&amp;rdquo;&lt;/em&gt;. Sounds exactly like what I was looking for! &lt;strong&gt;Let&amp;rsquo;s give it a try&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;First, I need to obtain this crate into my project. so far I was using single &lt;code&gt;main.rs&lt;/code&gt; file directly compiled using &lt;code&gt;rustc&lt;/code&gt; compiler. Let&amp;rsquo;s switch to the official way of doing things: &lt;a href=&#34;https://crates.io/&#34;&gt;Cargo&lt;/a&gt;. To &amp;ldquo;add&amp;rdquo; Cargo to our project, we need to create Cargo config file. &lt;code&gt;Cargo&lt;/code&gt; binary gives us an easy way to do that:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ Cargo init --bin
-     Created binary &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;application&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; project
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;code&gt;--bin&lt;/code&gt; switch was needed since our project is a binary (default mode is to create Rust library). We ended up with &lt;code&gt;Cargo.toml&lt;/code&gt; file, which looks more or less like this:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[[bin]]&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;path&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;main.rs&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;we have three sections in this file: package, dependencies and bin. The bin section was created because syncer&amp;rsquo;s source code (&lt;code&gt;main.rs&lt;/code&gt; file) lives directly in project main directory. Rust convention is to store source code in &lt;code&gt;src/&lt;/code&gt; subdirectory. Let&amp;rsquo;s move our code and remove the bin section:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mkdir src
-$ move main.rs src/
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Let&amp;rsquo;s check if it works, by running &lt;code&gt;cargo build&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
-warning: unreachable expression, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
-  --&amp;gt; src/main.rs:10:5
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-   &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
-
-    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;.81 secs
-$ ls
-Cargo.lock Cargo.toml LICENSE    README.md  src        target
-$ ls target/debug/
-build       deps        examples    incremental native      syncer      syncer.d
-$ target/debug/syncer
-Starting our application...
-Application started
-^C
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Looks like it does! Now, let&amp;rsquo;s add the &lt;code&gt;chan-signal&lt;/code&gt; dependency (it also requires &lt;code&gt;chan&lt;/code&gt; crate):&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;1 &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[package]&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;2 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;syncer&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;3 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;version&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.0&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;4 &lt;/span&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;authors&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;[&amp;quot;Karol Stepniewski &amp;lt;kstepniewski@vmware.com&amp;gt;&amp;quot;]&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;5 &lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;6 &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;[dependencies]&lt;/span&gt;
-&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;7 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;chan&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.1.19&amp;quot;&lt;/span&gt;
-&lt;/span&gt;&lt;span style=&#34;background-color: #f0f0f0; padding: 0 5px 0 5px&#34;&gt;8 &lt;/span&gt;&lt;span style=&#34;background-color: #ffffcc&#34;&gt;&lt;span style=&#34;color: #c4a000&#34;&gt;chan-signal&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;0.2.0&amp;quot;&lt;/span&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;now, we build our application again:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-    Updating registry &lt;span style=&#34;color: #4e9a06&#34;&gt;`&lt;/span&gt;https://github.com/rust-lang/crates.io-index&lt;span style=&#34;color: #4e9a06&#34;&gt;`&lt;/span&gt;
- Downloading chan-signal v0.2.0
- Downloading chan v0.1.19
- Downloading lazy_static v0.2.5
- Downloading libc v0.2.21
- Downloading bit-set v0.4.0
- Downloading rand v0.3.15
- Downloading bit-vec v0.4.3
-   Compiling lazy_static v0.2.5
-   Compiling libc v0.2.21
-   Compiling bit-vec v0.4.3
-   Compiling bit-set v0.4.0
-   Compiling rand v0.3.15
-   Compiling chan v0.1.19
-   Compiling chan-signal v0.2.0
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
-warning: unreachable expression, &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[warn(unreachable_code)] on by default&lt;/span&gt;
-  --&amp;gt; src/main.rs:10:5
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;10&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     println!&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;|&lt;/span&gt;
-   &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; note: this error originates in a macro outside of the current crate
-
-    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;5&lt;/span&gt;.30 secs
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;It builds correctly! Time to use it. I&amp;rsquo;ve adapted the sample code from &lt;code&gt;chan-signal&lt;/code&gt; documentation:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#[macro_use]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;extern&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;crate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;use&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Starting our application...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Initialization logic&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;notify&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;INT&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Signal&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;TERM&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;]);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// We create a channel to be used when application wants to stop itself.&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;let&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;rdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;sync&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Run our application logic in a separate thread.&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;	&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;std&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;thread&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;spawn&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;move&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;||&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;run&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;sdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;));&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Wait for a signal or for application to stop itself.&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;chan_select&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;recv&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;-&amp;gt; &lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Shutting down... (received signal: {:?})&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;signal&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;},&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;rdone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;recv&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;            &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application stopped.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;run&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;_sdone&lt;/span&gt;: &lt;span style=&#34;color: #000000&#34;&gt;chan&lt;/span&gt;::&lt;span style=&#34;color: #000000&#34;&gt;Sender&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Application started&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;loop&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    	&lt;/span&gt;&lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;// Application logic&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;strong&gt;Woah (again)!&lt;/strong&gt; There is a lot going on here. First, we&amp;rsquo;ve imported two external crates: &lt;code&gt;chan&lt;/code&gt; and &lt;code&gt;chan_signal&lt;/code&gt;. &lt;code&gt;chan&lt;/code&gt; is a multi-producer/multi-consumer channel library. Standard rust library already contains channels support, however, their implementation follows multi-producer/single-consumer semantics.&lt;/p&gt;
-
-&lt;p&gt;Our main function grew considerably. We define a &lt;code&gt;signal&lt;/code&gt; variable via &lt;code&gt;chan_signal::notify&lt;/code&gt; static method. This method returns a special channel, that we can further read from to obtain our signal (if such is sent). We also declare a synchronous &lt;code&gt;(sdone, rdone)&lt;/code&gt; channel (it&amp;rsquo;s used for the same purpose as its Go version). We spawn new OS thread used to run our application logic through &lt;code&gt;run()&lt;/code&gt; function, passing &lt;code&gt;done&lt;/code&gt; channel as a mean to stop application execution if needed. Finally, we use &lt;a href=&#34;http://burntsushi.net/rustdoc/chan/macro.chan_select.html&#34;&gt;&lt;code&gt;chan_select!&lt;/code&gt;&lt;/a&gt; macro to &amp;ldquo;poll&amp;rdquo; our channels for messages - it will block until either of them returns a message. Let&amp;rsquo;s see how that works:&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cargo build
-   Compiling syncer v0.1.0 &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;file:///Users/kstepniewski/projects/syncer&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    Finished dev &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;unoptimized + debuginfo&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; target&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;)&lt;/span&gt; in &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;.89 secs
-$ target/debug/syncer
-Starting our application...
-Application started
-^CShutting down... &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;received signal: Some&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;(&lt;/span&gt;INT&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Tada! We successfully handled the INT signal!&lt;/p&gt;
-
-&lt;h2 id=&#34;caveats&#34;&gt;Caveats&lt;/h2&gt;
-
-&lt;p&gt;There are always some! You probably spotted differences between Go and Rust version. Firstly, Go version uses only standard library packages, while Rust uses external creates to achieve a similar effect. Secondly, while Rust version uses native OS thread to run application logic, Go version utilizies lightweight goroutines (note: There seems to be &lt;a href=&#34;https://github.com/rustcc/coroutine-rs&#34;&gt;WIP on library&lt;/a&gt; to support coroutines in Rust). Finally, &lt;code&gt;chan-signal&lt;/code&gt; crate has no support for Windows. This is not very surprising, as signals are a POSIX thing, however Go is able to INT signal (as invoked through ctrl+c or ctrl+break) in Windows through &lt;code&gt;os/signal&lt;/code&gt;. I imagine such support could be added to &lt;code&gt;chan-signal&lt;/code&gt; as well if needed.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-about-those-first-impressions&#34;&gt;What about those first impressions?&lt;/h2&gt;
-
-&lt;p&gt;When reading through Rust documentation, I&amp;rsquo;ve had few &amp;ldquo;OMG This is awesome!&amp;rdquo; moments. Pattern matching, variable bindings, &lt;code&gt;Option&amp;lt;T&amp;gt;&lt;/code&gt; type, all these sound familiar from languages like Haskell or Elixir, and seem like a great addition to a system programming language, which is Rust&amp;rsquo;s main priority. As such, however, Rust focused on providing value in different areas, so certain things (like these I described above) are harder to achieve compared to Go. Having written that, I definitely see value in Rust. It&amp;rsquo;s too early for me to give full comparison of these languages (I will write such post once I get more proficient in Rust), but the much broader control over your program that Rust gives by default is already appealing.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What about you? Go or Rust? What do you pick and why?&lt;/strong&gt;&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -284,74 +30,7 @@ Application started
       
       <guid>http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</guid>
       <description>&lt;p&gt;I&amp;rsquo;ve became a huge fan of describing ideas using single sentence. If you can&amp;rsquo;t describe an idea this way, it may be that this idea needs more thought or it&amp;rsquo;s too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year&amp;rsquo;s edition of &lt;a href=&#34;http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/&#34;&gt;DSP contest&lt;/a&gt; using single sentence then:
-&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;An application that continously runs on a computer, &lt;strong&gt;monitors for changes in selected path&lt;/strong&gt; and &lt;strong&gt;communicates these changes to other instances&lt;/strong&gt; of the same application running on different computers connected together in &lt;strong&gt;single L2 network&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;There, I did it. I hope it conveys something meaningful to you. Of course, this is still very vague and, depending on the person who reads it, could be visualised as simple rsync running in daemon mode as well as very sophisticated distributed file system. Let me further clarify by providing some simple use cases.&lt;/p&gt;
-
-&lt;h2 id=&#34;feature-requirements&#34;&gt;Feature requirements&lt;/h2&gt;
-
-&lt;p&gt;A short list of features I would like to have, ordered by increasing complexity:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Once executed, application runs continously, until user stops it using ctrl-C combination (or it receives TERM signal some other way).&lt;/li&gt;
-&lt;li&gt;Application should take an argument which is a path to a directory on local filesystem.&lt;/li&gt;
-&lt;li&gt;Application should monitor the specified directory by registering any changes to any files/subdirectories in that directory. Specifically, it should register new file or directory being created, existing file/directory being deleted, existing file or directory being renamed (why rename is a separate requirement I will write on a different occasion), and existing file&amp;rsquo;s content being modified.&lt;/li&gt;
-&lt;li&gt;Application should be able to detect other instances of itself running in the same network by using network broadcasting&lt;/li&gt;
-&lt;li&gt;Application should share the changes it detects with other instances of itself running in the same network.&lt;/li&gt;
-&lt;li&gt;Application should listen for changes coming from other instances of itself&lt;/li&gt;
-&lt;li&gt;Application should apply changes coming from other instances of itself to it&amp;rsquo;s local state.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I will stop here. It doesn&amp;rsquo;t seem like a lot of requirements, especially given that I won&amp;rsquo;t spend too much time veryfing if these features have been implemented correctly. &lt;strong&gt;The main goal here is to deliver MVP&lt;/strong&gt;, and the challenge is using language knew to me to achieve that MVP.&lt;/p&gt;
-
-&lt;h2 id=&#34;one-more-thing-rust-installation&#34;&gt;One more thing - rust installation&lt;/h2&gt;
-
-&lt;p&gt;I don&amp;rsquo;t want to produce another introductory post again, so let&amp;rsquo;s document some work. This will be trivial, but&amp;hellip; you have to start somewhere. I&amp;rsquo;m using &lt;a href=&#34;https://www.rust-lang.org&#34;&gt;Rust programming language&lt;/a&gt;, which means I should have installed on my system. Let&amp;rsquo;s do it then. I&amp;rsquo;m using MacOS, and de facto a standard &lt;a href=&#34;https://brew.sh/&#34;&gt;package manager&lt;/a&gt; for MacOS. Rust installation couldn&amp;rsquo;t be simpler:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install rust
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Which after a minute or so gives us &lt;code&gt;rustc&lt;/code&gt; command:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc --help
-Usage: rustc &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;OPTIONS&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt; INPUT
-
-Options:
-    -h --help           Display this message
-    --cfg SPEC          Configure the compilation environment
-    .
-    .
-    .
-    &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;# Omitted&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;Let&amp;rsquo;s finish this post with simple, classic and mandatory &amp;ldquo;Hello world&amp;rdquo;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;println&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #f8f8f8; text-decoration: underline&#34;&gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;that we compile with &lt;code&gt;rustc&lt;/code&gt;:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ rustc main.rs
-$ ./main
-Hello, world!
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;That&amp;rsquo;s it! Environment ready. I will follow up in the next post, where I will attempt to write a daemon that handles signals gracefully.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: I&amp;rsquo;m learning Rust as I write these posts. Hence, there will be a lot of modifications and sudden changes of course in my code.&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -360,42 +39,7 @@ Hello, world!
       <pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</guid>
-      <description>&lt;p&gt;Some time ago (or one year ago to be more accurate) I &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take up a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;
-
-&lt;h2 id=&#34;dsp-in-short&#34;&gt;DSP in short&lt;/h2&gt;
-
-&lt;p&gt;DSP, or Daj Się poznać, is a coding competition, but very different from what one may expect from something called a &amp;ldquo;coding competition.&amp;rdquo; There is no solving of algorithmic challenges, or doing that in most optimal an elegant way (but it may be part of your work!). Instead, the goal is to actually &lt;strong&gt;deliver&lt;/strong&gt;. Write two posts/week, push code to your repo. The quality of the code doesn&amp;rsquo;t matter (for real!). DSP promotes two things:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;participants. yes, competition title says &amp;ldquo;Get noticed!&amp;rdquo;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;GET THINGS DONE&lt;/strong&gt; - stop producing flashes in the pan, but actually deliver!&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;things-haven-t-been-done&#34;&gt;Things haven&amp;rsquo;t been done&lt;/h2&gt;
-
-&lt;p&gt;Again, to put it mildly. If you look at my blog history and check the &lt;a href=&#34;http://blog.kars7e.io/tags/dajsiepoznac2016/&#34;&gt;dajsiepoznac2016&lt;/a&gt; tag, you will immediately spot the problem. Three posts out of required 20. Don&amp;rsquo;t even try looking at the GitHub repo - you won&amp;rsquo;t find anything useful there. Why?&lt;/p&gt;
-
-&lt;p&gt;Good question. I did a quick retrospection, and came up with following conclusions:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;I&amp;rsquo;m a busy man&lt;/strong&gt;. My family, my beautiful wife and daughter, take a lot of my time. My work projects naturally take up most of my weekdays. I also play basketball as many times as I can. All of this leaves me barely any time to work on my side projects. I was not able to dedicate enough time I planned, and the moment I realized I&amp;rsquo;m not able to keep up with my planned DSP work, my motivation went out the window.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;I tried to do too much&lt;/strong&gt;. My project ( an online game) was way too big for this type of competition. DSP is about delivering, and the smaller project, the greater chance is that you will deliver. Some people submitted already undergoing projects to the contest, and they often barely made it (or didn&amp;rsquo;t) to the end.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;I cared too much&lt;/strong&gt;. It sounds completely counterintuitive, so let me explain. When planning my work and visualizing it in my head, I&amp;rsquo;ve included all the items a production-ready project must include, like tests, scalability, clean code, proper design, etc., etc. It sounds ridiculous,  doesn&amp;rsquo;t it? It does to me know, but back then I &lt;strong&gt;cared too much&lt;/strong&gt;. I wanted to create a perfect project, and again, DSP is NOT about that.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;So what can I do about it to improve the situation in my second attempt?&lt;/p&gt;
-
-&lt;h2 id=&#34;deliver-deliver-deliver&#34;&gt;Deliver, deliver, deliver!&lt;/h2&gt;
-
-&lt;p&gt;I&amp;rsquo;m pretty sure this mantra was a part of many talks/presentations/coaching books. But this is also my plan. With following details:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Reduced scope&lt;/strong&gt; - I decided to learn myself some rust, which I wanted to do for very long time. My project will be a simple file sync tool, think poor man&amp;rsquo;s dropbox. But very poor man, penniless I daresay. With no clothes. And he owes $2M for God knows what. No UI, no graphics, no advanced features.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Minimize the burden&lt;/strong&gt; - No tests, clean code as much as I do by default. Design? It will come up naturally or will be a result of refactoring (the project is small!). One of the things that I will have to decide on is how to resolve conflicts when syncing files. Or will I? I can just ignore it and, for example, take the latest file version, which is the simplest (and probably incorrect) way to solve it. Whatever it takes to &lt;strong&gt;deliver&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Don&amp;rsquo;t try to predict everything upfront&lt;/strong&gt; - yes, my biggest problem. Works perfectly well in my daily job (I can save us months of work by spending a week on analyzing stuff). But this is not the place, and I need to give up this attitude.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ok, I feel motivated. Let&amp;rsquo;s do it!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Some time ago (or one year ago to be more accurate) I &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take up a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -404,135 +48,7 @@ Hello, world!
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;
-
-&lt;p&gt;
-If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;A getting started guide&lt;/a&gt; - Official guide on Elixir website, one of the best I&amp;rsquo;ve seen.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;Programming Elixir 1.2&lt;/a&gt; - A book by the one and only &lt;a href=&#34;https://twitter.com/pragdave&#34;&gt;Dave Thomas&lt;/a&gt;. I&amp;rsquo;ve read it and I wholeheartedly recommend it.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://howistart.org/posts/elixir/1&#34;&gt;Portal Game in Elixir&lt;/a&gt; - by &lt;a href=&#34;https://twitter.com/josevalim&#34;&gt;Jose Valim&lt;/a&gt;, the author of Elixir. I remember reading this article was the first thing that got me into the language.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;erlang-the-battle-tested-foundation-of-elixir&#34;&gt;Erlang - the battle-tested foundation of Elixir&lt;/h2&gt;
-
-&lt;p&gt;I will start my introduction by talking about a different language, called &lt;a href=&#34;https://en.wikipedia.org/wiki/Erlang_(programming_language)&#34;&gt;Erlang&lt;/a&gt;. Erlang is a 30 years old language built specifically to be used in distributed and highly available applications. It has proved its value over the years in telecommunications industry where it had been employed to deal with telephone connections at massive scale, but it also has been used by companies like &lt;a href=&#34;https://vimeo.com/44312354&#34;&gt;Whatsapp&lt;/a&gt; or &lt;a href=&#34;https://www.quora.com/Why-was-Erlang-chosen-for-use-in-Facebook-chat&#34;&gt;Facebook&lt;/a&gt; for their most connections-heavy applications. Such strong foundations are very important for me - as a pragmatic programmer, I&amp;rsquo;m looking for solutions that will last, and Erlang ecosystem is definitely a good ingredient to build one.&lt;/p&gt;
-
-&lt;p&gt;So how does Elixir utilize Erlang? First of all, it&amp;rsquo;s written in it. You can look at the &lt;a href=&#34;https://github.com/elixir-lang/elixir&#34;&gt;Elixir&amp;rsquo;s Github repository&lt;/a&gt;, You will obviously notice that Elixir is a huge Erlang&amp;rsquo;s code base. But there&amp;rsquo;s more than that. When you write code in Elixir, you can utilize &lt;a href=&#34;http://erlang.org/doc/apps/stdlib/&#34;&gt;standard Erlang library&lt;/a&gt;. You will find a lot of useful 3rd party libraries written for &lt;a href=&#34;https://hex.pm/&#34;&gt;Elixir or Erlang&lt;/a&gt; itself. In my opinion this helps a lot in Elixir&amp;rsquo;s adoption, because lack of decent library ecosystem is often a main problem of young programming languages. And last but not least, Elixir utilizes the power of BEAM, an Erlang&amp;rsquo;s virtual machine. It&amp;rsquo;s very interesting concept itself, and I won&amp;rsquo;t go much into detail of it here, let me just mention that Erlang VM in some way behaves very similarly to the Operating System - in fact, there is a special version of it running &lt;a href=&#34;http://erlangonxen.org/&#34;&gt;directly on Xen&lt;/a&gt; - without any additional operating system in between.&lt;/p&gt;
-
-&lt;h2 id=&#34;elixir-let-s-go-meta&#34;&gt;Elixir - let&amp;rsquo;s go meta&lt;/h2&gt;
-
-&lt;p&gt;Enough about Erlang, let&amp;rsquo;s talk about our actor in a leading role, Elixir, and what have made me fall in love with that language. There are many reasons to that, but I will start with a small piece of code that comes from the book &lt;a href=&#34;https://pragprog.com/book/elixir12/programming-elixir-1-2&#34;&gt;&amp;ldquo;Programming Elixir&amp;rdquo;&lt;/a&gt; by Dave Thomas:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:ok&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;body&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;body&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-    &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #3465a4&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;keyfind&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;puts&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Error fetching from Github: #{&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;}&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;halt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;process&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;count&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;fetch&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;convert_to_list_of_maps&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;sort_into_ascending_order&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;take&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;count&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;print_table_for_columns&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;([&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;])&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;printable&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;when&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;is_binary&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;printable&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;to_string&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;This excerpt is not complete (there are few functions missing, as well as module definition, which means the example will not compile), but it perfectly depicts 2 out of my 3 favorite features of Elixir: pattern matching and pipe operator. let&amp;rsquo;s talk about them in detail.&lt;/p&gt;
-
-&lt;h3 id=&#34;pattern-matching-the-beautiful-if&#34;&gt;Pattern matching - the beautiful &amp;ldquo;if&amp;rdquo;&lt;/h3&gt;
-
-&lt;p&gt;I will start with the fact that Elixir is a &lt;a href=&#34;https://en.wikipedia.org/wiki/Functional_programming&#34;&gt;functional&lt;/a&gt; programming language - the central concepts of it are functions and data immutability. This is important especially if you come from the object-oriented background like Java or C++. In Java your main friends are a class and an object instance of that class, and you have a lot of these. In Elixir, you have a lot of functions, and you want them to be clean and easily understandable. Your main enemy in such situations is a conditional statement, whether it is &amp;ldquo;if&amp;rdquo; or &amp;ldquo;switch&amp;rdquo;, it makes code harder to reason about - especially if you have nested several conditionals together (that&amp;rsquo;s something you always try to avoid).&lt;/p&gt;
-
-&lt;p&gt;In Elixir, you have a great help in form of pattern matching:
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:ok&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;body&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;body&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-    &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #3465a4&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;List&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;keyfind&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;error&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;message&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;IO&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;puts&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Error fetching from Github: #{&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;}&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;System&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;halt&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-As you can see in the example above, function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt; is defined twice, with different function bodies.
-They both accept single parameter, which is a &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#tuples&#34;&gt;tuple&lt;/a&gt;, however it goes even further - they accept only two-element tuple, and specify that first element must be either an &lt;strong&gt;&lt;em&gt;:ok&lt;/em&gt;&lt;/strong&gt; or &lt;strong&gt;&lt;em&gt;:error&lt;/em&gt;&lt;/strong&gt; &lt;a href=&#34;http://elixir-lang.org/getting-started/basic-types.html#atoms&#34;&gt;atom&lt;/a&gt;. If we try to break any of those constraints and for example execute that function with first element set to &lt;strong&gt;&lt;em&gt;:warning&lt;/em&gt;&lt;/strong&gt;, we will get:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;iex&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:warning&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt;
-&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;FunctionClauseError&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;no&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;clause&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;matching&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;iex&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #0000cf; font-weight: bold&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;ExampleModule&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:warning&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;body&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;This gives a tremendous value to limit the &amp;ldquo;ifs&amp;rdquo; in our code, but also makes code much easier to reason about - the error handling case like the code above is a great example where we see exactly which part is responsible for dealing with errors, and which processes the happy code path.&lt;/p&gt;
-
-&lt;p&gt;There is also a mechanism called &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/case-cond-and-if.html#expressions-in-guard-clauses&#34;&gt;guard clauses&lt;/a&gt;&lt;/strong&gt; which I consider to be a logical part of pattern matching (although technically it might not be). In the code example I already used before we can observe:
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;printable&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;when&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;is_binary&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;printable&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;to_string&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-Which boils down to a check if an argument is a binary (which indicates &lt;a href=&#34;http://elixir-lang.org/getting-started/binaries-strings-and-char-lists.html&#34;&gt;it&amp;rsquo;s a string&lt;/a&gt;) and should just be returned, or is it something else and should be first converted to string. The way it&amp;rsquo;s done though is by using &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword, which gives more visibility into what&amp;rsquo;s the actual purpose of this code. &lt;strong&gt;&lt;em&gt;when&lt;/em&gt;&lt;/strong&gt; keyword causes function to match only if the expression after it is true. For example if we had a function that takes 2 arguments, and multiplies them if the first argument is larger than the second one, and sums them otherwise, we could write:
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;combine&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;when&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;b&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;combine&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;do&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;b&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-It&amp;rsquo;s very important to remember that functions are matched in the same order they are defined, so match-all functions should be defined last.&lt;/p&gt;
-
-&lt;h3 id=&#34;pipe-operator-from-unix-with-love&#34;&gt;Pipe operator - from unix with |love&amp;gt;&lt;/h3&gt;
-
-&lt;p&gt;The second feature that attracted me to Elixir is &lt;strong&gt;&lt;a href=&#34;http://elixir-lang.org/getting-started/enumerables-and-streams.html#the-pipe-operator&#34;&gt;pipe operator&lt;/a&gt;&lt;/strong&gt;. Pipe operator is not something unique to Elixir - in one of &lt;a href=&#34;https://changelog.com/194/&#34;&gt;The Changelog&amp;rsquo;s episodes&lt;/a&gt;, Jose Valim (author of Elixir) mentions that he borrowed that idea from F#, functional programming language that belongs to .NET family. Before we talk more about this operator though, let&amp;rsquo;s first talk about another Elixir&amp;rsquo;s property, which is data immutability. Its basic principle is that data, once created, cannot be modified in place, which in turn means that if we want store that modified data, we will create a new data entry for it. It&amp;rsquo;s very similar to Unix &lt;em&gt;pipe&lt;/em&gt; (&amp;ldquo;|&amp;rdquo;) use case - when we use &lt;strong&gt;&lt;em&gt;cat &amp;ldquo;file.txt&amp;rdquo; | grep &amp;ldquo;some text&amp;rdquo;&lt;/em&gt;&lt;/strong&gt;  in linux, we almost never want to save it back to &lt;em&gt;file.txt&lt;/em&gt; - instead we&amp;rsquo;ll save it to a new file, or use it instantly. In that case we can talk about &lt;strong&gt;data transformation&lt;/strong&gt; - and Elixir is all about transforming the data. So similarly to Unix, Elixir has its pipe operator, which differs from the standard &amp;ldquo;|&amp;rdquo; character by having an additional &amp;ldquo;greater than&amp;rdquo; sign after it.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;rsquo;s see the example again:
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;process&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;count&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;Issues.GithubIssues&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;fetch&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;project&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;decode_response&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;convert_to_list_of_maps&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;sort_into_ascending_order&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Enum&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;take&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;count&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;print_table_for_columns&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;([&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;number&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;created_at&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;])&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-So how does this work?&lt;br&gt;
-&lt;strong&gt;&lt;em&gt;&amp;#124;&amp;gt;&lt;/em&gt;&lt;/strong&gt; operator causes the output of &lt;strong&gt;&lt;em&gt;Issues.GithubIssues.fetch(user,project)&lt;/em&gt;&lt;/strong&gt; function call to be bound with the first argument of function &lt;strong&gt;_decode&lt;em&gt;response&lt;/em&gt;&lt;/strong&gt;, which output of is in turn bound to the first argument of function &lt;strong&gt;_convert_to_list_of&lt;em&gt;maps&lt;/em&gt;&lt;/strong&gt;, and so on. Notice that some of the functions in that chain still take arguments - those arguments will be passed to the function starting from the second argument, as first is reserved for pipe operator.&lt;/p&gt;
-
-&lt;p&gt;Such code composition gives a great insight into what data transformation is happening here, and in what order. Also, if we need to modify/remove/add one of the transformation&amp;rsquo;s steps, it&amp;rsquo;s very clear how it should be done.&lt;/p&gt;
-
-&lt;h3 id=&#34;meta-programming-in-elixir-the-scary-powerful-wizard-in-a-high-tower&#34;&gt;Meta programming in Elixir - the scary powerful wizard in a high tower&lt;/h3&gt;
-
-&lt;p&gt;I mentioned that pattern matching and pipe operator are my 2 of 3 favorite Elixir features, and the third one couldn&amp;rsquo;t be anything else then macros and meta programming. It&amp;rsquo;s a big addition compared to the Erlang, and I remember reading an article where Jose mentions Meta programming and &lt;a href=&#34;http://elixir-lang.org/getting-started/protocols.html&#34;&gt;Protocols&lt;/a&gt; as the most important language features. I used the word &amp;ldquo;scary&amp;rdquo; because meta programming is indeed super powerful, but at the same time it might be dangerous - once you learn how many things can be done with help of macros, you might be tempted to use them even where it doesn&amp;rsquo;t really make much sense. Macros are expressions in code that are executed at compile time, and replaced with computed code. I won&amp;rsquo;t go into detail about macros and meta programming, because this topic requires really good explanation, so I will recommend two sources to learn more about it:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://vimeo.com/131643017&#34;&gt;Great presentation&lt;/a&gt; by Chris Mccord, where he talks about meta programming in Elixir at NDC conference in Norway,&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://pragprog.com/book/cmelixir/metaprogramming-elixir&#34;&gt;Metaprogramming Elixir&lt;/a&gt; - an awesome book, also by Chris Mccord, which goes into detail of macros wizardry.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But to give some perspective into how powerful macros in Elixir are, consider following piece of code (shamelessly taken from Chris&amp;rsquo; presentation):
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;defmodule&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Notifier&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;ping&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;pid&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Process&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;alive?&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;pid&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;Logger&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;debug&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;quot;Sending ping!&amp;quot;&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;send&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;pid&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;:ping&lt;/span&gt;
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&gt;send&lt;/em&gt; function is a &lt;strong&gt;macro&lt;/strong&gt; - including &lt;strong&gt;&lt;em&gt;defmodule&lt;/em&gt;&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;def&lt;/em&gt;&lt;/strong&gt; keywords! Even &lt;strong&gt;&lt;em&gt;Logger.debug&lt;/em&gt;&lt;/strong&gt; is a macro, and there is a good reason to that. Because macros are evaluated at compile time, debug messages can be completely removed from the actual compiled code if logging level has been set to omit them, which results in saving CPU cycles required to handle them. Isn&amp;rsquo;t that just awesome?&lt;/p&gt;
-
-&lt;h2 id=&#34;summary-just-the-tip-of-the-iceberg&#34;&gt;Summary - just the tip of the iceberg&lt;/h2&gt;
-
-&lt;p&gt;This introduction was only a brief summary of features that attracted me to the language. There are so, so many of them they may attract you to Elixir, and I encourage you to &lt;a href=&#34;http://elixir-lang.org/getting-started/introduction.html&#34;&gt;read about it&lt;/a&gt; and try it yourself! As of me, you can expect more posts about Elixir and its ecosystem, including Protocols, Streams, Processes, OTP, and others, as my work on the project progresses.&lt;/p&gt;
-
-&lt;p&gt;In next post, I will talk more about my project (game), and how can we model it Elixir language. Stay tuned!&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -542,41 +58,16 @@ So what&amp;rsquo;s so special about it? Every line in this code except &lt;em&g
       
       <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
       <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
-So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;
-
-&lt;p&gt;
-I want to talk a bit about how I&amp;rsquo;m gonna tackle this problem from the time management perspective. After all, this competition has a certain set of rules which all of the participants must adhere to in order to remain in the competition. We have 10 weeks of work, 2 posts per week, which makes it 20 posts total (including this one). To make sure I&amp;rsquo;m on track, let&amp;rsquo;s define some progress marks that I expect to have after every week. So the plan for the next 10 weeks is as follows:&lt;/p&gt;
-
-&lt;h3 id=&#34;week-1-the-game&#34;&gt;Week 1 - The Game&lt;/h3&gt;
-
-&lt;p&gt;I will introduce basic game concepts and rules, and how I envision the game will look like at the end of this challenge.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-2-hello-elixir&#34;&gt;Week 2 - Hello Elixir&lt;/h3&gt;
-
-&lt;p&gt;Week 2 will be about elixir - what is this language, what interesting features does it have, and how can we model the game in it.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-3-mvp&#34;&gt;Week 3 - MVP&lt;/h3&gt;
-
-&lt;p&gt;By the end of week 3 I&amp;rsquo;d like to have a running version of the game in pure Elixir, available to play through iex (Elixir REPL).&lt;/p&gt;
-
-&lt;h3 id=&#34;week-4-we-re-going-web-wide&#34;&gt;Week 4 - We&amp;rsquo;re going web-wide&lt;/h3&gt;
-
-&lt;p&gt;I&amp;rsquo;ll do an introduction to Phoenix, Elixir based high performance web framework.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-5-work-work-work&#34;&gt;Week 5 - Work, work, work&lt;/h3&gt;
-
-&lt;p&gt;I will spend this week on implementing the game in phoenix, and I will slowly transition to frontend.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-6-7-8-show-me-your-pretty-face&#34;&gt;Week 6, 7 &amp;amp; 8 - Show me your pretty face&lt;/h3&gt;
-
-&lt;p&gt;Well, we&amp;rsquo;re talking games here, and it ain&amp;rsquo;t &lt;a href=&#34;https://en.wikipedia.org/wiki/MUD&#34;&gt;mud&lt;/a&gt;-type, so we need to create some UI.
-I honestly have no idea how it will work, what technologies will I use, or where will I take some decent graphics from. Fun ride, as usual.&lt;/p&gt;
-
-&lt;h3 id=&#34;week-9-10-let-s-scale-it-baby&#34;&gt;Week 9 &amp;amp; 10 - Let&amp;rsquo;s scale it baby!&lt;/h3&gt;
-
-&lt;p&gt;Elixir is really a &lt;a href=&#34;http://www.phoenixframework.org/blog/the-road-to-2-million-websocket-connections&#34;&gt;high performance language&lt;/a&gt;, but at some point there is always a need to scale out and use more servers than just one. I&amp;rsquo;d like to spend last two weeks on adding a feature to the game server which will allow new servers to join existing ones and form a cluster where each node can communicate with each other. Although players of the same game will always talk to the same server (although I&amp;rsquo;m curious if this assumption can be changed), cluster will allow to display some global stats regardless of the server player is connected to (number of total games currently being played across all cluster nodes, etc.), and possibly some other interesting use cases.&lt;/p&gt;
-
-&lt;p&gt;As we&amp;rsquo;re in week 1, it means that in the next post I will go into details of the game mechanics. Stay tuned!&lt;/p&gt;</description>
+So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>http://blog.kars7e.io/page/about/</link>
+      <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.kars7e.io/page/about/</guid>
+      <description>Short version 30, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Go, Elixir &amp;amp; Rust. Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for VMware, industry leader in virtualization and private cloud solutions. Currently living in Santa Clara, CA, with my lovely wife and 5 months 1 year 2 years old daughter.</description>
     </item>
     
     <item>
@@ -585,27 +76,7 @@ I honestly have no idea how it will work, what technologies will I use, or where
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
-      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;
-
-&lt;p&gt;
-I’ve recently started learning &lt;a href=&#34;elixir-lang.org&#34;&gt;Elixir language&lt;/a&gt;, as well as &lt;a href=&#34;http://phoenixframework.org/&#34;&gt;Phoenix framework&lt;/a&gt;, pretty new technologies based on the not so new Erlang VM. Elixir is a functional language created by Jose Valim, and Phoenix is a web framework created on top of it. Both of them have really neat features, and I encourage everyone to read more about them. The most compelling feature for me personally was the fact Elixir is based on erlang VM - a battle tested technology, used for distributed systems for &amp;gt;20 years. Many concepts, like actor model, which have been “discovered” in other languages recently, had been part of Erlang for many years. (It’s interesting how certain trends come and go, even in the area of technology, which you’d think should be driven by scientific method and well established best practices - that’s a topic for different post though).&lt;/p&gt;
-
-&lt;p&gt;I decided to write a game inspired by a card game called Exploding Kittens. It’s a game I’ve recently fallen in love with, so it’s kind of natural choice. However to achieve my goal I could probably choose any other multiplayer game (which does not require fancy 3D graphics, obviously). That’s because my goal is to write a distributed system that will:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;allow anonymous players to join the game easily, just by opening game’s website.&lt;/li&gt;
-&lt;li&gt;handle many (and i really mean MANY, like ~1MLN) connections at the same time.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To achieve above, I want to:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;design this system in maximally stateless mode - game state will be held in memory, and each game instance will be handled by a separate ‘actor’ in the system&lt;/li&gt;
-&lt;li&gt;System will be able to connect new nodes (physical/virtual servers) dynamically. This means that server can be scaled horizontally, based on the current load (number of players).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I’m aware those goals are quite ambitious given the time frame (10 weeks), however the beauty of this contest is that I don’t really have to finish the full project in time - most important is systematic work on the project, and that’s something I always had trouble with.
-Wish me good luck! :-)&lt;/p&gt;</description>
+      <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -614,87 +85,7 @@ Wish me good luck! :-)&lt;/p&gt;</description>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
-      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.&lt;/p&gt;
-
-&lt;p&gt;
-I’m using awsome vpim gem.
-In controller, where you will generate vcard, add this require:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87&#34;&gt;require&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;vpim&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;vcard&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;The best working solution is to encode your vcard in utf-8, which is not currently available in vpim, so lets add following piece of code (after the require):&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;module&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Vpim&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;DirectoryInfo&lt;/span&gt;
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Field&lt;/span&gt;
-      &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;self&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;alias_method&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;:orig_create&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;:create&lt;/span&gt;
-
-        &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;# we overwrite Field.create for setting the CHARSET&lt;/span&gt;
-        &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{})&lt;/span&gt;
-          &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;# specify the lines you don&amp;#39;t want to add a charset to&lt;/span&gt;
-          &lt;span style=&#34;color: #000000&#34;&gt;lines_to_ignore&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;%w(BEGIN END VERSION)&lt;/span&gt;
-          &lt;span style=&#34;color: #000000&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;merge!&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;({&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;CHARSET&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;})&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;unless&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;lines_to_ignore&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;include?&lt;/span&gt; &lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;
-          &lt;span style=&#34;color: #000000&#34;&gt;orig_create&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-        &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-      &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;It&amp;rdquo;s important to set charset to utf-8, not UTF-8 - Outlook won’t handle it!
-Now you have to generate vcard itself - i’m doing it with following piece of code:&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;  &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#controller method&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;vcard&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;visible&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;find&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;params&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;:id&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt;
-    &lt;span style=&#34;color: #000000&#34;&gt;card&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;Vpim&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Vcard&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;make2&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;
-
-      &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;#setting up name&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_name&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;
-        &lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;prefix&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-        &lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;given&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;first_name&lt;/span&gt;
-        &lt;span style=&#34;color: #204a87&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;family&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;last_name&lt;/span&gt;
-      &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-      &lt;span style=&#34;color: #8f5902; font-style: italic&#34;&gt;# setting up address.&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_addr&lt;/span&gt; &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;street&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;street&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;postalcode&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;zip_code&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;region&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;city&lt;/span&gt;
-        &lt;span style=&#34;color: #000000&#34;&gt;addr&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;country&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;Poland&amp;#39;&lt;/span&gt;
-      &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;title&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;law_level&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;org&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;your company&amp;#39;&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_field&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Vpim&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;DirectoryInfo&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;Field&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;create&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;office&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;))&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_tel&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;phone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;cell&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_tel&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;phone&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;
-
-
-      &lt;span style=&#34;color: #000000&#34;&gt;maker&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;add_email&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;email&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;{&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;e&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;location&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;work&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;}&lt;/span&gt;
-
-    &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;At the end, we have to send the file (still vcard method) :&lt;/p&gt;
-
-&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;send_data&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;card&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;to_s&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;:type&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;vcard&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;:filename&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;URI&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;encode&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;person&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;name&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #ce5c00; font-weight: bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;vcf&lt;/span&gt;&lt;span style=&#34;color: #4e9a06&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-  &lt;span style=&#34;color: #204a87; font-weight: bold&#34;&gt;end&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Things to remember:
-* Make correct charset
-* set content-type (:type option) - you can sent charset also in content-type.
-* URI:encode helps when filename includes non-ASCII characters&lt;/p&gt;</description>
+      <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -703,24 +94,7 @@ Now you have to generate vcard itself - i’m doing it with following piece of c
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description>&lt;p&gt;
-In case u receive this error with such explanation:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;translation data can not be used with :count =&amp;gt; 2&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:&lt;/p&gt;
-
-&lt;div class=&#34;highlight&#34; style=&#34;background: #f8f8f8&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #000000&#34;&gt;pl&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;  activerecord&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;    models&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;      article&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        one&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuł”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        few&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuły”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        many&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykułów”&lt;/span&gt;
-&lt;span style=&#34;color: #000000&#34;&gt;        other&lt;/span&gt;&lt;span style=&#34;color: #000000; font-weight: bold&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #000000&#34;&gt;“Artykuły”&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</description>
+      <description></description>
     </item>
     
     <item>
@@ -729,17 +103,7 @@ In case u receive this error with such explanation:&lt;/p&gt;
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
-      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;
-
-&lt;p&gt;
-I have to admit that I also made plenty of unkind comments about PHP itself and its ecosystem. However that was far before PHP 5.4 arrived. Its new functions like traits, short array syntax, and - what’s bothered me the most before - now you can dereference array index directly from the function that returns array (e.g. fun()[0] ). You can also access class members directly after instantiation (e.g. (new Foo())-&amp;gt;bar() ). What’s more, in PHP5.4 you get built-in server, which is a killer feature for developers - seriously, installing big apache bundle for development… come on. And no, the fact that you develop plenty of sites is not an excuse for forcing standalone web server in development environments.
-Changes in the language itself are not all good things - another big change, important as well, is how the PHP ecosystem works. Based on the power of git and Github, it embraces all the ease of development using these tools - Composer is great example.&lt;/p&gt;
-
-&lt;h2 id=&#34;still-long-way-to-go-but-not-that-long-anymore&#34;&gt;Still long way to go? (but not that long anymore)&lt;/h2&gt;
-
-&lt;p&gt;Well, things went well for PHP recently, but there are still two main problems slowing down PHP progress - which of course would change what developers think of PHP, because the success on a software market is indisputable (look at statistics about PHP-based CMS usage provided by Fabien in his article).
-First is the massive amount of legacy code hanging on servers all around the world. And when i’m talking legacy, i don’t have in mind bad designed code which can’t be developed because some poor coders had no idea about design patterns that time. I&amp;rdquo;n talking about old, pre-5.3 PHP code, without namespaces, sometimes even without classes, You can’t touch it. You can’t do anything. 
-Second obstacle is hosting companies and their support for PHP. The main reason for PHP-based sites burst is the number of hostings where you can deploy your site (written in 2 days in PHP) in matter of minutes/hours. But these companies often still support PHP &amp;lt;= 5.3, mostly without SSH access (FTP only), with ridiculous strange pain-in-the-ass configuration which forces developer to be a magician. And you just can&amp;rdquo;t use all the great features which comes with new PHP and its environment.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -749,19 +113,7 @@ Second obstacle is hosting companies and their support for PHP. The main reason 
       
       <guid>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</guid>
       <description>&lt;p&gt;Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:
-&lt;/p&gt;
-
-&lt;p&gt;select department_name from departments where departments.department_id not in (employees.department_id from employees group by department_id );&lt;/p&gt;
-
-&lt;p&gt;And made so many problems….
-This statement was supposed to return all departments which do not have any employees. Sounds easy, hmm? So it was for me, but… it returned nothing, and i knew there are at least 8 such departments.&lt;/p&gt;
-
-&lt;p&gt;After throwing away theory about data errors, i started googling. I found some info about NOT IN operator. Shortly, if it gets set of values which NULL inside, it will fail to return anything. i checked this and… yep, there was 1 (literally: ONE) employee that had no department (department_id was NULL). Argh.
-Anyway, the fixed version of query:&lt;/p&gt;
-
-&lt;p&gt;select department_name from departments where departments.department_id not in (select NVL(employees.department_id,0) from employees group by department_id );&lt;/p&gt;
-
-&lt;p&gt;Remember: always ensure that you are not getting NULL values in NOT IN subqueries!&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -770,17 +122,7 @@ Anyway, the fixed version of query:&lt;/p&gt;
       <pubDate>Thu, 13 May 2010 20:49:54 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</guid>
-      <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment.&lt;/p&gt;
-
-&lt;p&gt;
-My first idea was that i had enough of KDE4, so i installed Gnome on OpenSUSE. However, Gnome on OpenSUSE… no, thats wrong.
-After really short time i burned Ubuntu 10.04 CD and put it on install. It wasn’t too hard to do it - all important data was on different partition, i just had to rememeber to remove all gnome config files, because i didn’t want to format my home partition (i left all my stuff as it was). Without removing these files Ubuntu after installation looks awful (it detects gnome files and does not override them).
-Summary:
-pros:
- * my laptop’s VGA output works! (now i can connect my monitor… yeah)
- * it’s really fast
-cons:
-- a lot of stuff to setup again….&lt;/p&gt;</description>
+      <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -789,12 +131,7 @@ cons:
       <pubDate>Mon, 10 May 2010 13:49:00 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</guid>
-      <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).&lt;/p&gt;
-
-&lt;p&gt;
-Fortunately, there is great software called dd-wrt.com, which makes your $60 worth router to a $600 worth one. It adds a lot of great features, also the one i needed most - port redirection. Simply download the package (version for WEB interface was good for me) and update the router firmware - it goes through easy web interface, few clicks - and it’s done! Just remember to stay away from power connector during the proccess.
-After that, i got new handy web interface. Then i could simply redirect from different WAN ports to the same 80 port but on different hosts.
-There are more supported routers, full list is available here.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -803,22 +140,7 @@ There are more supported routers, full list is available here.&lt;/p&gt;</descri
       <pubDate>Mon, 10 May 2010 00:54:44 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</guid>
-      <description>&lt;p&gt;Krótkie intro
-Do tej pory zawsze korzystałem z VirtualBoksa do wirtualizacji systemu (zwykłe uruchomienie Windows pod linuksem, nic specjalnego). Nie posiada on jednak wsparcia dla DirectX3D, co podobno umie VMware - wczoraj wieczorem postanowiłem więc go wypróbować. Z bogatej oferty softu VMware&amp;rdquo;a Wybrałem VMware Server w wersji 2.0.2, i szczęśliwy zabrałem się za pobieranie, mając nadzieję na szybki test i długi sen. Jak się okazało, nic z tego.
-Instalacja VMware Server - Problem 1
-Po pobraniu pakietu rpm ze strony &lt;a href=&#34;http://www.vmware.com/download/server/getserver.html&#34;&gt;http://www.vmware.com/download/server/getserver.html&lt;/a&gt; (pominę upierdliwą rejestrację na stronie, której trzeba dokonać aby cokolwiek pobrać) i zainstalowaniu pakietu w systemie należy uruchomić skrypt konfiguracyjny vmware-config.pl. Po uruchomieniu skrypt spróbuje nam zbudować sterownik dla naszego jądra - w moim przypadku jest to defaultowa wersja 2.6.31.12-0.1-desktop. Należy mieć oczywiście zainstalowany pakiet ze źródłami danej wersji kernela. Przy próbie budowania sterownika kompilator niestety rzuca sporą ilością błędów, na przykład:
-CC [M] /tmp/vmware-config20/vmmon-only/linux/driver.o /tmp/vmware-config20/vmmon-only/linux/driver.c:171: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:172: warning: initialization from incompatible pointer type /tmp/vmware-config20/vmmon-only/linux/driver.c:175: error: unknown field ‘nopage’ specified in initializer /tmp/vmware-config20/vmmon-only/linux/driver.c:176: warning: initialization from incompatible pointer type
-Błędy przy kompilacji modułu występują podobno dla wersji kernela od 2.6.28 w górę. Aby temu zaradzić, należy pobrać ten patch. ( Teoretycznie w nazwie ma wersję 2.0.1 i x64, ale zadziałał również w moim przypadku). Paczkę należy rozpakować do katalogu /usr/lib/vmware/modules/source, a następnie uruchomić skrypt, który znajdował się w paczce (robimy to z uprawnieniami roota). Po zakończeniu pracy skryptu dostajemy informację, aby uruchomić vmware-config.pl ponownie. NIE robimy tego, ponieważ zostalibyśmy zasypani kolejnym błędem - tym razem dotyczącym modułu vsock i wynikającym z błędów w samym skrypcie vmware-config.pl . Pobieramy kolejnego patcha, Rozpakowujemy gdziekolwiek, i aplikujemy zawartość w następujący sposób:
-patch /usr/bin/vmware-config.pl vmware-config-tools.pl.patch
-Teraz możemy już uruchomić vmware-config.pl ponownie, i dokonać reszty konfiguracji. Dobrym pomysłem jest podanie swojej nazwy użytkownika, kiedy skrypt zapyta o użytkownika będącego administratorem VMservera.
-Korzystanie z VMware Web Access pod Firefoksem 3.6 - problem 2
-Podczas konfiguracji serwera podawaliśmy numery portów, na jakich pracuje serwer. domyślnie jest to 8333 dla połączeń po https i 8222 dla połączeń http. Można więc wypróbować jak to działa, otwierając w przeglądarce adres 127.0.0.1:8222 . Poprzez Web Access możemy tworzyć nowe maszyny wirtualne i nimi zarządzać, a także używać ich poprzez Remote Console plug-in. Jednak nie w firefoksie 3.6.
-a) Przede wszystkim, wspomniany dostęp przez https nie będzie działać. Wynika to z domyślnej konfiguracji FF3.6 , w której SSL2 jest wyłączony. Aby go włączyć, należy wpisać w pasek adresu about:config, poszukać opcji security.enable_ssl2 i zmienić jej wartość na true.
-b) Oprócz tego, nie uda nam się również dostać do maszyny poprzez Remote Console Plug-in . Problem ten występuje w wersji FF3.6 i bodajże tylko dla linuksa. Objawia się on komunikatem o treści:
-Cannot access virtual machine console. The request timed out.
-UWAGA: przyczyną tego komunikatu może być również zainstalowany Adblock, flashblock, noscript lub inne tego typu pluginy. Należy upewnić się, że to nie one są przyczyną problemu, szczególnie jeśli nasza wersja Firefoksa jest inna niż 3.6 .
-Aby dostać się do maszyny, należy uruchomić plugin ręcznie. w tym celu odnajdujemy zainstalowany plugin (ścieżka ~/.mozilla/firefox/folder_z_profilem/extensions/VMwareVMRC\@vmware.com/). Wewnątrz znajduje się katalog plugins, który nas interesuje. Kopiujemy sobie go w miejsce, z którego łatwiej nam będzie z niego korzystać, a następnie uruchamiamy vmware-vmrc znajdujący się wewnątrz (może być potrzebne nadanie uprawnień wykonywania dla tego skryptu oraz paru innych znajdujących się w katalogu plugins). Po uruchomieniu dostaniemy interfejs podobny do tego, jaki oferuje nam VMware Player. Podajemy dane do logowania do serwera. Uwaga - u mnie zadziałało tylko połączenie po SSL (na porcie 8883), zwykłe połączenie po porcie 8882 powodowało wieczne łączenie się z serwerem. Po połączeniu wybieramy maszynę, którą wcześniej utworzyliśmy poprzez Web Access. Teraz możemy cieszyć się działającą maszyną wirtualną. Ufff :)&lt;/p&gt;
-</description>
+      <description>Krótkie intro Do tej pory zawsze korzystałem z VirtualBoksa do wirtualizacji systemu (zwykłe uruchomienie Windows pod linuksem, nic specjalnego). Nie posiada on jednak wsparcia dla DirectX3D, co podobno umie VMware - wczoraj wieczorem postanowiłem więc go wypróbować. Z bogatej oferty softu VMware&amp;rdquo;a Wybrałem VMware Server w wersji 2.0.2, i szczęśliwy zabrałem się za pobieranie, mając nadzieję na szybki test i długi sen. Jak się okazało, nic z tego. Instalacja VMware Server - Problem 1 Po pobraniu pakietu rpm ze strony http://www.</description>
     </item>
     
     <item>
@@ -827,13 +149,7 @@ Aby dostać się do maszyny, należy uruchomić plugin ręcznie. w tym celu odna
       <pubDate>Mon, 10 May 2010 00:27:16 +0000</pubDate>
       
       <guid>http://blog.kars7e.io/2010/05/10/arp-spoofing/</guid>
-      <description>&lt;p&gt;Ostatnio w sieci znów krąży trojan, który m.in. wykorzystuje mechanizm arp spoofingu. Spotkaliście się z dziwnym linkiem do skryptu js na początku strony, np. v.freefl.info/day.js? No to klops… ale można spróbować z tym skutecznie powalczyć.
-Nie usuniemy tego żadnym antywirusem, bo nie siedzi to na naszym komputerze. możemy zablokować wspomniany link adblockiem/noscriptem i innymi tego typu podobnymi, lecz jest to tylko tymczasowe rozwiązanie, bo wspomniany link w każdej chwili może się zmienić. Ale o co właściwie chodzi?
-Komputery wykorzystują protokół arp do translacji adresów IP na adresy MAC urządzeń sieciowych. komputer atakujący podszywa się w czasie takiej translacji pod inny komputer ( najczęściej gateway do internetu), przez co wszystkie zapytania idą poprzez komputer atakujący (tzw. man in the middle ). Dokładniejszy scenariusz tego ataku można przeczytać tu.
-Co zrobić z tym fantem?
-Przede wszystkim zlokalizować źródło problemu, czyli komputer zarażony wirusem, będący naszym “podszywaczem” w sieci. w małej sieci domowej to nie problem, gorsza sprawa jeśli jest to np. duża sieć akademikowa (jak w moim przypadku), a jej admini nie kwapią się z analizą i wykryciem zainfekowanych maszyn. Rozwiązaniem tego problemu jest statyczne przypisanie komputerom i ich adresom MAC przydzielonych im adresów IP. aby sprawdzić, czy w naszej sieci występuje problem, wykorzystujemy polecenie arp. wydajemy komendę:arp -a (zarówno na linuksie, jak i na windows). Jeśli w zwróconej tablicy mamy dwa wpisy o tym samym adresie mac i dwóch różnych adresach IP, to znak, że coś jest nie tak. możemy sami ustawić statyczne linkowanie adresów (jeśli znamy adres MAC właściwego komputera) poleceniem:arp -s IP_ADDR MAC_ADDR Podany adres możemy wyciągać analizując ruch narzędziami tcpdump (windump na windows) . Możemy również posłużyć się narzędziami stworzonymi w tym celu: arpON na linuksa, oraz anti-arpspoof na windows. Niemniej jednak są to tymczasowe rozwiązania, gdyż dopiero wyeliminowanie zarażonego komputera zapewni pełnię bezpieczeństwa.
-P.S. Wpis ten powstał ze względu na dokuczliwość problemu i trudność znalezienia rozwiązania w internecie.&lt;/p&gt;
-</description>
+      <description>Ostatnio w sieci znów krąży trojan, który m.in. wykorzystuje mechanizm arp spoofingu. Spotkaliście się z dziwnym linkiem do skryptu js na początku strony, np. v.freefl.info/day.js? No to klops… ale można spróbować z tym skutecznie powalczyć. Nie usuniemy tego żadnym antywirusem, bo nie siedzi to na naszym komputerze. możemy zablokować wspomniany link adblockiem/noscriptem i innymi tego typu podobnymi, lecz jest to tylko tymczasowe rozwiązanie, bo wspomniany link w każdej chwili może się zmienić.</description>
     </item>
     
   </channel>

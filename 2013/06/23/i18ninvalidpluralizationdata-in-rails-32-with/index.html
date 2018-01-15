@@ -8,7 +8,7 @@
 
 
 <link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro|Merriweather' rel='stylesheet' type='text/css'>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="/favicon.ico">
@@ -29,7 +29,9 @@
     </a>
     <ul class="nav-list">
       
-      <li><a href="/about/">About</a></li>
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/page/about/">About</a></li>
       
 	    <li class="spacer">&ac;</li>
       <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
@@ -53,15 +55,14 @@ In case u receive this error with such explanation:</p>
 
 <p>Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:</p>
 
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #000000">pl</span><span style="color: #000000; font-weight: bold">:</span>
-<span style="color: #000000">  activerecord</span><span style="color: #000000; font-weight: bold">:</span>
-<span style="color: #000000">    models</span><span style="color: #000000; font-weight: bold">:</span>
-<span style="color: #000000">      article</span><span style="color: #000000; font-weight: bold">:</span>
-<span style="color: #000000">        one</span><span style="color: #000000; font-weight: bold">:</span> <span style="color: #000000">“Artykuł”</span>
-<span style="color: #000000">        few</span><span style="color: #000000; font-weight: bold">:</span> <span style="color: #000000">“Artykuły”</span>
-<span style="color: #000000">        many</span><span style="color: #000000; font-weight: bold">:</span> <span style="color: #000000">“Artykułów”</span>
-<span style="color: #000000">        other</span><span style="color: #000000; font-weight: bold">:</span> <span style="color: #000000">“Artykuły”</span>
-</pre></div>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">pl<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">  </span>activerecord<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">    </span>models<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">      </span>article<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">        </span>one<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8"> </span>“Artykuł”<span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">        </span>few<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8"> </span>“Artykuły”<span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">        </span>many<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8"> </span>“Artykułów”<span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">        </span>other<span style="color:#000;font-weight:bold">:</span><span style="color:#f8f8f8"> </span>“Artykuły”</code></pre></div>
           </div>
         </div>
         <div class="pagination">

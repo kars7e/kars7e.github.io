@@ -2,65 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Blog on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/blog/index.xml</link>
+    <link>http://blog.kars7e.io/tags/blog/</link>
     <description>Recent content in Blog on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://blog.kars7e.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Feb 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.kars7e.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
-      <title>About</title>
-      <link>http://blog.kars7e.io/about/</link>
+      <title>About me</title>
+      <link>http://blog.kars7e.io/page/about/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/about/</guid>
-      <description>
-
-&lt;h3 id=&#34;short-version&#34;&gt;Short version&lt;/h3&gt;
-
-&lt;p&gt;28, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Elixir &amp;amp; Go.
-Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for &lt;a href=&#34;http://www.vmware.com/&#34;&gt;VMware&lt;/a&gt;, industry leader in virtualization and private cloud solutions. Currently living in Sunnyvale, CA, with my lovely wife
-and 5 months old daughter. Check out my &lt;a href=&#34;http://linkedin.com/in/karolstepniewski&#34;&gt;LinkedIn&lt;/a&gt; to learn more about my career and what I have been doing in my professional life.&lt;/p&gt;
-
-&lt;h2 id=&#34;a-bit-longer-version&#34;&gt;A bit longer version&lt;/h2&gt;
-
-&lt;p&gt;I was born in 1988 in Poland, in a family where my father held a Ph.D. in physics, while my two older brothers
-graduated from the university with Computer Science degree, and my mom was a math teacher.
-So it was obvious I should choose to study arts and history of medieval crop farming&amp;hellip; no, not really.&lt;/p&gt;
-
-&lt;p&gt;So yeah, I started early. I played with computer keyboards when I was 2. I did my first &amp;ldquo;format C&amp;rdquo;
-(sorry dad) when I was 6. I had my first computer (the mighty &lt;a href=&#34;https://en.wikipedia.org/wiki/Intel_80286&#34;&gt;286&lt;/a&gt;)
-when I was 9. I burnt my first computer when I was 10 (again, sorry dad). I wrote my first program when I was 12
-(most likely &lt;a href=&#34;https://en.wikipedia.org/wiki/Logo_(programming_language)&#34;&gt;Logo&lt;/a&gt;, could have been Pascal too).
-But it&amp;rsquo;s not like I was all in love with programming since then - I didn&amp;rsquo;t feel it, coding wasn&amp;rsquo;t my passion.
-I just wanted to play basketball and video games. Now when I look at the past, I think I could have felt like
-I was forced to do that - and as we all know, there is nothing more effective to make you hate doing something than
-forcing you to do so. Of course I used linux for everything, I compiled my first kernel before I even finished my primary school, but still, it wasn&amp;rsquo;t something I liked to do.&lt;/p&gt;
-
-&lt;p&gt;Only somewhere in high-school i started realizing programming is fun. I did it more and more often,
-I learned C, C++, bash, PHP. I did CLI apps, web programming, I modified kernel to make it print funny stuff.
-Those were fun times. But I still preferred basketball and video games :-)&lt;/p&gt;
-
-&lt;p&gt;And then university happened.&lt;br&gt;
-Actually, two universities happened. I was accepted to &lt;a href=&#34;http://www.elka.pw.edu.pl/eng&#34;&gt;Warsaw University of Technology&lt;/a&gt;, one of the top CS schools in Poland, but my semester wasn&amp;rsquo;t starting until February, which was unusual and different from any other school (normal university semester in Poland starts in October). So to not bore myself to death during those 5 months, I decided to join different university, and different major, which had a bit more relaxed terms of applying. and it was supposed to just be a temporary thing&amp;hellip; Boy, what a good decision that was.&lt;/p&gt;
-
-&lt;p&gt;I joined &lt;a href=&#34;http://www.sggw.pl/en/&#34;&gt;Warsaw University of Life Sciences&lt;/a&gt; to study Econometrics - an area of economy completely new to me (not that I knew anything about economy at that time). It gave me different perspective, it taught me how computer science can be applied to do really interesting things. And it made me aware of stocks, options, bonds, and all other derivatives - something that turned out to be quite useful when I later arrived to Silicon Valley :-).&lt;/p&gt;
-
-&lt;p&gt;So I stayed, and after some time I studied at two universities at the same time. Oh, and I worked at the same time too.
-After all, why not? I realized that the more tasks you have to do, the better you get at managing them. Those were crazy days, which included coding (together with my best friend) a fully functional multi-player snake game with GUI and what not over single night, having 5 exams the same day (with half of them on a campus located at the other end of the city) or hacking studying process (no, seriously, you can&amp;rsquo;t study two full-time majors and work at the same time without finding some shortcuts. But it was all legal!). Sometimes I think that I could have waited with working until after I finished my studies, to have more time for research, etc. But then I think how MUCH I learned by working - and this experience is so priceless I would never exchange it for anything else.&lt;/p&gt;
-
-&lt;p&gt;So I worked. Again, it&amp;rsquo;s always been a fun ride. Once I woke up on Friday to learn we need to move EVERYTHING from our servers because the company who actually owned them would come to collect them on Monday. So I spent next 3 days to plan and migrate all our data to a real data center. 56 hours without sleep is pretty unforgettable memory. I did different things in my career: I wrote software, I managed it, I designed it, I managed the physical infrastructure it was running on. I had my own company and I helped my customers resolve their needs, whether it was a website, data migration to cloud, or complex CRM system performance optimization. I worked full-time on a position that involved integrating huge enterprise software for telco industry.&lt;/p&gt;
-
-&lt;p&gt;And that&amp;rsquo;s when I turned 26.&lt;/p&gt;
-
-&lt;p&gt;So when I was 26, I got a message on LinkedIn saying that VMware is having this huge recruiting event in Warsaw, and I&amp;rsquo;m invited to participate. I was like &amp;ldquo;why would I even want to work for VMware?&amp;rdquo; - at that time I only knew their awesome desktop virtualization products (Fusion, Workstation) and server-side industry standard vSphere family. Not really in my area of interests. But with the usual attitude of &amp;ldquo;why not?&amp;rdquo; I went ahead and took part in it. My goal was to just check how such things look like, and what expectations companies of that scale might have. So I spent good 6 hours being grilled by all those smart engineers and managers, with my brain melting more and more every time interviewers would switch. And, after all of these, 30 MINUTES after my last interview (employers, this is how it should be done!), I&amp;rsquo;ve been told they want me, and they want me in US. To work on Cloud Foundry. In ruby. And they also do Go. At that time all those technologies were my top choices and favorite languages, so I couldn&amp;rsquo;t say no. When I left home that day, I told my girlfriend: &amp;ldquo;I&amp;rsquo;m just gonna see what is this VMware about&amp;rdquo;. When I got back, I said: &amp;ldquo;Honey, looks like we&amp;rsquo;re moving to USA&amp;rdquo;&amp;hellip;&lt;/p&gt;
-
-&lt;p&gt;So as I said, the offer was about working on Cloud Foundry project using Ruby in Seattle. But if you read my short bio version, you will notice I&amp;rsquo;m in Sunnyvale, working on OpenStack, which is written in Python! What happened? Well, it turned out that VMware is in the process of building their new product called &lt;a href=&#34;https://www.vmware.com/products/openstack&#34;&gt;VIO - VMware Integrated OpenStack&lt;/a&gt;. It was new, it was fresh, it was cool. But it also needed a lot of people, and it needed them quickly. I&amp;rsquo;ve got asked if I&amp;rsquo;m okay with joining VIO team instead. I didn&amp;rsquo;t know much about OpenStack at that time, last time I coded production python had been long time ago, so I thought - why not? I don&amp;rsquo;t have to mention the weather in Bay Area is a bit better than in Seattle :-).&lt;/p&gt;
-
-&lt;p&gt;So here we are, at the end of this story, and the future will show what&amp;rsquo;s next. But one thing I&amp;rsquo;m pretty sure about is that it&amp;rsquo;s full of &amp;ldquo;why not?&amp;rdquo; attitude!&lt;/p&gt;
-
-&lt;p&gt;TBD!&lt;/p&gt;
-</description>
+      <guid>http://blog.kars7e.io/page/about/</guid>
+      <description>Short version 30, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Go, Elixir &amp;amp; Rust. Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for VMware, industry leader in virtualization and private cloud solutions. Currently living in Santa Clara, CA, with my lovely wife and 5 months 1 year 2 years old daughter.</description>
     </item>
     
   </channel>

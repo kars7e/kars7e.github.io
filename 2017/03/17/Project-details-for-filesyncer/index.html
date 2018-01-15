@@ -8,7 +8,7 @@
 
 
 <link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro|Merriweather' rel='stylesheet' type='text/css'>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
 <link rel="shortcut icon" href="/favicon.ico">
@@ -29,7 +29,9 @@
     </a>
     <ul class="nav-list">
       
-      <li><a href="/about/">About</a></li>
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/page/about/">About</a></li>
       
 	    <li class="spacer">&ac;</li>
       <li><a href="https://github.com/kars7e" target="_blank">Github</a></li>
@@ -73,14 +75,12 @@
 
 <p>I don&rsquo;t want to produce another introductory post again, so let&rsquo;s document some work. This will be trivial, but&hellip; you have to start somewhere. I&rsquo;m using <a href="https://www.rust-lang.org">Rust programming language</a>, which means I should have installed on my system. Let&rsquo;s do it then. I&rsquo;m using MacOS, and de facto a standard <a href="https://brew.sh/">package manager</a> for MacOS. Rust installation couldn&rsquo;t be simpler:</p>
 
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ brew install rust
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install rust</code></pre></div>
 
 <p>Which after a minute or so gives us <code>rustc</code> command:</p>
 
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ rustc --help
-Usage: rustc <span style="color: #ce5c00; font-weight: bold">[</span>OPTIONS<span style="color: #ce5c00; font-weight: bold">]</span> INPUT
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rustc --help
+Usage: rustc <span style="color:#ce5c00;font-weight:bold">[</span>OPTIONS<span style="color:#ce5c00;font-weight:bold">]</span> INPUT
 
 Options:
     -h --help           Display this message
@@ -88,25 +88,19 @@ Options:
     .
     .
     .
-    <span style="color: #8f5902; font-style: italic"># Omitted</span>
-</pre></div>
-
+    # Omitted</code></pre></div>
 
 <p>Let&rsquo;s finish this post with simple, classic and mandatory &ldquo;Hello world&rdquo;:</p>
 
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span><span style="color: #204a87; font-weight: bold">fn</span> <span style="color: #000000">main</span><span style="color: #000000; font-weight: bold">()</span><span style="color: #f8f8f8; text-decoration: underline"> </span><span style="color: #000000; font-weight: bold">{</span><span style="color: #f8f8f8; text-decoration: underline"></span>
-<span style="color: #f8f8f8; text-decoration: underline">    </span><span style="color: #000000">println</span><span style="color: #ce5c00; font-weight: bold">!</span><span style="color: #000000; font-weight: bold">(</span><span style="color: #4e9a06">&quot;Hello, world!&quot;</span><span style="color: #000000; font-weight: bold">);</span><span style="color: #f8f8f8; text-decoration: underline"></span>
-<span style="color: #000000; font-weight: bold">}</span><span style="color: #f8f8f8; text-decoration: underline"></span>
-</pre></div>
-
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#204a87;font-weight:bold">fn</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span><span style="color:#f8f8f8"> </span><span style="color:#000;font-weight:bold">{</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8">    </span><span style="color:#000">println</span><span style="color:#ce5c00;font-weight:bold">!</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Hello, world!&#34;</span><span style="color:#000;font-weight:bold">);</span><span style="color:#f8f8f8">
+</span><span style="color:#f8f8f8"></span><span style="color:#000;font-weight:bold">}</span></code></pre></div>
 
 <p>that we compile with <code>rustc</code>:</p>
 
-<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span></span>$ rustc main.rs
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ rustc main.rs
 $ ./main
-Hello, world!
-</pre></div>
-
+Hello, world!</code></pre></div>
 
 <p>That&rsquo;s it! Environment ready. I will follow up in the next post, where I will attempt to write a daemon that handles signals gracefully.</p>
 
