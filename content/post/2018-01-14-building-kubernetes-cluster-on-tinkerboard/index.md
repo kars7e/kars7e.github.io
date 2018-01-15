@@ -3,6 +3,7 @@ title: "Kubernetes cluster on ARM using Asus Tinkerboard"
 description: How to build Kubernetes cluster on ARM, using Asus Tinkerboard as a base and OpenFaaS as the serverless platform
 date: 2018-01-14T16:13:20-08:00
 author: karol_stepniewski
+draft: true
 comments: true
 tags:
 - kubernetes
