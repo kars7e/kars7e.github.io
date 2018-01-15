@@ -275,27 +275,9 @@ rm -rf /var.bak
 
 <p>The above will make sudo passwordless, and your ansible will run smoothly.</p>
 
-<p><a href="https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml">Here</a> is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:</p>
-
-<pre><code>git clone https://github.com/kars7e/tinker-cluster
-cd tinker-cluster/ansible
-cat &gt; inventory.ini&lt;&lt;EOF
-tinker-0
-tinker-1
-tinker-2
-tinker-3
-
-[k8s-master]
-tinker-0
-
-[k8s-node]
-tinker-1
-tinker-2
-tinker-3
-EOF
-</code></pre>
-
-<p>(Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add <code>ansible_host=192.0.2.50</code> to each entry in first four lines of the inventory file, replacing the IP with the correct one).</p>
+<p><a href="https://github.com/kars7e/tinker-cluster/blob/master/ansible/configure.yml">Here</a> is the playbook that will get you the fully working Kubernetes cluster. Just make sure you have an inventory file, like this:
+<script src="//gist.github.com/kars7e/09b97d4ff1aaf379d9dae94f03fa01c9.js"></script>
+(Note: the above file assumes that your cluster nodes are accessible via their hostnames. if your DNS does not provide that, add <code>ansible_host=192.0.2.50</code> to each entry in first four lines of the inventory file, replacing the IP with the correct one).</p>
 
 <p>Then run it like this:</p>
 
@@ -333,14 +315,14 @@ EOF
 
 <p>Before installing OpenFaaS, make sure you have <code>kubectl</code> installed (<code>brew install kubernetes-cli</code> on macos), and you have it configured (Copy <code>/etc/kubernetes/admin.conf</code> from your master node to <code>~/.kube/config</code>). Once you have the above, just run:</p>
 
-<pre><code class="language-bash">git clone https://github.com/openfaas/faas-netes
-cd faas-netes/yaml_armhf
-kubectl apply -f nats.armhf.yml,faas.async.armhf.yml,rbac.yml,monitoring.armhf.yml
-</code></pre>
+<script src="//gist.github.com/kars7e/dd73367f0db9e1397b7d50fab7aa558d.js"></script>
 
-<p>You can retrieve the URL for OpenFaaS UI running following command (replace <code>tinker-0</code> with your node&rsquo;s hostname or IP):</p>
+<p>You can retrieve the URL for OpenFaaS UI running following command (replace <code>tinker-0</code> with your node&rsquo;s hostname or IP):
+<script src="//gist.github.com/kars7e/61e75bcf5c75f924aed066bb74383cdd.js"></script></p>
 
-<pre><code class="language-bash">echo &quot;http://tinker-0:$(kubectl get svc/gateway -o go-template --template='{{ (index .spec.ports 0).nodePort }}')/ui&quot;
+<p>To get something like this:</p>
+
+<pre><code class="language-bash">http://tinker-0:31112/ui
 </code></pre>
 
 <p><strong><em>And you should be good to go!</em></strong></p>
