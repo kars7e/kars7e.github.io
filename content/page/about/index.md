@@ -1,16 +1,15 @@
 ---
-title: About
+title: About me
 tags: [about, blog]
 date: 2016-02-16
 comments: false
-menu: "main"
 ---
 
 ### Short version
 
-28, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active & passive), technological polyglot. Currently in <3 with Elixir & Go.
-Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for [VMware](http://www.vmware.com/), industry leader in virtualization and private cloud solutions. Currently living in Sunnyvale, CA, with my lovely wife
-and 5 months old daughter. Check out my [LinkedIn](http://linkedin.com/in/karolstepniewski) to learn more about my career and what I have been doing in my professional life.
+30, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active & passive), technological polyglot. Currently in <3 with Go, Elixir & Rust.
+Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for [VMware](http://www.vmware.com/), industry leader in virtualization and private cloud solutions. Currently living in Santa Clara, CA, with my lovely wife
+and ~~5 months~~ ~~1 year~~ 2 years old daughter. Check out my [LinkedIn](http://linkedin.com/in/karolstepniewski) to learn more about my career and what I have been doing in my professional life.
 
 ## A bit longer version
 
@@ -45,7 +44,9 @@ And that's when I turned 26.
 
 So when I was 26, I got a message on LinkedIn saying that VMware is having this huge recruiting event in Warsaw, and I'm invited to participate. I was like "why would I even want to work for VMware?" - at that time I only knew their awesome desktop virtualization products (Fusion, Workstation) and server-side industry standard vSphere family. Not really in my area of interests. But with the usual attitude of "why not?" I went ahead and took part in it. My goal was to just check how such things look like, and what expectations companies of that scale might have. So I spent good 6 hours being grilled by all those smart engineers and managers, with my brain melting more and more every time interviewers would switch. And, after all of these, 30 MINUTES after my last interview (employers, this is how it should be done!), I've been told they want me, and they want me in US. To work on Cloud Foundry. In ruby. And they also do Go. At that time all those technologies were my top choices and favorite languages, so I couldn't say no. When I left home that day, I told my girlfriend: "I'm just gonna see what is this VMware about". When I got back, I said: "Honey, looks like we're moving to USA"...
 
-So as I said, the offer was about working on Cloud Foundry project using Ruby in Seattle. But if you read my short bio version, you will notice I'm in Sunnyvale, working on OpenStack, which is written in Python! What happened? Well, it turned out that VMware is in the process of building their new product called [VIO - VMware Integrated OpenStack](https://www.vmware.com/products/openstack). It was new, it was fresh, it was cool. But it also needed a lot of people, and it needed them quickly. I've got asked if I'm okay with joining VIO team instead. I didn't know much about OpenStack at that time, last time I coded production python had been long time ago, so I thought - why not? I don't have to mention the weather in Bay Area is a bit better than in Seattle :-).
+So as I said, the offer was about working on Cloud Foundry project using Ruby, in Seattle, WA. But I ended up not going to Seattle at all! So what happened? Well, it turned out that VMware is in the process of building their new product called [VIO - VMware Integrated OpenStack](https://www.vmware.com/products/openstack). It was new, it was fresh, it was cool. But it also needed a lot of people, and it needed them quickly. I've got asked if I'm okay with joining VIO team instead. I didn't know much about OpenStack at that time, last time I coded production python had been long time ago, so I thought - why not? I don't have to mention the weather in Bay Area is a bit better than in Seattle :-). While in VIO team, I also worked on VIOK - Kubernetes deployment on top of OpenStack, [part of VIO 4.0 release](https://blogs.vmware.com/openstack/vmware-integrated-openstack-4-0/).
+
+After spending 3 years working on OpenStack & Kubernetes, I've decided to try something new. Still within VMware, I joined Serverless team, to work on [Project Dispatch](https://github.com/vmware/dispatch) - an open source framework for deploying and managing serverless style applications.
 
 So here we are, at the end of this story, and the future will show what's next. But one thing I'm pretty sure about is that it's full of "why not?" attitude!
 

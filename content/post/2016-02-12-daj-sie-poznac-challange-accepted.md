@@ -2,8 +2,6 @@
 author: karol_stepniewski
 comments: true
 date: 2016-02-12T09:05:45Z
-image:
-  feature: dajsiepoznac_logo.png
 tags:
 - dajsiepoznac2016
 - elixir
