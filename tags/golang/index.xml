@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/golang/</link>
+    <link>https://blog.kars7e.io/tags/golang/</link>
     <description>Recent content in Golang on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 28 Mar 2017 17:09:31 -0700</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Rust: first impressions</title>
-      <link>http://blog.kars7e.io/2017/03/28/Rust-first-impressions/</link>
+      <link>https://blog.kars7e.io/2017/03/28/Rust-first-impressions/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/2017/03/28/Rust-first-impressions/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s been a while since my last &lt;a href=&#34;http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/&#34;&gt;DSP post&lt;/a&gt;, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&amp;rsquo;s get back to the business, though. &lt;strong&gt;In this post, I will share my first impressions on Rust, as well as some code in filesyncer project&lt;/strong&gt;.&lt;/p&gt;
+      <guid>https://blog.kars7e.io/2017/03/28/Rust-first-impressions/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s been a while since my last &lt;a href=&#34;https://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/&#34;&gt;DSP post&lt;/a&gt;, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&amp;rsquo;s get back to the business, though. &lt;strong&gt;In this post, I will share my first impressions on Rust, as well as some code in filesyncer project&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s dig in!
 &lt;/p&gt;</description>

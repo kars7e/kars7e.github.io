@@ -2,282 +2,282 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/</link>
+    <link>https://blog.kars7e.io/tags/</link>
     <description>Recent content in Tags on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
-      <link>http://blog.kars7e.io/tags/about/</link>
+      <link>https://blog.kars7e.io/tags/about/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/about/</guid>
+      <guid>https://blog.kars7e.io/tags/about/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Antirants</title>
-      <link>http://blog.kars7e.io/tags/antirants/</link>
+      <link>https://blog.kars7e.io/tags/antirants/</link>
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/antirants/</guid>
+      <guid>https://blog.kars7e.io/tags/antirants/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Arm</title>
-      <link>http://blog.kars7e.io/tags/arm/</link>
+      <link>https://blog.kars7e.io/tags/arm/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/arm/</guid>
+      <guid>https://blog.kars7e.io/tags/arm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Armbian</title>
-      <link>http://blog.kars7e.io/tags/armbian/</link>
+      <link>https://blog.kars7e.io/tags/armbian/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/armbian/</guid>
+      <guid>https://blog.kars7e.io/tags/armbian/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Blog</title>
-      <link>http://blog.kars7e.io/tags/blog/</link>
+      <link>https://blog.kars7e.io/tags/blog/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/blog/</guid>
+      <guid>https://blog.kars7e.io/tags/blog/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dajsiepoznac2016</title>
-      <link>http://blog.kars7e.io/tags/dajsiepoznac2016/</link>
+      <link>https://blog.kars7e.io/tags/dajsiepoznac2016/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/dajsiepoznac2016/</guid>
+      <guid>https://blog.kars7e.io/tags/dajsiepoznac2016/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Dajsiepoznac2017</title>
-      <link>http://blog.kars7e.io/tags/dajsiepoznac2017/</link>
+      <link>https://blog.kars7e.io/tags/dajsiepoznac2017/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/dajsiepoznac2017/</guid>
+      <guid>https://blog.kars7e.io/tags/dajsiepoznac2017/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Elixir</title>
-      <link>http://blog.kars7e.io/tags/elixir/</link>
+      <link>https://blog.kars7e.io/tags/elixir/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/elixir/</guid>
+      <guid>https://blog.kars7e.io/tags/elixir/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Encoding</title>
-      <link>http://blog.kars7e.io/tags/encoding/</link>
+      <link>https://blog.kars7e.io/tags/encoding/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/encoding/</guid>
+      <guid>https://blog.kars7e.io/tags/encoding/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Erlang</title>
-      <link>http://blog.kars7e.io/tags/erlang/</link>
+      <link>https://blog.kars7e.io/tags/erlang/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/erlang/</guid>
+      <guid>https://blog.kars7e.io/tags/erlang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Filesyncer</title>
-      <link>http://blog.kars7e.io/tags/filesyncer/</link>
+      <link>https://blog.kars7e.io/tags/filesyncer/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/filesyncer/</guid>
+      <guid>https://blog.kars7e.io/tags/filesyncer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Functionalprogramming</title>
-      <link>http://blog.kars7e.io/tags/functionalprogramming/</link>
+      <link>https://blog.kars7e.io/tags/functionalprogramming/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/functionalprogramming/</guid>
+      <guid>https://blog.kars7e.io/tags/functionalprogramming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Golang</title>
-      <link>http://blog.kars7e.io/tags/golang/</link>
+      <link>https://blog.kars7e.io/tags/golang/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/golang/</guid>
+      <guid>https://blog.kars7e.io/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>I18n</title>
-      <link>http://blog.kars7e.io/tags/i18n/</link>
+      <link>https://blog.kars7e.io/tags/i18n/</link>
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/i18n/</guid>
+      <guid>https://blog.kars7e.io/tags/i18n/</guid>
       <description></description>
     </item>
     
     <item>
       <title>K8s 1.9</title>
-      <link>http://blog.kars7e.io/tags/k8s-1.9/</link>
+      <link>https://blog.kars7e.io/tags/k8s-1.9/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/k8s-1.9/</guid>
+      <guid>https://blog.kars7e.io/tags/k8s-1.9/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kubernetes</title>
-      <link>http://blog.kars7e.io/tags/kubernetes/</link>
+      <link>https://blog.kars7e.io/tags/kubernetes/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/kubernetes/</guid>
+      <guid>https://blog.kars7e.io/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Openfaas</title>
-      <link>http://blog.kars7e.io/tags/openfaas/</link>
+      <link>https://blog.kars7e.io/tags/openfaas/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/openfaas/</guid>
+      <guid>https://blog.kars7e.io/tags/openfaas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Outlook</title>
-      <link>http://blog.kars7e.io/tags/outlook/</link>
+      <link>https://blog.kars7e.io/tags/outlook/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/outlook/</guid>
+      <guid>https://blog.kars7e.io/tags/outlook/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Phoenix</title>
-      <link>http://blog.kars7e.io/tags/phoenix/</link>
+      <link>https://blog.kars7e.io/tags/phoenix/</link>
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/phoenix/</guid>
+      <guid>https://blog.kars7e.io/tags/phoenix/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Php</title>
-      <link>http://blog.kars7e.io/tags/php/</link>
+      <link>https://blog.kars7e.io/tags/php/</link>
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/php/</guid>
+      <guid>https://blog.kars7e.io/tags/php/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Planning</title>
-      <link>http://blog.kars7e.io/tags/planning/</link>
+      <link>https://blog.kars7e.io/tags/planning/</link>
       <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/planning/</guid>
+      <guid>https://blog.kars7e.io/tags/planning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Programming</title>
-      <link>http://blog.kars7e.io/tags/programming/</link>
+      <link>https://blog.kars7e.io/tags/programming/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/programming/</guid>
+      <guid>https://blog.kars7e.io/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quicknote</title>
-      <link>http://blog.kars7e.io/tags/quicknote/</link>
+      <link>https://blog.kars7e.io/tags/quicknote/</link>
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/quicknote/</guid>
+      <guid>https://blog.kars7e.io/tags/quicknote/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rails</title>
-      <link>http://blog.kars7e.io/tags/rails/</link>
+      <link>https://blog.kars7e.io/tags/rails/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/rails/</guid>
+      <guid>https://blog.kars7e.io/tags/rails/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rails3</title>
-      <link>http://blog.kars7e.io/tags/rails3/</link>
+      <link>https://blog.kars7e.io/tags/rails3/</link>
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/rails3/</guid>
+      <guid>https://blog.kars7e.io/tags/rails3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Raspberrypi</title>
-      <link>http://blog.kars7e.io/tags/raspberrypi/</link>
+      <link>https://blog.kars7e.io/tags/raspberrypi/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/raspberrypi/</guid>
+      <guid>https://blog.kars7e.io/tags/raspberrypi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ruby</title>
-      <link>http://blog.kars7e.io/tags/ruby/</link>
+      <link>https://blog.kars7e.io/tags/ruby/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/ruby/</guid>
+      <guid>https://blog.kars7e.io/tags/ruby/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rust</title>
-      <link>http://blog.kars7e.io/tags/rust/</link>
+      <link>https://blog.kars7e.io/tags/rust/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/rust/</guid>
+      <guid>https://blog.kars7e.io/tags/rust/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tinkerboard</title>
-      <link>http://blog.kars7e.io/tags/tinkerboard/</link>
+      <link>https://blog.kars7e.io/tags/tinkerboard/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/tinkerboard/</guid>
+      <guid>https://blog.kars7e.io/tags/tinkerboard/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vpim</title>
-      <link>http://blog.kars7e.io/tags/vpim/</link>
+      <link>https://blog.kars7e.io/tags/vpim/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/tags/vpim/</guid>
+      <guid>https://blog.kars7e.io/tags/vpim/</guid>
       <description></description>
     </item>
     

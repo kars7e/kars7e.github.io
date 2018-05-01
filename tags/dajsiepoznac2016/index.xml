@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dajsiepoznac2016 on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/dajsiepoznac2016/</link>
+    <link>https://blog.kars7e.io/tags/dajsiepoznac2016/</link>
     <description>Recent content in Dajsiepoznac2016 on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 04 Mar 2016 14:05:45 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/dajsiepoznac2016/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/dajsiepoznac2016/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My introduction to Elixir programming language</title>
-      <link>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
+      <link>https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;</description>
+      <guid>https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>[DSP] Let&#39;s do some planning</title>
-      <link>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</link>
+      <link>https://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</link>
       <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
-      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
+      <guid>https://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
+      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
 So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Daj Się poznać - challange accepted</title>
-      <link>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
+      <link>https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
+      <guid>https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
       <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;</description>
     </item>
     

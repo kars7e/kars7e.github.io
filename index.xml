@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/</link>
+    <link>https://blog.kars7e.io/</link>
     <description>Recent content on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 14 Jan 2018 16:13:20 -0800</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kubernetes cluster on ARM using Asus Tinkerboard</title>
-      <link>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</link>
+      <link>https://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</link>
       <pubDate>Sun, 14 Jan 2018 16:13:20 -0800</pubDate>
       
-      <guid>http://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</guid>
+      <guid>https://blog.kars7e.io/2018/01/14/Kubernetes-cluster-on-ARM-using-Asus-Tinkerboard/</guid>
       <description>&lt;p&gt;Over the winter holiday break of 2017, I&amp;rsquo;ve spent some time playing with Kubernetes on ARM. I had a lot of fun building this beast:&lt;/p&gt;
 
 &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Ok, I&amp;#39;ve got &lt;a href=&#34;https://twitter.com/hashtag/kubernetes?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#kubernetes&lt;/a&gt; running on 4 nodes Asus Tinkerboard ARM cluster with ARMbian (with some ultra-advanced cooling), and it&amp;#39;s a beast!  Oh, did I mention it runs &lt;a href=&#34;https://twitter.com/openfaas?ref_src=twsrc%5Etfw&#34;&gt;@openfaas&lt;/a&gt; like a champ?&lt;br&gt;&lt;br&gt;Blog post incoming! &lt;a href=&#34;https://t.co/CiqnSPiPb7&#34;&gt;pic.twitter.com/CiqnSPiPb7&lt;/a&gt;&lt;/p&gt;&amp;mdash; Karol Stępniewski (@kars7e) &lt;a href=&#34;https://twitter.com/kars7e/status/948122096969818113?ref_src=twsrc%5Etfw&#34;&gt;January 2, 2018&lt;/a&gt;&lt;/blockquote&gt;
@@ -29,11 +29,11 @@
     
     <item>
       <title>Rust: first impressions</title>
-      <link>http://blog.kars7e.io/2017/03/28/Rust-first-impressions/</link>
+      <link>https://blog.kars7e.io/2017/03/28/Rust-first-impressions/</link>
       <pubDate>Tue, 28 Mar 2017 17:09:31 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/2017/03/28/Rust-first-impressions/</guid>
-      <description>&lt;p&gt;It&amp;rsquo;s been a while since my last &lt;a href=&#34;http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/&#34;&gt;DSP post&lt;/a&gt;, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&amp;rsquo;s get back to the business, though. &lt;strong&gt;In this post, I will share my first impressions on Rust, as well as some code in filesyncer project&lt;/strong&gt;.&lt;/p&gt;
+      <guid>https://blog.kars7e.io/2017/03/28/Rust-first-impressions/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s been a while since my last &lt;a href=&#34;https://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/&#34;&gt;DSP post&lt;/a&gt;, mainly due to my trip to Poland and unavoidable result of it - jetlag. Let&amp;rsquo;s get back to the business, though. &lt;strong&gt;In this post, I will share my first impressions on Rust, as well as some code in filesyncer project&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Let&amp;rsquo;s dig in!
 &lt;/p&gt;</description>
@@ -41,130 +41,132 @@
     
     <item>
       <title>Project details for filesyncer</title>
-      <link>http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</link>
+      <link>https://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</link>
       <pubDate>Fri, 17 Mar 2017 01:31:17 -0700</pubDate>
       
-      <guid>http://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve became a huge fan of describing ideas using single sentence. If you can&amp;rsquo;t describe an idea this way, it may be that this idea needs more thought or it&amp;rsquo;s too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year&amp;rsquo;s edition of &lt;a href=&#34;http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/&#34;&gt;DSP contest&lt;/a&gt; using single sentence then:
+      <guid>https://blog.kars7e.io/2017/03/17/Project-details-for-filesyncer/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve became a huge fan of describing ideas using single sentence. If you can&amp;rsquo;t describe an idea this way, it may be that this idea needs more thought or it&amp;rsquo;s too complex and could be divided into smaller components (the latter is rare). Let me describe my project for this year&amp;rsquo;s edition of &lt;a href=&#34;https://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/&#34;&gt;DSP contest&lt;/a&gt; using single sentence then:
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Daj Się poznać - challenge accepted (again)</title>
-      <link>http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</link>
+      <link>https://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</link>
       <pubDate>Sun, 12 Mar 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</guid>
-      <description>&lt;p&gt;Some time ago (or one year ago to be more accurate) I &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take up a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;</description>
+      <guid>https://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/</guid>
+      <description>&lt;p&gt;Some time ago (or one year ago to be more accurate) I &lt;a href=&#34;https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;decided to take up a challange&lt;/a&gt; of DSP contest. It wasn&amp;rsquo;t much of a success (to put it mildly). I&amp;rsquo;ve been very reluctant to try it again, but finally, few hours before the registration closed, I have &lt;a href=&#34;http://uczestnicy.dajsiepoznac.pl/lista&#34;&gt;signed up&lt;/a&gt;. I&amp;rsquo;m going to give some details here what was my thought process.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>My introduction to Elixir programming language</title>
-      <link>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
+      <link>https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</link>
       <pubDate>Fri, 04 Mar 2016 14:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
-      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;</description>
+      <guid>https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/</guid>
+      <description>&lt;p&gt;Today I&amp;rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my &lt;a href=&#34;https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;project&lt;/a&gt; in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&amp;rsquo;s most interesting features, and why I think this language has a bright future ahead of it.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>[DSP] Let&#39;s do some planning</title>
-      <link>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</link>
+      <link>https://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</link>
       <pubDate>Tue, 01 Mar 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
-      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
+      <guid>https://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/</guid>
+      <description>&lt;p&gt;The competition I mentioned in my &lt;a href=&#34;https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/&#34;&gt;previous post&lt;/a&gt; has just &lt;a href=&#34;http://www.maciejaniserowicz.com/2016/03/01/daj-sie-poznac-2016-startujemy-i-przedluzamy-rejestracje/&#34;&gt;started&lt;/a&gt;!
 So again, what is it about? For a period of 10 weeks (out of 13 available), work on a software project and blog about it minimum twice a week. My idea for this challenge is to write a game inspired by a game called &lt;a href=&#34;http://www.explodingkittens.com/&#34;&gt;Exploding Kittens&lt;/a&gt;, using Elixir language and Phoenix framework. And what&amp;rsquo;s that planning I mentioned in the title of this post?&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>About me</title>
-      <link>http://blog.kars7e.io/page/about/</link>
+      <link>https://blog.kars7e.io/page/about/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/page/about/</guid>
+      <guid>https://blog.kars7e.io/page/about/</guid>
       <description>Short version 30, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Go, Elixir &amp;amp; Rust. Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for VMware, industry leader in virtualization and private cloud solutions. Currently living in Santa Clara, CA, with my lovely wife and 5 months 1 year 2 years old daughter.</description>
     </item>
     
     <item>
       <title>Daj Się poznać - challange accepted</title>
-      <link>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
+      <link>https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</link>
       <pubDate>Fri, 12 Feb 2016 09:05:45 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
+      <guid>https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/</guid>
       <description>&lt;p&gt;To motivate myself a bit, I decided to take part in &lt;a href=&#34;http://www.maciejaniserowicz.com/daj-sie-poznac/&#34;&gt;Maciej&lt;/a&gt;’s contest and, for a period of 10 weeks, work on an open source project.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Creating vcards in rails using vpim</title>
-      <link>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</link>
+      <link>https://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</link>
       <pubDate>Thu, 12 Sep 2013 12:28:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
+      <guid>https://blog.kars7e.io/2013/09/12/creating-vcards-in-rails-using-vpim-which-works/</guid>
       <description>&lt;p&gt;Short info - how to create vcards in rails, which work correctly in Outlook 20xx.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>I18n::InvalidPluralizationData in rails 3.2 with polish locale</title>
-      <link>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</link>
+      <link>https://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</link>
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description></description>
+      <guid>https://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
+      <description>In case u receive this error with such explanation:
+ translation data can not be used with :count =&amp;gt; 2
+ Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:</description>
     </item>
     
     <item>
       <title>Bright sides of PHP - it evolved!</title>
-      <link>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</link>
+      <link>https://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</link>
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
+      <guid>https://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
       <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>NOT IN operator on Oracle 10g Express Edition</title>
-      <link>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</link>
+      <link>https://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</link>
       <pubDate>Sun, 16 May 2010 18:39:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</guid>
+      <guid>https://blog.kars7e.io/2010/05/16/not-in-operator-on-oracle-10g-express-edition/</guid>
       <description>&lt;p&gt;Today i had quite annoying problem with query on Oracle 10g. What annoyed me even more is that query was so short:
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>From OpenSUSE 11.2 (KDE4) to Ubuntu 10.04 (Gnome)</title>
-      <link>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</link>
+      <link>https://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</link>
       <pubDate>Thu, 13 May 2010 20:49:54 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</guid>
+      <guid>https://blog.kars7e.io/2010/05/13/from-opensuse-112-kde4-to-ubuntu-1004-gnome/</guid>
       <description>&lt;p&gt;After about a year of using OpenSUSE (currently 11.2) and KDE4, i decided to change my environment.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>How to make Linksys WRT54GL able to redirect port</title>
-      <link>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</link>
+      <link>https://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</link>
       <pubDate>Mon, 10 May 2010 13:49:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</guid>
+      <guid>https://blog.kars7e.io/2010/05/10/how-to-make-linksys-wrt54gl-able-to-redirect-port/</guid>
       <description>&lt;p&gt;Today i wanted to make few of my computers visible from outside. I decided to set up some simple from WAN to LAN port redirections. After 0,5h of trying, i realized that’s just not possible. Yes, it’s possible to make port forwarding (e.g. from WAN:80 to SomeLanHost:80 ), but i could not make port redirection (e.g. from WAN:666 to LAN:80).&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>VMware Server 2 &#43; OpenSuSE 11.2 (32bit) &#43; Firefox 3.6</title>
-      <link>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</link>
+      <link>https://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</link>
       <pubDate>Mon, 10 May 2010 00:54:44 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</guid>
+      <guid>https://blog.kars7e.io/2010/05/10/vmware-server-2-opensuse-112-32bit-firefox/</guid>
       <description>Krótkie intro Do tej pory zawsze korzystałem z VirtualBoksa do wirtualizacji systemu (zwykłe uruchomienie Windows pod linuksem, nic specjalnego). Nie posiada on jednak wsparcia dla DirectX3D, co podobno umie VMware - wczoraj wieczorem postanowiłem więc go wypróbować. Z bogatej oferty softu VMware&amp;rdquo;a Wybrałem VMware Server w wersji 2.0.2, i szczęśliwy zabrałem się za pobieranie, mając nadzieję na szybki test i długi sen. Jak się okazało, nic z tego. Instalacja VMware Server - Problem 1 Po pobraniu pakietu rpm ze strony http://www.</description>
     </item>
     
     <item>
       <title>Arp spoofing</title>
-      <link>http://blog.kars7e.io/2010/05/10/arp-spoofing/</link>
+      <link>https://blog.kars7e.io/2010/05/10/arp-spoofing/</link>
       <pubDate>Mon, 10 May 2010 00:27:16 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2010/05/10/arp-spoofing/</guid>
+      <guid>https://blog.kars7e.io/2010/05/10/arp-spoofing/</guid>
       <description>Ostatnio w sieci znów krąży trojan, który m.in. wykorzystuje mechanizm arp spoofingu. Spotkaliście się z dziwnym linkiem do skryptu js na początku strony, np. v.freefl.info/day.js? No to klops… ale można spróbować z tym skutecznie powalczyć. Nie usuniemy tego żadnym antywirusem, bo nie siedzi to na naszym komputerze. możemy zablokować wspomniany link adblockiem/noscriptem i innymi tego typu podobnymi, lecz jest to tylko tymczasowe rozwiązanie, bo wspomniany link w każdej chwili może się zmienić.</description>
     </item>
     

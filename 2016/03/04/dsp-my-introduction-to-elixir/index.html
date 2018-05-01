@@ -7,7 +7,7 @@
 <title> My introduction to Elixir programming language &middot; kars7e&#39;s Blog </title>
 
 
-<link rel="stylesheet" href="http://blog.kars7e.io/css/slim.css">
+<link rel="stylesheet" href="https://blog.kars7e.io/css/slim.css">
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro|Merriweather' rel='stylesheet' type='text/css'>
 
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
@@ -21,7 +21,7 @@
 <body>
   <div class="container">
     <div class="header">
-  <h1 class="site-title"><a href="http://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
+  <h1 class="site-title"><a href="https://blog.kars7e.io/">kars7e&#39;s Blog</a></h1>
   <p class="site-tagline">Personal blog of Karol Stepniewski</p>
   <div class="nav">
     <a class="nav-btn" href="#">
@@ -43,10 +43,10 @@
     <div class="content">
       <div class="posts">
         <div class="post">
-          <h2 class="post-title"><a href="http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/">My introduction to Elixir programming language</a></h2>
+          <h2 class="post-title"><a href="https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/">My introduction to Elixir programming language</a></h2>
           <span class="post-date">Mar 4, 2016 </span>
           <div class="post-content">
-            <p>Today I&rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my <a href="http://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/">project</a> in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&rsquo;s most interesting features, and why I think this language has a bright future ahead of it.</p>
+            <p>Today I&rsquo;m going to talk a bit about Elixir, the programming language that I chose to write my <a href="https://blog.kars7e.io/2016/02/12/daj-sie-poznac-challange-accepted/">project</a> in. I will start by saying that this is not a comprehensive introduction, but just my take on what are the Elixir&rsquo;s most interesting features, and why I think this language has a bright future ahead of it.</p>
 
 <p>
 If you would like to learn more about Elixir, there are really good resources out there in the Internet, notably:</p>
@@ -69,17 +69,17 @@ If you would like to learn more about Elixir, there are really good resources ou
 
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">  <span style="color:#000">def</span> <span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:ok</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">body</span><span style="color:#000;font-weight:bold">}),</span> <span style="color:#4e9a06">do</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">body</span>
   <span style="color:#000">def</span> <span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">})</span> <span style="color:#000">do</span>
-    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">message</span><span style="color:#000;font-weight:bold">}</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">keyfind</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;message&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">IO</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">puts</span> <span style="color:#4e9a06">&#34;Error fetching from Github: </span><span style="color:#4e9a06">#{</span><span style="color:#000">message</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">halt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">message</span><span style="color:#000;font-weight:bold">}</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">keyfind</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;message&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000">IO</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">puts</span> <span style="color:#4e9a06">&#34;Error fetching from Github: </span><span style="color:#4e9a06">#{</span><span style="color:#000">message</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span>
+    <span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">halt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
   <span style="color:#000">end</span>
 
   <span style="color:#000">def</span> <span style="color:#000">process</span><span style="color:#000;font-weight:bold">({</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">project</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">count</span><span style="color:#000;font-weight:bold">})</span> <span style="color:#000">do</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">Issues.GithubIssues</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">fetch</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">project</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000">Issues.GithubIssues</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">fetch</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">project</span><span style="color:#000;font-weight:bold">)</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">decode_response</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">convert_to_list_of_maps</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">sort_into_ascending_order</span>
-    <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">Enum</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">take</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">count</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">Enum</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">take</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">count</span><span style="color:#000;font-weight:bold">)</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">print_table_for_columns</span><span style="color:#000;font-weight:bold">([</span><span style="color:#4e9a06">&#34;number&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;created_at&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;title&#34;</span><span style="color:#000;font-weight:bold">])</span>
   <span style="color:#000">end</span>
 
@@ -95,16 +95,16 @@ If you would like to learn more about Elixir, there are really good resources ou
 <p>In Elixir, you have a great help in form of pattern matching:
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">  <span style="color:#000">def</span> <span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:ok</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">body</span><span style="color:#000;font-weight:bold">}),</span> <span style="color:#4e9a06">do</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">body</span>
   <span style="color:#000">def</span> <span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">error</span><span style="color:#000;font-weight:bold">})</span> <span style="color:#000">do</span>
-    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">message</span><span style="color:#000;font-weight:bold">}</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">keyfind</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;message&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">IO</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">puts</span> <span style="color:#4e9a06">&#34;Error fetching from Github: </span><span style="color:#4e9a06">#{</span><span style="color:#000">message</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">halt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">{</span><span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">message</span><span style="color:#000;font-weight:bold">}</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">List</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">keyfind</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">error</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;message&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000">IO</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">puts</span> <span style="color:#4e9a06">&#34;Error fetching from Github: </span><span style="color:#4e9a06">#{</span><span style="color:#000">message</span><span style="color:#4e9a06">}</span><span style="color:#4e9a06">&#34;</span>
+    <span style="color:#000">System</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">halt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
   <span style="color:#000">end</span></code></pre></div>
 As you can see in the example above, function <strong>_decode<em>response</em></strong> is defined twice, with different function bodies.
 They both accept single parameter, which is a <a href="http://elixir-lang.org/getting-started/basic-types.html#tuples">tuple</a>, however it goes even further - they accept only two-element tuple, and specify that first element must be either an <strong><em>:ok</em></strong> or <strong><em>:error</em></strong> <a href="http://elixir-lang.org/getting-started/basic-types.html#atoms">atom</a>. If we try to break any of those constraints and for example execute that function with first element set to <strong><em>:warning</em></strong>, we will get:</p>
 
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="color:#000">iex</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:warning</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;body&#34;</span><span style="color:#000;font-weight:bold">})</span>
-<span style="color:#ce5c00;font-weight:bold">**</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">FunctionClauseError</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">no</span> <span style="color:#000">function</span> <span style="color:#000">clause</span> <span style="color:#000">matching</span> <span style="color:#000">in</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#0000cf;font-weight:bold">1</span>
-    <span style="color:#000">iex</span><span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:warning</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;body&#34;</span><span style="color:#000;font-weight:bold">})</span></code></pre></div>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="color:#000">iex</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:warning</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;body&#34;</span><span style="color:#000;font-weight:bold">})</span>
+<span style="color:#ce5c00;font-weight:bold">**</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">FunctionClauseError</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">no</span> <span style="color:#000">function</span> <span style="color:#000">clause</span> <span style="color:#000">matching</span> <span style="color:#000">in</span> <span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#0000cf;font-weight:bold">1</span>
+    <span style="color:#000">iex</span><span style="color:#000;font-weight:bold">:</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">ExampleModule</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">decode_response</span><span style="color:#000;font-weight:bold">({</span><span style="color:#4e9a06">:warning</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;body&#34;</span><span style="color:#000;font-weight:bold">})</span></code></pre></div>
 
 <p>This gives a tremendous value to limit the &ldquo;ifs&rdquo; in our code, but also makes code much easier to reason about - the error handling case like the code above is a great example where we see exactly which part is responsible for dealing with errors, and which processes the happy code path.</p>
 
@@ -122,11 +122,11 @@ It&rsquo;s very important to remember that functions are matched in the same ord
 
 <p>Let&rsquo;s see the example again:
 <div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir">  <span style="color:#000">def</span> <span style="color:#000">process</span><span style="color:#000;font-weight:bold">({</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">project</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">count</span><span style="color:#000;font-weight:bold">})</span> <span style="color:#000">do</span>
-    <span style="color:#000;font-weight:bold"></span><span style="color:#000">Issues.GithubIssues</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">fetch</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">project</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000">Issues.GithubIssues</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">fetch</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">user</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">project</span><span style="color:#000;font-weight:bold">)</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">decode_response</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">convert_to_list_of_maps</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">sort_into_ascending_order</span>
-    <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">Enum</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">take</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">count</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">Enum</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">take</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">count</span><span style="color:#000;font-weight:bold">)</span>
     <span style="color:#ce5c00;font-weight:bold">|&gt;</span> <span style="color:#000">print_table_for_columns</span><span style="color:#000;font-weight:bold">([</span><span style="color:#4e9a06">&#34;number&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;created_at&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;title&#34;</span><span style="color:#000;font-weight:bold">])</span>
   <span style="color:#000">end</span></code></pre></div>
 So how does this work?<br>
@@ -144,11 +144,11 @@ So how does this work?<br>
 </ul>
 
 <p>But to give some perspective into how powerful macros in Elixir are, consider following piece of code (shamelessly taken from Chris&rsquo; presentation):
-<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="color:#000">defmodule</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">Notifier</span> <span style="color:#000">do</span>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-elixir" data-lang="elixir"><span style="color:#000">defmodule</span> <span style="color:#000">Notifier</span> <span style="color:#000">do</span>
 
   <span style="color:#000">def</span> <span style="color:#000">ping</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pid</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">do</span>
-    <span style="color:#000">if</span> <span style="color:#000;font-weight:bold"></span><span style="color:#000">Process</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">alive?</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pid</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">do</span>
-      <span style="color:#000;font-weight:bold"></span><span style="color:#000">Logger</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">debug</span> <span style="color:#4e9a06">&#34;Sending ping!&#34;</span>
+    <span style="color:#000">if</span> <span style="color:#000">Process</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">alive?</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">pid</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">do</span>
+      <span style="color:#000">Logger</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">debug</span> <span style="color:#4e9a06">&#34;Sending ping!&#34;</span>
       <span style="color:#000">send</span> <span style="color:#000">pid</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">:ping</span>
     <span style="color:#000">end</span>
   <span style="color:#000">end</span>
@@ -164,8 +164,8 @@ So what&rsquo;s so special about it? Every line in this code except <em>send</em
           </div>
         </div>
         <div class="pagination">
-          <a class="btn previous " href="http://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/"> Prev</a>  
-          <a class="btn next " href="http://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/"> Next</a> 
+          <a class="btn previous " href="https://blog.kars7e.io/2017/03/12/Daj-Si%C4%99-pozna%C4%87---challange-accepted-again/"> Prev</a>  
+          <a class="btn next " href="https://blog.kars7e.io/2016/03/01/dsp-lets-do-some-planning/"> Next</a> 
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ So what&rsquo;s so special about it? Every line in this code except <em>send</em
     <div id="disqus_thread"></div>
     <script>
       var disqus_config = function () {
-        this.page.url = "http://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/";
+        this.page.url = "https://blog.kars7e.io/2016/03/04/dsp-my-introduction-to-elixir/";
         
       };
       (function() {
@@ -190,7 +190,7 @@ So what&rsquo;s so special about it? Every line in this code except <em>send</em
 </div>
 
   </div>
-  <script src="http://blog.kars7e.io/js/slim.js"></script>
+  <script src="https://blog.kars7e.io/js/slim.js"></script>
   <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

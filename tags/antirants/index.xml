@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Antirants on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/antirants/</link>
+    <link>https://blog.kars7e.io/tags/antirants/</link>
     <description>Recent content in Antirants on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Jul 2012 00:12:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/antirants/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/antirants/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bright sides of PHP - it evolved!</title>
-      <link>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</link>
+      <link>https://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</link>
       <pubDate>Wed, 04 Jul 2012 00:12:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
+      <guid>https://blog.kars7e.io/2012/07/04/bright-sides-of-php-it-evolved/</guid>
       <description>&lt;p&gt;Today &lt;a href=&#34;https://twitter.com/fabpot&#34;&gt;Fabien Potencier&lt;/a&gt; published a &lt;a href=&#34;http://fabien.potencier.org/php-is-much-better-than-you-think.html&#34;&gt;great post&lt;/a&gt; about how much all the PHP rants (which are quite popular recently in the PHP blogosphere) are inadequate to the current situation of the language. It should be read by all developers, especially those who do not code in PHP day to day. Why? Because they have no idea how much this language evolved in the last years.&lt;/p&gt;</description>
     </item>
     

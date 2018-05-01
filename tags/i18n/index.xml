@@ -2,22 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>I18n on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/i18n/</link>
+    <link>https://blog.kars7e.io/tags/i18n/</link>
     <description>Recent content in I18n on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 23 Jun 2013 13:50:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/i18n/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/i18n/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>I18n::InvalidPluralizationData in rails 3.2 with polish locale</title>
-      <link>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</link>
+      <link>https://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</link>
       <pubDate>Sun, 23 Jun 2013 13:50:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
-      <description></description>
+      <guid>https://blog.kars7e.io/2013/06/23/i18ninvalidpluralizationdata-in-rails-32-with/</guid>
+      <description>In case u receive this error with such explanation:
+ translation data can not be used with :count =&amp;gt; 2
+ Remember that you need to define a “few” and “many” key for translation for particular entity, e.g.:</description>
     </item>
     
   </channel>

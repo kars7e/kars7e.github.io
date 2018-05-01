@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About on kars7e&#39;s Blog</title>
-    <link>http://blog.kars7e.io/tags/about/</link>
+    <link>https://blog.kars7e.io/tags/about/</link>
     <description>Recent content in About on kars7e&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://blog.kars7e.io/tags/about/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.kars7e.io/tags/about/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About me</title>
-      <link>http://blog.kars7e.io/page/about/</link>
+      <link>https://blog.kars7e.io/page/about/</link>
       <pubDate>Tue, 16 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://blog.kars7e.io/page/about/</guid>
+      <guid>https://blog.kars7e.io/page/about/</guid>
       <description>Short version 30, born and raised in Poland. M.Ec. in Econometrics, specialization Computer Science in Management. Basketball fan (active &amp;amp; passive), technological polyglot. Currently in &amp;lt;3 with Go, Elixir &amp;amp; Rust. Somewhere along the way opportunity showed up and I traveled to Silicon Valley to work for VMware, industry leader in virtualization and private cloud solutions. Currently living in Santa Clara, CA, with my lovely wife and 5 months 1 year 2 years old daughter.</description>
     </item>
     
